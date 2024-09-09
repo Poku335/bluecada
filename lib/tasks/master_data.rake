@@ -274,7 +274,7 @@ def import_topo
         icd_10: row["icd-10"],
         name: row["Topography"]
      
-      )
+      ) 
     end
   end
 end
