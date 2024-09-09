@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
+  port: <%= ENV.fetch('DATABASE_PORT') { 5432 } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { 'riseplus' } %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') { 'riseplus' } %>
+
+development:
+  primary:
+    <<: *default
+    database: <%= ENV.fetch('POSTGRES_DB_PRIMARY') { 'cancer_in_Srinagarind_hospital' } %>
+
+production:
+  primary:
+    <<: *default
+    database: <%= ENV.fetch('POSTGRES_DB_PRIMARY') { 'cancer_in_Srinagarind_hospital_production' } %>
+  
+

@@ -1,0 +1,2 @@
+class TopographyCode < ApplicationRecord
+end

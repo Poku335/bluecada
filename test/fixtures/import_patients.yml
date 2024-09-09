@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: MyString
+  total_patient_count: 1
+  new_patient_count: 1
+  existing_patient_count: 1
+  error_patient_count: 1
+
+two:
+  date: MyString
+  total_patient_count: 1
+  new_patient_count: 1
+  existing_patient_count: 1
+  error_patient_count: 1

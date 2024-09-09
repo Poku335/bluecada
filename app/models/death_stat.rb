@@ -1,0 +1,2 @@
+class DeathStat < ApplicationRecord
+end

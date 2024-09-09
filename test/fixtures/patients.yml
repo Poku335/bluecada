@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hos_no: MyString
+  hospital: one
+  name: MyString
+  citizen_id: MyString
+  sex: one
+  age: MyString
+  birth_date: MyString
+  address_detail: MyString
+  post_code: one
+  address_code: one
+  marital_status: one
+  race: one
+  religion: one
+  health_insurance: one
+  regis_date: MyString
+  id_finding: MyString
+  province: one
+  district: one
+  sub_distric: one
+
+two:
+  hos_no: MyString
+  hospital: two
+  name: MyString
+  citizen_id: MyString
+  sex: two
+  age: MyString
+  birth_date: MyString
+  address_detail: MyString
+  post_code: two
+  address_code: two
+  marital_status: two
+  race: two
+  religion: two
+  health_insurance: two
+  regis_date: MyString
+  id_finding: MyString
+  province: two
+  district: two
+  sub_distric: two

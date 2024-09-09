@@ -1,0 +1,2 @@
+class AddressCode < ApplicationRecord
+end

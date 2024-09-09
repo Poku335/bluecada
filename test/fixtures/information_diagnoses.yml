@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tumor_marker: MyString
+  tumor_suppressor_gene: MyString
+
+two:
+  tumor_marker: MyString
+  tumor_suppressor_gene: MyString

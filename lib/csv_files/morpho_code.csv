@@ -1,0 +1,1705 @@
+ICDO3.2,idd,beh,type,Term
+8000/3,1,/3,cancer,"Neoplasm, malignant
+Blastoma
+Tumor, malignant
+Cancer
+Malignancy
+Unclassified tumor, malignant"
+8001/3,2,/3,cancer,"Tumor cells, malignant"
+8002/3,3,/3,cancer,"Malignant tumor, small cell type"
+8003/3,4,/3,cancer,"Malignant tumor, giant cell type"
+8004/3,5,/3,cancer,"Malignant tumor, spindle cell type
+Malignant tumor, fusiform cell type"
+8005/3,6,/3,cancer,"Malignant tumor, clear cell type"
+8010/3,7,/3,cancer,"Carcinoma
+Epithelial tumor, malignant
+Heterotopia-associated carcinoma"
+8011/3,8,/3,cancer,"Epithelioma, malignant
+Epithelioma"
+8012/3,9,/3,cancer,Large cell carcinoma
+8013/3,10,/3,cancer,"Large cell neuroendocrine carcinoma
+Combined large cell neuroendocrine carcinoma"
+8014/3,11,/3,cancer,Large cell carcinoma with rhabdoid phenotype
+8015/3,12,/3,cancer,Glassy cell carcinoma
+8020/3,13,/3,cancer,"Carcinoma, undifferentiated
+Carcinoma, poorly differentiated
+Anaplastic undifferentiated carcinoma
+Dedifferentiated carcinoma"
+8021/3,14,/3,cancer,"Carcinoma, anaplastic"
+8022/3,15,/3,cancer,Pleomorphic carcinoma
+8023/3,16,/3,cancer,"Nuclear protein in testis (NUT) associated carcinoma
+NUT carcinoma
+NUT midline carcinoma"
+8030/3,17,/3,cancer,Giant cell and spindle cell carcinoma
+8031/3,18,/3,cancer,Giant cell carcinoma
+8032/3,19,/3,cancer,Spindle cell carcinoma
+8033/3,20,/3,cancer,"Pseudosarcomatous carcinoma
+Sarcomatoid carcinoma"
+8034/3,21,/3,cancer,Polygonal cell carcinoma
+8035/3,22,/3,cancer,"Carcinoma with osteoclast-like giant cells
+Squamous carcinoma with osteoclast-like giant cells
+Undifferentiated carcinoma with osteoclast-like giant cells"
+8041/3,23,/3,cancer,"Small cell carcinoma
+Reserve cell carcinoma
+Round cell carcinoma
+Small cell neuroendocrine carcinoma
+Small cell carcinoma, pulmonary type"
+8042/3,24,/3,cancer,Oat cell carcinoma
+8043/3,25,/3,cancer,"Small cell carcinoma, fusiform cell"
+8044/3,26,/3,cancer,"Small cell carcinoma, intermediate cell
+Small cell carcinoma, hypercalcemic type"
+8045/3,27,/3,cancer,"Combined small cell carcinoma
+Mixed small cell carcinoma
+Combined small cell-adenocarcinoma
+Combined small cell-large cell carcinoma
+Combined small cell-squamous cell carcinoma"
+8046/3,28,/3,cancer,Non-small cell carcinoma
+8050/3,29,/3,cancer,Papillary carcinoma
+8051/3,30,/3,cancer,"Verrucous carcinoma
+Verrucous epidermoid carcinoma
+Verrucous squamous cell carcinoma"
+8052/3,31,/3,cancer,"Papillary squamous cell carcinoma
+Papillary epidermoid carcinoma"
+8054/3,32,/3,cancer,"Warty carcinoma
+Condylomatous carcinoma
+Warty-basaloid carcinoma"
+8070/3,33,/3,cancer,"Squamous cell carcinoma
+Squamous cell carcinoma, usual type
+Epidermoid carcinoma
+Squamous carcinoma
+Squamous cell epithelioma"
+8071/3,34,/3,cancer,"Squamous cell carcinoma, keratinizing
+Epidermoid carcinoma, keratinizing
+Squamous cell carcinoma, large cell, keratinizing
+Keratoacanthoma"
+8072/3,35,/3,cancer,"Squamous cell carcinoma, large cell, nonkeratinizing
+Epidermoid carcinoma, large cell, nonkeratinizing
+Squamous cell carcinoma, nonkeratinizing"
+8073/3,36,/3,cancer,"Squamous cell carcinoma, small cell, nonkeratinizing
+Epidermoid carcinoma, small cell, nonkeratinizing"
+8074/3,37,/3,cancer,"Squamous cell carcinoma, spindle cell
+Epidermoid carcinoma, spindle cell
+Squamous cell carcinoma, sarcomatoid
+Pseudovascular squamous cell carcinoma"
+8075/3,38,/3,cancer,"Squamous cell carcinoma, adenoid
+Squamous cell carcinoma, acantholytic
+Squamous cell carcinoma, pseudoglandular"
+8076/3,39,/3,cancer,"Squamous cell carcinoma, microinvasive"
+8078/3,40,/3,cancer,Squamous cell carcinoma with horn formation
+8082/3,41,/3,cancer,"Lymphoepithelial carcinoma
+Lymphoepithelioma
+Lymphoepithelioma-like carcinoma
+Schmincke tumor"
+8083/3,42,/3,cancer,"Basaloid squamous cell carcinoma
+Papillary-basaloid carcinoma"
+8084/3,43,/3,cancer,"Squamous cell carcinoma, clear cell type"
+8085/3,44,/3,cancer,"Squamous cell carcinoma, HPV-positive"
+8086/3,45,/3,cancer,"Squamous cell carcinoma, HPV-negative"
+8090/3,46,/3,cancer,"Basal cell carcinoma
+Basal cell epithelioma
+Rodent ulcer
+Pigmented basal cell carcinoma
+Basal cell carcinoma with adnexal differentiation"
+8091/3,47,/3,cancer,"Superficial basal cell carcinoma
+Multifocal superficial basal cell carcinoma
+Multicentric basal cell carcinoma"
+8092/3,48,/3,cancer,"Infiltrating basal cell carcinoma
+Infiltrating basal cell carcinoma, non-sclerosing
+Infiltrating basal cell carcinoma, sclerosing
+Basal cell carcinoma, desmoplastic type
+Basal cell carcinoma, morpheic
+Basal cell carcinoma, sarcomatoid"
+8093/3,49,/3,cancer,"Basal cell carcinoma, fibroepithelial
+Fibroepithelioma
+Fibroepithelioma of Pinkus type
+Fibroepithelial basal cell carcinoma, Pinkus type
+Pinkus tumor"
+8094/3,50,/3,cancer,"Basosquamous carcinoma
+Mixed basal-squamous cell carcinoma"
+8095/3,51,/3,cancer,Metatypical carcinoma
+8097/3,52,/3,cancer,"Basal cell carcinoma, nodular
+Basal cell carcinoma, micronodular"
+8098/3,53,/3,cancer,Adenoid basal carcinoma
+8100/3,54,/3,cancer,"Trichoblastic carcinoma
+Trichoblastic carcinosarcoma"
+8102/3,55,/3,cancer,"Trichilemmocarcinoma
+Trichilemmal carcinoma"
+8110/3,56,/3,cancer,"Pilomatrical carcinoma
+Pilomatrix carcinoma
+Matrical carcinoma
+Pilomatricoma, malignant
+Pilomatrixoma, malignant"
+8120/3,57,/3,cancer,"Transitional cell carcinoma
+Urothelial carcinoma
+Transitional carcinoma
+Squamotransitional carcinoma"
+8121/3,58,/3,cancer,"Schneiderian carcinoma
+Cylindrical cell carcinoma"
+8122/3,59,/3,cancer,"Urothelial carcinoma, sarcomatoid 
+Urothelial carcinoma, spindle cell
+Transitional cell carcinoma, spindle cell
+Transitional cell carcinoma, sarcomatoid"
+8123/3,60,/3,cancer,Basaloid carcinoma
+8124/3,61,/3,cancer,Cloacogenic carcinoma
+8130/3,62,/3,cancer,"Papillary transitional cell carcinoma
+Papillary urothelial carcinoma"
+8131/3,63,/3,cancer,"Urothelial carcinoma, micropapillary
+Transitional cell carcinoma, micropapillary"
+8140/3,64,/3,cancer,"Adenocarcinoma
+Adenocarcinoma, usual type
+Carcinoma of Skene, Cowper and Littre Glands
+Endolymphatic sac tumor
+Parathyroid carcinoma
+Acinar adenocarcinoma of prostate"
+8141/3,65,/3,cancer,"Scirrhous adenocarcinoma
+Carcinoma with productive fibrosis
+Scirrhous carcinoma"
+8142/3,66,/3,cancer,Linitis plastica
+8143/3,67,/3,cancer,Superficial spreading adenocarcinoma
+8144/3,68,/3,cancer,"Adenocarcinoma, intestinal type
+Adenocarcinoma, enteric
+Carcinoma, intestinal type
+Mucinous carcinoma, intestinal type"
+8145/3,69,/3,cancer,"Carcinoma, diffuse type
+Adenocarcinoma, diffuse type"
+8147/3,70,/3,cancer,"Basal cell adenocarcinoma
+Basal cell carcinoma of the prostate"
+8150/3,71,/3,cancer,"Pancreatic neuroendocrine tumor, nonfunctioning
+Pancreatic endocrine tumor, nonfunctioning
+Pancreatic endocrine tumor
+Islet cell adenoma
+Islet cell adenomatosis
+Nesidioblastoma
+Islet cell tumor
+Islet cell adenocarcinoma
+Islet cell carcinoma"
+8151/3,72,/3,cancer,"Insulinoma
+Beta cell adenoma
+Beta cell tumor, malignant"
+8152/3,73,/3,cancer,"Glucagonoma
+Alpha cell tumor
+Enteroglucagonoma
+Glucagon-like peptide-producing tumor
+L-cell tumor
+Pancreatic peptide and pancreatic peptide-like peptide within terminal tyrosine amide producing tumor
+PP/PYY producing tumor"
+8153/3,74,/3,cancer,"Gastrinoma
+G cell tumor
+Gastrin cell tumor"
+8154/3,75,/3,cancer,"Mixed neuroendocrine non-neuroendocrine neoplasm (MiNEN)
+Mixed pancreatic endocrine and exocrine tumor, malignant
+Mixed islet cell and exocrine adenocarcinoma
+Mixed acinar-endocrine carcinoma
+Mixed acinar-neuroendocrine carcinoma
+Mixed acinar-endocrine-ductal carcinoma
+Mixed ductal-endocrine carcinoma
+Mixed ductal-neuroendocrine carcinoma
+Mixed endocrine and exocrine adenocarcinoma"
+8155/3,76,/3,cancer,Vipoma
+8156/3,77,/3,cancer,"Somatostatinoma
+Somatostatin cell tumor"
+8158/3,78,/3,cancer,"ACTH-producing tumor
+Endocrine tumor, functioning"
+8160/3,79,/3,cancer,"Cholangiocarcinoma
+Bile duct adenocarcinoma
+Bile duct carcinoma"
+8161/3,80,/3,cancer,Bile duct cystadenocarcinoma
+8162/3,81,/3,cancer,Klatskin tumor
+8163/3,82,/3,cancer,"Pancreatobiliary type carcinoma
+Adenocarcinoma, pancreatobiliary type"
+8170/3,83,/3,cancer,"Hepatocellular carcinoma
+Hepatoma
+Hepatocarcinoma
+Hepatoma, malignant
+Liver cell carcinoma"
+8171/3,84,/3,cancer,"Hepatocellular carcinoma, fibrolamellar"
+8172/3,85,/3,cancer,"Hepatocellular carcinoma, scirrhous
+Sclerosing hepatic carcinoma"
+8173/3,86,/3,cancer,"Hepatocellular carcinoma, spindle cell variant
+Hepatocellular carcinoma, sarcomatoid"
+8174/3,87,/3,cancer,"Hepatocellular carcinoma, clear cell type"
+8175/3,88,/3,cancer,"Hepatocellular carcinoma, pleomorphic type"
+8180/3,89,/3,cancer,"Combined hepatocellular carcinoma and cholangiocarcinoma
+Hepatocholangiocarcinoma
+Mixed hepatocellular and bile duct carcinoma"
+8190/3,90,/3,cancer,"Trabecular adenocarcinoma
+Trabecular carcinoma"
+8200/3,91,/3,cancer,"Adenoid cystic carcinoma
+Cylindroma
+Adenocarcinoma, cylindroid
+Adenocystic carcinoma
+Bronchial adenoma, cylindroid
+Thymic carcinoma with adenoid cystic carcinoma-like features"
+8201/3,92,/3,cancer,"Cribriform carcinoma
+Ductal carcinoma, cribriform type
+Cribriform comedo type carcinoma
+Adenocarcinoma, cribriform comedo type"
+8210/3,93,/3,cancer,"Adenocarcinoma in adenomatous polyp
+Adenocarcinoma in polyp
+Carcinoma in polyp
+Adenocarcinoma in polypoid adenoma
+Adenocarcinoma in tubular adenoma
+Carcinoma in adenomatous polyp"
+8211/3,94,/3,cancer,"Tubular adenocarcinoma
+Tubular carcinoma"
+8213/3,95,/3,cancer,Serrated adenocarcinoma
+8214/3,96,/3,cancer,"Parietal cell carcinoma
+Parietal cell adenocarcinoma"
+8215/3,97,/3,cancer,"Adenocarcinoma of anal glands
+Adenocarcinoma of anal ducts"
+8220/3,98,/3,cancer,Adenocarcinoma in adenomatous polyposis coli
+8221/3,99,/3,cancer,Adenocarcinoma in multiple adenomatous polyps
+8230/3,100,/3,cancer,"Solid carcinoma
+Solid adenocarcinoma
+Solid carcinoma with mucin formation
+Solid adenocarcinoma with mucin formation"
+8231/3,101,/3,cancer,Carcinoma simplex
+8240/3,102,/3,cancer,"Neuroendocrine tumor
+Carcinoid tumor
+Carcinoid
+Bronchial adenoma, carcinoid
+Neuroendocrine carcinoma, low grade
+Neuroendocrine carcinoma, well differentiated
+Neuroendocrine tumor, grade 1
+Typical carcinoid"
+8241/3,103,/3,cancer,"Enterochromaffin cell carcinoid
+Argentaffinoma, malignant
+Carcinoid tumor, argentaffin, malignant
+EC cell carcinoid
+Serotonin producing carcinoid
+Serotonin producing tumor"
+8242/3,104,/3,cancer,"Enterochromaffin-like cell tumor, malignant
+ECL cell carcinoid, malignant"
+8243/3,105,/3,cancer,"Goblet cell carcinoid
+Mucinous carcinoid
+Mucocarcinoid tumor"
+8244/3,106,/3,cancer,"Mixed adenoneuroendocrine carcinoma
+Combined carcinoid and adenocarcinoma
+Mixed carcinoid and adenocarcinoma
+Composite carcinoid
+MANEC
+Mixed carcinoid-adenocarcinoma"
+8245/3,107,/3,cancer,Adenocarcinoid tumor
+8246/3,108,/3,cancer,"Neuroendocrine carcinoma
+Poorly differentiated neuroendocrine neoplasm"
+8247/3,109,/3,cancer,"Merkel cell carcinoma
+Merkel cell tumor
+Primary cutaneous neuroendocrine carcinoma"
+8249/3,110,/3,cancer,"Neuroendocrine tumor, grade 2
+Atypical carcinoid tumor
+Neuroendocrine carcinoma, moderately differentiated
+Neuroendocrine tumor, grade 3"
+8250/3,111,/3,cancer,"Lepidic adenocarcinoma
+Bronchiolo-alveolar adenocarcinoma
+Bronchiolo-alveolar carcinoma
+Alveolar cell carcinoma
+Bronchiolar adenocarcinoma
+Bronchiolar carcinoma"
+8251/3,112,/3,cancer,"Alveolar adenocarcinoma
+Alveolar carcinoma"
+8252/3,113,/3,cancer,"Bronchiolo-alveolar carcinoma, non-mucinous
+Bronchiolo-alveolar carcinoma, Clara cell
+Bronchiolo-alveolar carcinoma, type II pneumocyte"
+8253/3,114,/3,cancer,"Adenocarcinoma of the lung, mucinous
+Bronchiolo-alveolar carcinoma, mucinous
+Bronchiolo-alveolar carcinoma, goblet cell type"
+8254/3,115,/3,cancer,"Adenocarcinoma of the lung, mixed mucinous and non-mucinous
+Bronchiolo-alveolar carcinoma, mixed mucinous and non-mucinous
+Bronchiolo-alveolar carcinoma, Clara cell and goblet cell type
+Bronchiolo-alveolar carcinoma, indeterminate type
+Bronchiolo-alveolar carcinoma, type II pneumocyte and goblet cell type"
+8255/3,116,/3,cancer,"Adenocarcinoma with mixed subtypes
+Adenocarcinoma combined with other types of carcinoma"
+8256/3,117,/3,cancer,"Minimally invasive adenocarcinoma, non-mucinous"
+8257/3,118,/3,cancer,"Minimally invasive adenocarcinoma, mucinous"
+8260/3,119,/3,cancer,"Papillary adenocarcinoma
+Papillary carcinoma of thyroid
+Papillary renal cell carcinoma"
+8261/3,120,/3,cancer,Adenocarcinoma in villous adenoma
+8262/3,121,/3,cancer,Villous adenocarcinoma
+8263/3,122,/3,cancer,"Adenocarcinoma in tubulovillous adenoma
+Villoglandular carcinoma
+Villoglandular variant of endometrioid adenocarcinoma
+Papillotubular adenocarcinoma
+Tubulopapillary adenocarcinoma"
+8265/3,123,/3,cancer,"Micropapillary carcinoma
+Micropapillary adenocarcinoma"
+8270/3,124,/3,cancer,"Chromophobe carcinoma
+Chromophobe adenocarcinoma"
+8272/3,125,/3,cancer,Pituitary carcinoma
+8273/3,126,/3,cancer,Pituitary blastoma
+8280/3,127,/3,cancer,"Acidophil carcinoma
+Acidophil adenocarcinoma
+Eosinophil adenocarcinoma
+Eosinophil carcinoma"
+8281/3,128,/3,cancer,Mixed acidophil-basophil carcinoma
+8290/3,129,/3,cancer,"Oxyphilic adenocarcinoma
+Oncocytic adenocarcinoma
+Oncocytic carcinoma
+Hurthle cell carcinoma
+Hurthle cell adenocarcinoma
+Follicular carcinoma, oxyphilic cell"
+8300/3,130,/3,cancer,"Basophil carcinoma
+Basophil adenocarcinoma
+Mucoid cell adenocarcinoma"
+8310/3,131,/3,cancer,"Clear cell adenocarcinoma
+Clear cell carcinoma
+Clear cell adenocarcinoma, mesonephroid
+Clear cell renal cell carcinoma"
+8311/3,132,/3,cancer,"Hereditary leiomyomatosis and renal cell carcinoma (HRCC)-associated renal cell carcinoma
+MiT Family translocation carcinoma
+Succinate dehydrogenase deficient renal cell carcinoma"
+8312/3,133,/3,cancer,"Renal cell carcinoma
+Renal cell adenocarcinoma
+Renal cell carcinoma, unclassified
+Grawitz tumor
+Hypernephroma"
+8313/3,134,/3,cancer,"Clear cell adenocarcinofibroma
+Clear cell cystadenocarcinofibroma"
+8314/3,135,/3,cancer,Lipid-rich carcinoma
+8315/3,136,/3,cancer,"Glycogen-rich carcinoma
+Glycogen-rich clear cell carcinoma"
+8316/3,137,/3,cancer,"Cyst-associated renal cell carcinoma
+Acquired cystic disease associated renal cell carcinoma
+Tubulocystic renal cell carcinoma"
+8317/3,138,/3,cancer,"Renal cell carcinoma, chromophobe type
+Chromophobe cell renal carcinoma
+Hybrid oncocytic chromophobe tumor"
+8318/3,139,/3,cancer,"Renal cell carcinoma, sarcomatoid
+Renal cell carcinoma, spindle cell"
+8319/3,140,/3,cancer,"Collecting duct carcinoma
+Bellini duct carcinoma
+Renal carcinoma, collecting duct type"
+8320/3,141,/3,cancer,"Granular cell carcinoma
+Granular cell adenocarcinoma"
+8322/3,142,/3,cancer,"Water-clear cell adenocarcinoma
+Water-clear cell carcinoma"
+8323/3,143,/3,cancer,Mixed cell adenocarcinoma
+8330/3,144,/3,cancer,"Follicular carcinoma
+Follicular adenocarcinoma"
+8331/3,145,/3,cancer,"Follicular adenocarcinoma, well differentiated
+Follicular carcinoma, well differentiated"
+8332/3,146,/3,cancer,"Follicular adenocarcinoma, trabecular
+Follicular carcinoma, trabecular
+Follicular adenocarcinoma, moderately differentiated
+Follicular carcinoma, moderately differentiated"
+8333/3,147,/3,cancer,Fetal adenocarcinoma
+8335/3,148,/3,cancer,"Follicular carcinoma, minimally invasive"
+8337/3,149,/3,cancer,"Poorly differentiated thyroid carcinoma
+Insular carcinoma"
+8339/3,150,/3,cancer,"Follicular carcinoma, encapsulated, angioinvasive"
+8340/3,151,/3,cancer,"Papillary carcinoma, follicular variant
+Papillary adenocarcinoma, follicular variant
+Papillary and follicular adenocarcinoma
+Papillary and follicular carcinoma"
+8341/3,152,/3,cancer,Papillary microcarcinoma
+8342/3,153,/3,cancer,"Papillary carcinoma, oncocytic variant
+Papillary carcinoma, oxyphilic cell"
+8343/3,154,/3,cancer,"Papillary carcinoma, encapsulated of thyroid"
+8344/3,155,/3,cancer,"Papillary carcinoma, columnar cell
+Papillary carcinoma, tall cell"
+8345/3,156,/3,cancer,"Medullary thyroid carcinoma
+C cell carcinoma
+Parafollicular cell carcinoma
+Medullary carcinoma with amyloid stroma"
+8346/3,157,/3,cancer,Mixed medullary-follicular carcinoma
+8347/3,158,/3,cancer,Mixed medullary-papillary carcinoma
+8350/3,159,/3,cancer,"Nonencapsulated sclerosing carcinoma
+Nonencapsulated sclerosing adenocarcinoma
+Nonencapsulated sclerosing tumor
+Papillary carcinoma, diffuse sclerosing"
+8370/3,160,/3,cancer,"Adrenal cortical carcinoma
+Adrenal cortical adenocarcinoma
+Adrenal cortical tumor, malignant"
+8380/3,161,/3,cancer,"Endometrioid adenocarcinoma
+Endometrioid carcinoma
+Endometrioid cystadenocarcinoma"
+8381/3,162,/3,cancer,"Endometrioid adenofibroma, malignant
+Endometrioid cystadenofibroma, malignant"
+8382/3,163,/3,cancer,"Endometrioid adenocarcinoma, secretory variant"
+8383/3,164,/3,cancer,"Endometrioid adenocarcinoma, ciliated cell variant"
+8384/3,165,/3,cancer,"Adenocarcinoma, endocervical type"
+8390/3,166,/3,cancer,"Adnexal adenocarcinoma
+Skin appendage carcinoma
+Adnexal carcinoma"
+8400/3,167,/3,cancer,"Sweat gland adenocarcinoma
+Sweat gland carcinoma
+Sweat gland tumor, malignant"
+8401/3,168,/3,cancer,"Apocrine adenocarcinoma
+Apocrine carcinoma"
+8402/3,169,/3,cancer,"Hidradenocarcinoma
+Nodular hidradenoma, malignant"
+8403/3,170,/3,cancer,"Malignant eccrine spiradenoma
+Malignant neoplasm arising from pre-existing spiradenoma
+Malignant neoplasm arising from pre-existing cylindroma
+Malignant neoplasm arising from pre-existing spiradenocylindroma"
+8406/3,171,/3,cancer,Syringocystadenocarcinoma papilliferum
+8407/3,172,/3,cancer,"Microcystic adnexal carcinoma
+Sclerosing sweat duct carcinoma
+Syringomatous carcinoma"
+8408/3,173,/3,cancer,"Digital papillary adenocarcinoma
+Aggressive digital papillary adenoma
+Eccrine papillary adenocarcinoma"
+8409/3,174,/3,cancer,"Porocarcinoma
+Eccrine poroma, malignant"
+8410/3,175,/3,cancer,"Sebaceous carcinoma
+Sebaceous adenocarcinoma"
+8413/3,176,/3,cancer,Eccrine adenocarcinoma
+8420/3,177,/3,cancer,"Ceruminous adenocarcinoma
+Ceruminous carcinoma"
+8430/3,178,/3,cancer,Mucoepidermoid carcinoma
+8440/3,179,/3,cancer,Cystadenocarcinoma
+8441/3,180,/3,cancer,"Serous carcinoma
+Serous cystadenocarcinoma
+Serous adenocarcinoma
+Serous papillary adenocarcinoma
+Papillary serous cystadenocarcinoma
+Papillary serous adenocarcinoma
+Serous surface papillary carcinoma"
+8450/3,181,/3,cancer,"Papillary cystadenocarcinoma
+Papillocystic adenocarcinoma"
+8452/3,182,/3,cancer,"Solid pseudopapillary neoplasm of the pancreas
+Solid pseudopapillary carcinoma"
+8453/3,183,/3,cancer,"Intraductal Papillary mucinous neoplasm with an associated invasive carcinoma
+Intraductal Papillary mucinous carcinoma, invasive"
+8460/3,184,/3,cancer,"Low grade serous carcinoma
+Micropapillary serous carcinoma"
+8461/3,185,/3,cancer,High grade serous carcinoma
+8470/3,186,/3,cancer,"Mucinous cystadenocarcinoma
+Pseudomucinous cystadenocarcinoma
+Pseudomucinous adenocarcinoma
+Mucinous cystic tumor with an associated invasive carcinoma
+Mucinous cystic neoplasm with an associated invasive carcinoma
+Papillary mucinous cystadenocarcinoma
+Papillary pseudomucinous cystadenocarcinoma"
+8474/3,187,/3,cancer,Seromucinous carcinoma
+8480/3,188,/3,cancer,"Mucinous adenocarcinoma
+Acinar adenocarcinoma, mucinous variant
+Colloid adenocarcinoma
+Colloid carcinoma
+Gelatinous adenocarcinoma
+Gelatinous carcinoma
+Mucinous carcinoma
+Mucoid adenocarcinoma
+Mucoid carcinoma
+Mucous adenocarcinoma
+Mucous carcinoma
+Pseudomyxoma peritonei with unknown primary site
+Mucinous tubular and spindle cell carcinoma"
+8481/3,189,/3,cancer,"Mucin-producing adenocarcinoma
+Mucin-producing carcinoma
+Mucin-secreting adenocarcinoma
+Mucin-secreting carcinoma"
+8482/3,190,/3,cancer,"Mucinous carcinoma, gastric type
+Mucinous adenocarcinoma, endocervical type"
+8490/3,191,/3,cancer,"Signet ring cell carcinoma
+Signet ring cell adenocarcinoma
+Acinar adenocarcinoma, signet ring-like variant
+Mucinous carcinoma, signet ring cell type
+Poorly cohesive carcinoma
+Signet ring cell/histiocytoid carcinoma"
+8500/3,192,/3,cancer,"Infiltrating duct carcinoma
+Invasive breast carcinoma of no special type
+Duct adenocarcinoma
+Duct carcinoma
+Ductal carcinoma
+Duct cell carcinoma
+Infiltrating duct adenocarcinoma
+Basal-like carcinoma of breast
+Adenocarcinoma of mammary gland type
+Adenocarcinoma of anogenital mammary-like glands
+Carcinoma of the male breast"
+8501/3,193,/3,cancer,Comedocarcinoma
+8502/3,194,/3,cancer,"Secretory carcinoma
+Juvenile carcinoma of breast"
+8503/3,195,/3,cancer,"Intraductal papillary adenocarcinoma with invasion
+Infiltrating papillary adenocarcinoma
+Infiltrating and papillary adenocarcinoma
+Papillary carcinoma of breast
+Intraductal papillary neoplasm with associated invasive carcinoma
+Intracystic papillary neoplasm with associated invasive carcinoma"
+8504/3,196,/3,cancer,"Encapsulated papillary carcinoma with invasion
+Encysted papillary carcinoma with invasion
+Intracystic papillary carcinoma with invasion"
+8507/3,197,/3,cancer,"Invasive micropapillary carcinoma of breast
+Micropapillary carcinoma of breast"
+8508/3,198,/3,cancer,Cystic hypersecretory carcinoma
+8509/3,199,/3,cancer,"Solid papillary carcinoma with invasion
+Endocrine mucin-producing sweat gland carcinoma"
+8510/3,200,/3,cancer,"Medullary carcinoma
+Medullary adenocarcinoma
+Medullary-like carcinoma"
+8512/3,201,/3,cancer,Medullary carcinoma with lymphoid stroma
+8513/3,202,/3,cancer,Atypical medullary carcinoma
+8514/3,203,/3,cancer,"Duct carcinoma, desmoplastic type"
+8520/3,204,/3,cancer,"Lobular carcinoma
+Infiltrating lobular carcinoma
+Lobular adenocarcinoma
+Tubulolobular carcinoma
+Lobular carcinoma, pleomorphic"
+8521/3,205,/3,cancer,Infiltrating ductular carcinoma
+8522/3,206,/3,cancer,"Infiltrating duct and lobular carcinoma
+Lobular and ductal carcinoma
+Intraductal and lobular carcinoma
+Infiltrating duct and lobular carcinoma in situ
+Infiltrating lobular carcinoma and ductal carcinoma in situ"
+8523/3,207,/3,cancer,"Infiltrating duct mixed with other types of carcinoma
+Infiltrating duct and colloid carcinoma
+Infiltrating duct and cribriform carcinoma
+Infiltrating duct and mucinous carcinoma
+Infiltrating duct and tubular carcinoma"
+8524/3,208,/3,cancer,Infiltrating lobular mixed with other types of carcinoma
+8525/3,209,/3,cancer,"Polymorphous adenocarcinoma
+Polymorphous carcinoma
+Terminal duct adenocarcinoma"
+8530/3,210,/3,cancer,"Inflammatory carcinoma
+Inflammatory adenocarcinoma"
+8540/3,211,/3,cancer,"Paget disease, mammary
+Paget disease of breast
+Paget disease of nipple"
+8541/3,212,/3,cancer,Paget disease and infiltrating duct carcinoma of breast
+8542/3,213,/3,cancer,"Paget disease, extramammary"
+8543/3,214,/3,cancer,Paget disease and intraductal carcinoma of breast
+8550/3,215,/3,cancer,"Acinar cell carcinoma
+Acinar adenocarcinoma
+Acinar carcinoma
+Acinic cell adenocarcinoma"
+8551/3,216,/3,cancer,"Acinar cell cystadenocarcinoma
+Acinar adenocarcinoma of the lung"
+8552/3,217,/3,cancer,Mixed acinar-ductal carcinoma
+8560/3,218,/3,cancer,"Adenosquamous carcinoma
+Mixed adenocarcinoma and epidermoid carcinoma
+Mixed adenocarcinoma and squamous cell carcinoma
+Squamoid eccrine ductal carcinoma"
+8562/3,219,/3,cancer,Epithelial-myoepithelial carcinoma
+8570/3,220,/3,cancer,"Adenocarcinoma with squamous metaplasia
+Adenoacanthoma
+Endometrioid carcinoma with squamous differentiation"
+8571/3,221,/3,cancer,"Adenocarcinoma with cartilaginous and osseous metaplasia
+Adenocarcinoma with cartilaginous metaplasia
+Adenocarcinoma with chondroid differentiation
+Adenocarcinoma with osseous metaplasia"
+8572/3,222,/3,cancer,"Adenocarcinoma with spindle cell metaplasia
+Acinar adenocarcinoma, sarcomatoid variant
+Fibromatosis-like metaplastic carcinoma"
+8573/3,223,/3,cancer,"Adenocarcinoma with apocrine metaplasia
+Carcinoma with apocrine metaplasia"
+8574/3,224,/3,cancer,"Adenocarcinoma with neuroendocrine differentiation
+Carcinoma with neuroendocrine differentiation
+Adenocarcinoma admixed with neuroendocrine carcinoma"
+8575/3,225,/3,cancer,Metaplastic carcinoma
+8576/3,226,/3,cancer,"Hepatoid adenocarcinoma
+Hepatoid carcinoma"
+8580/3,227,/3,cancer,"Thymoma
+Intrapulmonary thymoma
+Sclerosing thymoma
+Metaplastic thymoma"
+8581/3,228,/3,cancer,"Thymoma, type A
+Thymoma, medullary
+Thymoma, spindle cell"
+8582/3,229,/3,cancer,"Thymoma, type AB
+Thymoma, mixed type"
+8583/3,230,/3,cancer,"Thymoma, type B1
+Thymoma, lymphocyte-rich
+Thymoma, lymphocytic
+Thymoma, organoid
+Thymoma, predominantly cortical"
+8584/3,231,/3,cancer,"Thymoma, type B2
+Thymoma, cortical"
+8585/3,232,/3,cancer,"Thymoma, type B3
+Thymoma, atypical
+Thymoma, epithelial
+Well differentiated thymic carcinoma"
+8586/3,233,/3,cancer,"Thymic carcinoma
+Thymoma, type C"
+8588/3,234,/3,cancer,"Spindle epithelial tumor with thymus-like element
+SETTLE
+Spindle epithelial tumor with thymus-like differentiation"
+8589/3,235,/3,cancer,"Intrathyroid thymic carcinoma
+Carcinoma showing thymus-like element
+Carcinoma showing thymus-like differentiation
+CASTLE"
+8600/3,236,/3,cancer,"Thecoma, malignant"
+8620/3,237,/3,cancer,"Adult granulosa cell tumor of ovary
+Granulosa cell tumor, adult type
+Granulosa cell carcinoma
+Granulosa cell tumor, sarcomatoid"
+8630/3,238,/3,cancer,"Androblastoma, malignant
+Arrhenoblastoma, malignant"
+8631/3,239,/3,cancer,"Sertoli-Leydig cell tumor, poorly differentiated
+Sertoli-Leydig cell tumor, sarcomatoid"
+8634/3,240,/3,cancer,"Sertoli-Leydig cell tumor, poorly differentiated, with heterologous elements"
+8640/3,241,/3,cancer,Sertoli cell carcinoma
+8650/3,242,/3,cancer,"Leydig cell tumor, malignant
+Interstitial cell tumor, malignant"
+8670/3,243,/3,cancer,"Steroid cell tumor, malignant"
+8680/3,244,/3,cancer,Paraganglioma
+8681/3,245,/3,cancer,Sympathetic paraganglioma
+8682/3,246,/3,cancer,Parasympathetic paraganglioma
+8690/3,247,/3,cancer,"Middle ear paraganglioma
+Glomus jugulare tumor
+Jugular paraganglioma
+Jugulotympanic paraganglioma"
+8691/3,248,/3,cancer,"Aortic body tumor
+Aortic body paraganglioma
+Aorticopulmonary paraganglioma"
+8692/3,249,/3,cancer,"Carotid body paraganglioma
+Carotid body tumor"
+8693/3,250,/3,cancer,"Extra-adrenal paraganglioma
+Nonchromaffin paraganglioma
+Laryngeal paraganglioma
+Vagal paraganglioma
+Chemodectoma
+Composite paraganglioma"
+8700/3,251,/3,cancer,"Pheochromocytoma
+Adrenal medullary paraganglioma
+Chromaffin paraganglioma
+Chromaffin tumor
+Chromaffinoma
+Composite pheochromocytoma
+Pheochromoblastoma"
+8710/3,252,/3,cancer,"Glomangiosarcoma
+Glomoid sarcoma"
+8711/3,253,/3,cancer,"Glomus tumor, malignant"
+8714/3,254,/3,cancer,"Perivascular epithelioid tumor, malignant
+PEComa, malignant"
+8720/3,255,/3,cancer,"Malignant melanoma
+Melanoma
+Nevoid melanoma
+Melanoma, meningeal"
+8721/3,256,/3,cancer,Nodular melanoma
+8722/3,257,/3,cancer,Balloon cell melanoma
+8723/3,258,/3,cancer,"Malignant melanoma, regressing"
+8728/3,259,/3,cancer,Meningeal melanomatosis
+8730/3,260,/3,cancer,Amelanotic melanoma
+8740/3,261,/3,cancer,Malignant melanoma in junctional nevus
+8741/3,262,/3,cancer,Malignant melanoma in precancerous melanosis
+8742/3,263,/3,cancer,"Lentigo maligna melanoma
+Malignant melanoma in Hutchinson melanotic freckle"
+8743/3,264,/3,cancer,"Low cumulative sun damage melanoma
+Superficial spreading melanoma"
+8744/3,265,/3,cancer,"Acral melanoma
+Acral lentiginous melanoma, malignant"
+8745/3,266,/3,cancer,"Desmoplastic melanoma
+Desmoplastic melanoma, amelanotic
+Neurotropic melanoma, malignant"
+8746/3,267,/3,cancer,Mucosal lentiginous melanoma
+8761/3,268,/3,cancer,"Malignant melanoma arising in giant congenital nevus
+Malignant melanoma in giant pigmented nevus
+Malignant melanoma in congenital melanocytic nevus"
+8770/3,269,/3,cancer,"Malignant Spitz tumor
+Mixed epithelioid and spindle cell melanoma
+Spitz melanoma
+Spitzoid melanoma"
+8771/3,270,/3,cancer,Epithelioid cell melanoma
+8772/3,271,/3,cancer,Spindle cell melanoma
+8773/3,272,/3,cancer,"Spindle cell melanoma, type A"
+8774/3,273,/3,cancer,"Spindle cell melanoma, type B"
+8780/3,274,/3,cancer,"Blue nevus, malignant
+Melanoma arising in blue nevus"
+8800/3,275,/3,cancer,"Sarcoma
+Mesenchymal tumor, malignant
+Soft tissue sarcoma
+Soft tissue tumor, malignant"
+8801/3,276,/3,cancer,"Spindle cell sarcoma
+Spindle cell sarcoma, undifferentiated"
+8802/3,277,/3,cancer,"Giant cell sarcoma
+Pleomorphic cell sarcoma
+Pleomorphic cell sarcoma, undifferentiated
+Pleomorphic sarcoma
+Pleomorphic dermal sarcoma"
+8803/3,278,/3,cancer,"Small cell sarcoma
+Round cell sarcoma
+Round cell sarcoma, undifferentiated"
+8804/3,279,/3,cancer,"Epithelioid sarcoma
+Epithelioid cell sarcoma
+Epithelioid sarcoma, undifferentiated"
+8805/3,280,/3,cancer,Undifferentiated sarcoma
+8806/3,281,/3,cancer,Desmoplastic small round cell tumor
+8810/3,282,/3,cancer,Fibrosarcoma
+8811/3,283,/3,cancer,"Myxofibrosarcoma
+Fibromyxosarcoma"
+8812/3,284,/3,cancer,"Periosteal fibrosarcoma
+Periosteal sarcoma"
+8813/3,285,/3,cancer,Fascial fibrosarcoma
+8814/3,286,/3,cancer,"Infantile fibrosarcoma
+Congenital fibrosarcoma"
+8815/3,287,/3,cancer,"Solitary fibrous tumor, malignant
+Solitary fibrous tumor/Hemangiopericytoma, grade 3
+Hemangiopericytoma, malignant"
+8825/3,288,/3,cancer,Myofibroblastic sarcoma
+8830/3,289,/3,cancer,"Malignant fibrous histiocytoma
+Undifferentiated high grade pleomorphic sarcoma of bone
+Fibroxanthoma, malignant"
+8832/3,290,/3,cancer,"Dermatofibrosarcoma protuberans, fibrosarcomatous
+Dermatofibrosarcoma, sarcomatous"
+8840/3,291,/3,cancer,"Myxosarcoma
+Low grade fibromyxoid sarcoma
+Sclerosing epithelioid fibrosarcoma"
+8842/3,292,/3,cancer,"Ossifying fibromyxoid tumor, malignant
+Pulmonary myxoid sarcoma with EWSR1-CREB1 translocation"
+8850/3,293,/3,cancer,"Liposarcoma
+Fibroliposarcoma"
+8851/3,294,/3,cancer,"Liposarcoma, well differentiated
+Lipoma-like liposarcoma
+Liposarcoma, differentiated
+Inflammatory liposarcoma
+Sclerosing liposarcoma"
+8852/3,295,/3,cancer,"Myxoid liposarcoma
+Myxoliposarcoma"
+8853/3,296,/3,cancer,Round cell liposarcoma
+8854/3,297,/3,cancer,Pleomorphic liposarcoma
+8855/3,298,/3,cancer,Mixed liposarcoma
+8857/3,299,/3,cancer,Fibroblastic liposarcoma
+8858/3,300,/3,cancer,Dedifferentiated liposarcoma
+8890/3,301,/3,cancer,Leiomyosarcoma
+8891/3,302,/3,cancer,Epithelioid leiomyosarcoma
+8894/3,303,/3,cancer,Angiomyosarcoma
+8895/3,304,/3,cancer,Myosarcoma
+8896/3,305,/3,cancer,Myxoid leiomyosarcoma
+8900/3,306,/3,cancer,"Rhabdomyosarcoma
+Rhabdosarcoma"
+8901/3,307,/3,cancer,"Pleomorphic rhabdomyosarcoma, adult type
+Pleomorphic rhabdomyosarcoma
+Rhabdomyosarcoma, pleomorphic type"
+8902/3,308,/3,cancer,"Mixed type rhabdomyosarcoma
+Mixed embryonal rhabdomyosarcoma and alveolar rhabdomyosarcoma"
+8910/3,309,/3,cancer,"Embryonal rhabdomyosarcoma
+Rhabdomyosarcoma, embryonal type
+Embryonal rhabdomyosarcoma, pleomorphic
+Sarcoma botryoides
+Botryoid sarcoma"
+8912/3,310,/3,cancer,"Spindle cell rhabdomyosarcoma
+Sclerosing rhabdomyosarcoma
+Rhabdomyosarcoma, spindle cell/sclerosing type"
+8920/3,311,/3,cancer,Alveolar rhabdomyosarcoma
+8921/3,312,/3,cancer,"Ectomesenchymoma
+Rhabdomyosarcoma with ganglionic differentiation"
+8930/3,313,/3,cancer,"Endometrial stromal sarcoma
+Endometrial sarcoma
+Endometrial stromal sarcoma, high grade
+Endometrioid stromal sarcoma, high grade"
+8931/3,314,/3,cancer,"Endometrial stromal sarcoma, low grade
+Endolymphatic stromal myosis
+Endometrioid stromal sarcoma, low grade
+Endometrial stromatosis
+Stromal endometriosis
+Stromal myosis"
+8933/3,315,/3,cancer,Adenosarcoma
+8934/3,316,/3,cancer,Carcinofibroma
+8935/3,317,/3,cancer,Stromal sarcoma
+8936/3,318,/3,cancer,"Gastrointestinal stromal tumor
+GIST, malignant
+Gastrointestinal stromal sarcoma
+Gastrointestinal autonomic nerve tumor
+GANT
+Gastrointestinal pacemaker cell tumor"
+8940/3,319,/3,cancer,"Mixed tumor, malignant
+Mixed tumor, salivary gland type, malignant
+Malignant chondroid syringoma"
+8941/3,320,/3,cancer,"Carcinoma ex pleomorphic adenoma
+Carcinoma in pleomorphic adenoma"
+8950/3,321,/3,cancer,Mullerian mixed tumor
+8951/3,322,/3,cancer,Mesodermal mixed tumor
+8959/3,323,/3,cancer,"Malignant cystic nephroma
+Malignant multilocular cystic nephroma"
+8960/3,324,/3,cancer,"Nephroblastoma
+Nephroma
+Wilms tumor"
+8963/3,325,/3,cancer,"Rhabdoid tumor
+Malignant rhabdoid tumor
+Rhabdoid sarcoma"
+8964/3,326,/3,cancer,Clear cell sarcoma of kidney
+8970/3,327,/3,cancer,"Hepatoblastoma
+Embryonal hepatoma
+Hepatoblastoma, epithelioid
+Hepatoblastoma, mixed epithelial-mesenchymal"
+8971/3,328,/3,cancer,Pancreatoblastoma
+8972/3,329,/3,cancer,"Pulmonary blastoma
+Pneumoblastoma"
+8973/3,330,/3,cancer,Pleuropulmonary blastoma
+8980/3,331,/3,cancer,Carcinosarcoma
+8981/3,332,/3,cancer,"Carcinosarcoma, embryonal"
+8982/3,333,/3,cancer,"Myoepithelial carcinoma
+Malignant myoepithelioma
+Myoepithelioma, infiltrating"
+8983/3,334,/3,cancer,"Adenomyoepithelioma with carcinoma
+Malignant adenomyoepithelioma"
+8990/3,335,/3,cancer,"Mesenchymoma, malignant
+Mixed mesenchymal sarcoma
+Phosphaturic mesenchymal tumor, malignant"
+8991/3,336,/3,cancer,Embryonal sarcoma
+9000/3,337,/3,cancer,"Brenner tumor, malignant"
+9014/3,338,/3,cancer,"Serous adenocarcinofibroma
+Malignant serous adenofibroma
+Serous cystadenocarcinofibroma
+Malignant serous cystadenofibroma"
+9015/3,339,/3,cancer,"Mucinous adenocarcinofibroma
+Malignant mucinous adenofibroma
+Mucinous cystadenocarcinofibroma
+Malignant mucinous cystadenofibroma"
+9020/3,340,/3,cancer,"Phyllodes tumor, malignant
+Cystosarcoma phyllodes, malignant
+Periductal stromal tumor, low grade"
+9040/3,341,/3,cancer,"Synovial sarcoma
+Synovioma
+Synovioma, malignant"
+9041/3,342,/3,cancer,"Synovial sarcoma, spindle cell
+Synovial sarcoma, monophasic fibrous"
+9042/3,343,/3,cancer,"Synovial sarcoma, epithelioid cell"
+9043/3,344,/3,cancer,"Synovial sarcoma, biphasic"
+9044/3,345,/3,cancer,"Clear cell sarcoma
+Malignant melanoma of soft parts"
+9045/3,346,/3,cancer,Biphenotypic sinonasal sarcoma
+9050/3,347,/3,cancer,"Mesothelioma, malignant
+Mesothelioma"
+9051/3,348,/3,cancer,"Fibrous mesothelioma, malignant
+Fibrous mesothelioma
+Desmoplastic mesothelioma
+Sarcomatoid mesothelioma
+Spindled mesothelioma"
+9052/3,349,/3,cancer,"Epithelioid mesothelioma, malignant
+Epithelioid mesothelioma"
+9053/3,350,/3,cancer,"Mesothelioma, biphasic, malignant
+Mesothelioma, biphasic"
+9060/3,351,/3,cancer,Dysgerminoma
+9061/3,352,/3,cancer,Seminoma
+9062/3,353,/3,cancer,"Seminoma, anaplastic
+Seminoma with high mitotic index"
+9063/3,354,/3,cancer,"Spermatocytic seminoma
+Spermatocytoma
+Spermatocytic tumor"
+9064/3,355,/3,cancer,"Germinoma
+Germ cell tumor"
+9065/3,356,/3,cancer,"Germ cell tumor, nonseminomatous"
+9070/3,357,/3,cancer,"Embryonal carcinoma
+Embryonal adenocarcinoma"
+9071/3,358,/3,cancer,"Yolk sac tumor
+Embryonal carcinoma, infantile
+Yolk sac tumor, pre-pubertal type
+Endodermal sinus tumor
+Orchioblastoma
+Polyvesicular vitelline tumor
+Hepatoid yolk sac tumor
+Yolk sac tumor, post-pubertal type"
+9072/3,359,/3,cancer,"Polyembryoma
+Embryonal carcinoma, polyembryonal type"
+9080/3,360,/3,cancer,"Teratoma, malignant
+Embryonal teratoma
+Teratoblastoma, malignant
+Immature teratoma, malignant
+Immature teratoma"
+9081/3,361,/3,cancer,"Teratocarcinoma
+Mixed embryonal carcinoma and teratoma
+Teratocarcinosarcoma"
+9082/3,362,/3,cancer,"Malignant teratoma, undifferentiated
+Malignant teratoma, anaplastic"
+9083/3,363,/3,cancer,"Malignant teratoma, intermediate"
+9084/3,364,/3,cancer,"Teratoma with malignant transformation
+Teratoma with somatic type malignancies
+Dermoid cyst with malignant transformation
+Dermoid cyst with secondary tumor"
+9085/3,365,/3,cancer,"Mixed germ cell tumor
+Mixed teratoma and seminoma"
+9086/3,366,/3,cancer,Germ cell tumor with associated hematological malignancy
+9090/3,367,/3,cancer,"Struma ovarii, malignant"
+9100/3,368,/3,cancer,"Choriocarcinoma
+Chorioepithelioma
+Chorionepithelioma"
+9101/3,369,/3,cancer,"Choriocarcinoma combined with other germ cell elements
+Choriocarcinoma combined with embryonal carcinoma
+Choriocarcinoma combined with teratoma"
+9102/3,370,/3,cancer,"Malignant teratoma, trophoblastic"
+9105/3,371,/3,cancer,"Trophoblastic tumor, epithelioid"
+9110/3,372,/3,cancer,"Mesonephroma, malignant
+Mesonephroma
+Mesonephric adenocarcinoma
+Wolffian duct carcinoma
+Adenocarcinoma of rete ovarii"
+9120/3,373,/3,cancer,"Hemangiosarcoma
+Angiosarcoma"
+9124/3,374,/3,cancer,Kupffer cell sarcoma
+9130/3,375,/3,cancer,"Hemangioendothelioma, malignant
+Hemangioendothelial sarcoma"
+9133/3,376,/3,cancer,"Epithelioid hemangioendothelioma
+Epithelioid hemangioendothelioma, malignant
+Intravascular bronchial alveolar tumor"
+9137/3,377,/3,cancer,Intimal sarcoma
+9140/3,378,/3,cancer,"Kaposi sarcoma
+Multiple hemorrhagic sarcoma"
+9170/3,379,/3,cancer,"Lymphangiosarcoma
+Lymphangioendothelial sarcoma
+Lymphangioendothelioma, malignant"
+9180/3,380,/3,cancer,"Osteosarcoma
+Osteogenic sarcoma
+Osteoblastic sarcoma
+Osteochondrosarcoma
+Osteosarcoma, extraskeletal"
+9181/3,381,/3,cancer,Chondroblastic osteosarcoma
+9182/3,382,/3,cancer,"Fibroblastic osteosarcoma
+Osteofibrosarcoma"
+9183/3,383,/3,cancer,Telangiectatic osteosarcoma
+9184/3,384,/3,cancer,"Osteosarcoma in Paget disease of bone
+Secondary osteosarcoma"
+9185/3,385,/3,cancer,"Small cell osteosarcoma
+Round cell osteosarcoma"
+9186/3,386,/3,cancer,"Central osteosarcoma
+Conventional central osteosarcoma
+Medullary osteosarcoma"
+9187/3,387,/3,cancer,"Low grade central osteosarcoma
+Low grade intramedullary osteosarcoma
+Intraosseous well differentiated osteosarcoma
+Intraosseous low grade osteosarcoma"
+9192/3,388,/3,cancer,"Parosteal osteosarcoma
+Juxtacortical osteosarcoma"
+9193/3,389,/3,cancer,Periosteal osteosarcoma
+9194/3,390,/3,cancer,High grade surface osteosarcoma
+9195/3,391,/3,cancer,Intracortical osteosarcoma
+9220/3,392,/3,cancer,"Chondrosarcoma
+Fibrochondrosarcoma
+Chondrosarcoma, grade 2
+Chondrosarcoma, grade 3"
+9221/3,393,/3,cancer,"Periosteal chondrosarcoma
+Juxtacortical chondrosarcoma"
+9230/3,394,/3,cancer,"Chondroblastoma, malignant"
+9231/3,395,/3,cancer,Myxoid chondrosarcoma
+9240/3,396,/3,cancer,Mesenchymal chondrosarcoma
+9242/3,397,/3,cancer,Clear cell chondrosarcoma
+9243/3,398,/3,cancer,Dedifferentiated chondrosarcoma
+9250/3,399,/3,cancer,"Giant cell tumor of bone, malignant
+Giant cell sarcoma of bone
+Osteoclastoma, malignant"
+9251/3,400,/3,cancer,Malignant giant cell tumor of soft parts
+9252/3,401,/3,cancer,"Malignant tenosynovial giant cell tumor
+Giant cell tumor of tendon sheath, malignant"
+9261/3,402,/3,cancer,Adamantinoma of long bones
+9270/3,403,/3,cancer,"Odontogenic tumor, malignant
+Ameloblastic carcinoma
+Odontogenic carcinoma
+Odontogenic sarcoma
+Primary intraosseous carcinoma"
+9290/3,404,/3,cancer,"Ameloblastic odontosarcoma
+Ameloblastic fibro-odontosarcoma
+Ameloblastic fibrodentinosarcoma"
+9302/3,405,/3,cancer,Ghost cell odontogenic carcinoma
+9310/3,406,/3,cancer,"Ameloblastoma, metastasizing
+Ameloblastoma, malignant
+Adamantinoma, malignant"
+9330/3,407,/3,cancer,"Ameloblastic fibrosarcoma
+Ameloblastic sarcoma
+Odontogenic fibrosarcoma"
+9341/3,408,/3,cancer,"Clear cell odontogenic carcinoma
+Clear cell odontogenic tumor"
+9342/3,409,/3,cancer,Odontogenic carcinosarcoma
+9362/3,410,/3,cancer,"Pineoblastoma
+Mixed pineal tumor
+Mixed pineocytoma-pineoblastoma
+Pineal parenchymal tumor of intermediate differentiation
+Transitional pineal tumor"
+9364/3,411,/3,cancer,"Ewing sarcoma
+Peripheral neuroectodermal tumor
+Neuroectodermal tumor
+Peripheral primitive neuroectodermal tumor
+PPNET"
+9365/3,412,/3,cancer,Askin tumor
+9370/3,413,/3,cancer,Chordoma
+9371/3,414,/3,cancer,Chondroid chordoma
+9372/3,415,/3,cancer,Dedifferentiated chordoma
+9380/3,416,/3,cancer,"Glioma, malignant
+Glioma"
+9381/3,417,/3,cancer,Gliomatosis cerebri
+9382/3,418,/3,cancer,"Oligoastrocytoma
+Mixed glioma
+Anaplastic oligoastrocytoma"
+9385/3,419,/3,cancer,"Diffuse midline glioma, H3 K27M-mutant
+Diffuse intrinsic pontine glioma, H3 K27M-mutant"
+9390/3,420,/3,cancer,"Choroid plexus carcinoma
+Choroid plexus papilloma, anaplastic
+Choroid plexus papilloma, malignant"
+9391/3,421,/3,cancer,"Ependymoma
+Epithelial ependymoma
+Cellular ependymoma
+Clear cell ependymoma
+Tanycytic ependymoma"
+9392/3,422,/3,cancer,"Ependymoma, anaplastic
+Ependymoblastoma"
+9393/3,423,/3,cancer,Papillary ependymoma
+9395/3,424,/3,cancer,Papillary tumor of the pineal region
+9396/3,425,/3,cancer,"Ependymoma, RELA fusion-positive"
+9400/3,426,/3,cancer,"Astrocytoma
+Astrocytic glioma
+Astroglioma
+Astrocytoma, low grade
+Cystic astrocytoma
+Diffuse astrocytoma
+Diffuse astrocytoma, low grade
+Diffuse astrocytoma, IDH-mutant
+Diffuse astrocytoma, IDH-wildtype"
+9401/3,427,/3,cancer,"Astrocytoma, anaplastic
+Astrocytoma, anaplastic, IDH-mutant
+Astrocytoma, anaplastic, IDH-wildtype"
+9410/3,428,/3,cancer,Protoplasmic astrocytoma
+9411/3,429,/3,cancer,"Gemistocytic astrocytoma
+Gemistocytc astrocytoma, IDH-mutant
+Gemistocytoma"
+9420/3,430,/3,cancer,"Fibrillary astrocytoma
+Fibrous astrocytoma"
+9423/3,431,/3,cancer,"Polar spongioblastoma
+Primitive polar spongioblastoma
+Spongioblastoma polare"
+9424/3,432,/3,cancer,"Pleomorphic xanthoastrocytoma
+Anaplastic pleomorphic xanthoastrocytoma"
+9425/3,433,/3,cancer,Pilomyxoid astrocytoma
+9430/3,434,/3,cancer,Astroblastoma
+9440/3,435,/3,cancer,"Glioblastoma
+Epithelioid glioblastoma
+Glioblastoma, IDH-wildtype
+Glioblastoma, primary
+Glioblastoma multiforme
+Spongioblastoma multiforme
+Diffuse midline glioma
+Diffuse intrinsic pontine glioma"
+9441/3,436,/3,cancer,"Giant cell glioblastoma
+Monstrocellular sarcoma"
+9442/3,437,/3,cancer,"Gliosarcoma
+Glioblastoma with sarcomatous component"
+9445/3,438,/3,cancer,"Glioblastoma, IDH-mutant
+Glioblastoma, secondary, IDH-mutant
+Glioblastoma, secondary"
+9450/3,439,/3,cancer,"Oligodendroglioma
+Oligodendroglioma, IDH-mutant and 1p/19q-codeleted"
+9451/3,440,/3,cancer,"Oligodendroglioma, anaplastic
+Oligodendroglioma, anaplastic, IDH-mutant and 1p/19q codeleted"
+9460/3,441,/3,cancer,Oligodendroblastoma
+9470/3,442,/3,cancer,"Medulloblastoma
+Classic medulloblastoma
+Melanotic medulloblastoma"
+9471/3,443,/3,cancer,"Desmoplastic nodular medulloblastoma
+Circumscribed arachnoidal cerebellar sarcoma
+Desmoplastic medulloblastoma
+Medulloblastoma with extensive nodularity
+Medulloblastoma, SHH-activated and TP53-wildtype
+Medulloblastoma, SHH activated"
+9472/3,444,/3,cancer,Medullomyoblastoma
+9473/3,445,/3,cancer,"CNS embryonal tumor
+Primitive neuroectodermal tumor
+PNET
+Central primitive neuroectodermal tumor
+CPNET
+Supratentorial PNET"
+9474/3,446,/3,cancer,"Large cell medulloblastoma
+Anaplastic medulloblastoma"
+9475/3,447,/3,cancer,"Medullobloastoma, WNT-activated
+Medulloblastoma, WNT-activated, classic
+Medulloblastoma, WNT-activated, large cell type
+Medulloblastoma, WNT-activated, anaplastic type"
+9476/3,448,/3,cancer,"Medulloblastoma, SHH-activated and TP53-mutant"
+9477/3,449,/3,cancer,"Medulloblastoma, non-WNT/non-SHH
+Medulloblastoma, group 3
+Medulloblastoma, group 4"
+9478/3,450,/3,cancer,"Embryonal tumor with multilayered rosettes with C19MC alteration
+Embryonal tumor with multilayered rosettes"
+9480/3,451,/3,cancer,Cerebellar sarcoma
+9490/3,452,/3,cancer,"Ganglioneuroblastoma
+CNS ganglioneuroblastoma"
+9500/3,453,/3,cancer,"Neuroblastoma
+Central neuroblastoma
+CNS neuroblastoma
+Sympathicoblastoma"
+9501/3,454,/3,cancer,"Medulloepithelioma
+Diktyoma, malignant"
+9502/3,455,/3,cancer,Teratoid medulloepithelioma
+9503/3,456,/3,cancer,Neuroepithelioma
+9504/3,457,/3,cancer,Spongioneuroblastoma
+9505/3,458,/3,cancer,"Ganglioglioma, anaplastic"
+9508/3,459,/3,cancer,"Atypical teratoid/rhabdoid tumor
+CNS embryonal tumor with rhabdoid features"
+9510/3,460,/3,cancer,Retinoblastoma
+9511/3,461,/3,cancer,"Retinoblastoma, differentiated"
+9512/3,462,/3,cancer,"Retinoblastoma, undifferentiated"
+9513/3,463,/3,cancer,"Retinoblastoma, diffuse"
+9520/3,464,/3,cancer,Olfactory neurogenic tumor
+9521/3,465,/3,cancer,"Olfactory neurocytoma
+Esthesioneurocytoma"
+9522/3,466,/3,cancer,"Olfactory neuroblastoma
+Esthesioneuroblastoma"
+9523/3,467,/3,cancer,"Olfactory neuroepithelioma
+Esthesioneuroepithelioma"
+9530/3,468,/3,cancer,"Meningioma, malignant
+Leptomeningeal sarcoma
+Meningeal sarcoma
+Meningioma, anaplastic
+Meningothelial sarcoma"
+9538/3,469,/3,cancer,"Papillary meningioma
+Rhabdoid meningioma"
+9539/3,470,/3,cancer,Meningeal sarcomatosis
+9540/3,471,/3,cancer,"Malignant peripheral nerve sheath tumor
+MPNST
+Neurofibrosarcoma
+Neurogenic sarcoma
+Neurosarcoma
+Melanotic MPNST
+Melanotic psammomatous MPNST
+MPNST with glandular differentiation
+MPNST with mesenchymal differentiation
+MPNST with perineurial differentiation"
+9542/3,472,/3,cancer,"Malignant peripheral nerve sheath tumor, epithelioid
+Epithelioid MPNST"
+9560/3,473,/3,cancer,"Neurilemoma, malignant
+Malignant schwannoma
+Neurilemosarcoma"
+9561/3,474,/3,cancer,"Malignant peripheral nerve sheath tumor with rhabdomyoblastic differentiation
+Malignant schwannoma with rhabdomyoblastic differentiation
+MPNST with rhabdomyoblastic differentiation
+Triton tumor, malignant"
+9571/3,475,/3,cancer,"Perineurioma, malignant"
+9580/3,476,/3,cancer,"Granular cell tumor, malignant
+Granular cell myoblastoma, malignant"
+9581/3,477,/3,cancer,Alveolar soft part sarcoma
+9590/3,478,/3,cancer,"Malignant lymphoma
+Lymphoma
+Microglioma"
+9591/3,479,/3,cancer,"Malignant lymphoma, non-Hodgkin
+Non-Hodgkin lymphoma
+B-cell lymphoma
+Lymphosarcoma
+Lymphosarcoma, diffuse
+Malignant lymphoma, diffuse
+Malignant lymphoma, non-cleaved cell
+Reticulum cell sarcoma
+Reticulosarcoma
+Reticulum cell sarcoma, diffuse
+Reticulosarcoma, diffuse
+Hairy cell leukemia variant
+Malignant lymphoma, lymphocytic, intermediate differentiation, nodular
+Malignant lymphoma, lymphocytic, poorly differentiated, diffuse
+Malignant lymphoma, cleaved cell
+Malignant lymphoma, small cleaved cell
+Malignant lymphoma, small cell, noncleaved, diffuse
+Malignant lymphoma, undifferentiated cell type
+Malignant lymphoma, undifferentiated cell, non-Burkitt
+Malignant lymphoma, small cleaved cell, diffuse
+Splenic B-cell lymphoma/leukemia, unclassifiable
+Splenic diffuse red pulp small B-cell lymphoma"
+9596/3,480,/3,cancer,"Composite Hodgkin and non-Hodgkin lymphoma
+B-cell lymphoma, unclassifiable, with features intermediate between diffuse large B-cell lymphoma and classical Hodgkin lymphoma"
+9597/3,481,/3,cancer,Primary cutaneous follicle centre lymphoma
+9650/3,482,/3,cancer,"Hodgkin lymphoma
+Hodgkin disease
+Malignant lymphoma, Hodgkin
+Classical Hodgkin lymphoma post-transplant lymphoproliferative disease"
+9651/3,483,/3,cancer,"Hodgkin lymphoma, lymphocyte-rich
+Classical Hodgkin lymphoma, lymphocyte-rich
+Hodgkin disease, lymphocyte predominance
+Hodgkin disease, lymphocyte predominance, diffuse
+Hodgkin disease, lymphocytic-histiocytic predominance"
+9652/3,484,/3,cancer,"Hodgkin lymphoma, mixed cellularity
+Classical Hodgkin lymphoma, mixed cellularity"
+9653/3,485,/3,cancer,"Hodgkin lymphoma, lymphocyte depletion
+Classical Hodgkin lymphoma, lymphocyte depletion"
+9654/3,486,/3,cancer,"Hodgkin lymphoma, lymphocyte depletion, diffuse fibrosis
+Classical Hodgkin lymphoma, lymphocyte depletion, diffuse fibrosis"
+9655/3,487,/3,cancer,"Hodgkin lymphoma, lymphocyte depletion, reticular
+Classical Hodgkin lymphoma, lymphocyte depletion, reticular"
+9659/3,488,/3,cancer,"Hodgkin lymphoma, nodular lymphocyte predominant
+Hodgkin paragranuloma
+Hodgkin paragranuloma, nodular"
+9661/3,489,/3,cancer,Hodgkin granuloma
+9662/3,490,/3,cancer,Hodgkin sarcoma
+9663/3,491,/3,cancer,"Hodgkin lymphoma, nodular sclerosis
+Classical Hodgkin lymphoma, nodular sclerosis
+Hodgkin disease, nodular sclerosis"
+9664/3,492,/3,cancer,"Hodgkin lymphoma, nodular sclerosis, cellular phase
+Classical Hodgkin lymphoma, nodular sclerosis, cellular phase"
+9665/3,493,/3,cancer,"Hodgkin lymphoma, nodular sclerosis, grade 1
+Classical Hodgkin lymphoma, nodular sclerosis, grade 1
+Hodgkin disease, nodular sclerosis, lymphocyte predominance
+Hodgkin disease, nodular sclerosis, mixed cellularity"
+9667/3,494,/3,cancer,"Hodgkin lymphoma, nodular sclerosis, grade 2
+Classical Hodgkin lymphoma, nodular sclerosis, grade 2
+Hodgkin disease, nodular sclerosis, lymphocyte depletion
+Hodgkin disease, nodular sclerosis, syncytial variant"
+9671/3,495,/3,cancer,"Lymphoplasmacytic lymphoma
+Malignant lymphoma, lymphoplasmacytoid
+Immunocytoma
+Malignant lymphoma, plasmacytoid
+Plasmacytic lymphoma"
+9673/3,496,/3,cancer,"Mantle cell lymphoma
+Malignant lymphoma, centrocytic
+Malignant lymphoma, lymphocytic, intermediate differentiation, diffuse
+Malignant lymphomatous polyposis
+Mantle zone lymphoma"
+9675/3,497,/3,cancer,"Malignant lymphoma, mixed small and large cell, diffuse
+Malignant lymphoma, centroblastic-centrocytic
+Malignant lymphoma, centroblastic-centrocytic, diffuse
+Malignant lymphoma, mixed cell type, diffuse
+Malignant lymphoma, mixed lymphocytic-histiocytic, diffuse"
+9678/3,498,/3,cancer,Primary effusion lymphoma
+9679/3,499,/3,cancer,"Mediastinal large B-cell lymphoma
+Thymic large B-cell lymphoma"
+9680/3,500,/3,cancer,"Diffuse large B-cell lymphoma
+Malignant lymphoma, large B-cell, diffuse
+Malignant lymphoma, histiocytic
+Malignant lymphoma, large B-cell
+Malignant lymphoma, large B-cell, diffuse, centroblastic
+Malignant lymphoma, large cell
+Malignant lymphoma, large cell, cleaved
+Malignant lymphoma, large cell, diffuse
+Malignant lymphoma, large cell, noncleaved
+Malignant lymphoma, noncleaved
+Malignant lymphoma, noncleaved, diffuse
+Malignant lymphoma, histiocytic, diffuse
+Malignant lymphoma, large cell, cleaved and noncleaved
+Malignant lymphoma, large cell, cleaved, diffuse
+Malignant lymphoma, large cell, noncleaved, diffuse
+Malignant lymphoma, centroblastic
+Diffuse large B-cell lymphoma, germinal centre B-cell subtype
+Diffuse large B-cell lymphoma, activated B-cell subtype
+Malignant lymphoma, centroblastic, diffuse
+Anaplastic large B-cell lymphoma
+B-cell lymphoma, unclassifiable, with features intermediate between diffuse large B-cell lymphoma and Burkitt lymphoma
+Diffuse large B-cell lymphoma associated with chronic inflammation
+EBV positive diffuse large B-cell lymphoma
+Primary cutaneous DLBCL, leg type
+Primary diffuse large B-cell lymphoma of the CNS
+High grade B-cell lymphoma
+High grade B-cell lymphoma with MYC and BCL2 and/or BCL6 rearrangements
+Vitreoretinal lymphoma"
+9684/3,501,/3,cancer,"Malignant lymphoma, large B-cell, diffuse, immunoblastic
+Malignant lymphoma, immunoblastic
+Immunoblastic sarcoma
+Malignant lymphoma, large cell, immunoblastic"
+9687/3,502,/3,cancer,"Burkitt lymphoma
+Burkitt tumor
+Malignant lymphoma, small noncleaved, Burkitt type
+Malignant lymphoma, undifferentiated, Burkitt type
+Burkitt-like lymphoma
+Burkitt-like lymphoma with 11q aberration
+Burkitt cell leukemia
+Acute leukemia, Burkitt type
+Acute lymphoblastic leukemia, mature B-cell type
+B-ALL
+FAB L3"
+9688/3,503,/3,cancer,"T-cell/histiocyte rich large B-cell lymphoma
+T-cell rich large B-cell lymphoma
+Histiocyte-rich large B-cell lymphoma"
+9689/3,504,/3,cancer,"Splenic marginal zone B-cell lymphoma
+Splenic marginal zone lymphoma
+Splenic lymphoma with villous lymphocytes"
+9690/3,505,/3,cancer,"Follicular lymphoma
+Malignant lymphoma, follicle center
+Malignant lymphoma, follicular
+Malignant lymphoma, lymphocytic, nodular
+Malignant lymphoma, nodular
+Malignant lymphoma, centroblastic-centrocytic, follicular
+Malignant lymphoma, follicle center, follicular
+Follicular lymphoma, pediatric type"
+9691/3,506,/3,cancer,"Follicular lymphoma, grade 2
+Malignant lymphoma, mixed cell type, follicular
+Malignant lymphoma, mixed cell type, nodular
+Malignant lymphoma, mixed lymphocytic-histiocytic, nodular
+Malignant lymphoma, mixed small cleaved and large cell, follicular"
+9695/3,507,/3,cancer,"Follicular lymphoma, grade 1
+Follicular lymphoma, small cleaved cell
+Malignant lymphoma, lymphocytic, poorly differentiated, nodular
+Malignant lymphoma, small cleaved cell, follicular
+Follicular lymphoma, duodenal type"
+9698/3,508,/3,cancer,"Follicular lymphoma, grade 3
+Malignant lymphoma, large cell, follicular
+Malignant lymphoma, noncleaved cell, follicular
+Follicular lymphoma, grade 3A
+Follicular lymphoma, grade 3B
+Malignant lymphoma, centroblastic, follicular
+Malignant lymphoma, histiocytic, nodular
+Malignant lymphoma, large cell, noncleaved, follicular
+Malignant lymphoma, large cleaved cell, follicular
+Malignant lymphoma, lymphocytic, well differentiated, nodular
+Large B-cell lymphoma with IRF4 rearrangement"
+9699/3,509,/3,cancer,"Marginal zone B-cell lymphoma
+Marginal zone lymphoma
+BALT lymphoma
+Bronchus associated lymphoid tissue lymphoma
+MALT lymphoma
+Monocytoid B-cell lymphoma
+Mucosa associated lymphoid tissue lymphoma
+Nodal marginal zone lymphoma
+SALT lymphoma
+Skin-associated lymphoid tissue lymphoma
+Extranodal marginal zone lymphoma of mucosa-associated lymphoid tissue
+Primary choroidal lymphoma"
+9700/3,510,/3,cancer,"Mycosis fungoides
+Pagetoid reticulosis
+Granulomatous slack skin"
+9701/3,511,/3,cancer,"Sezary syndrome
+Sezary disease"
+9702/3,512,/3,cancer,"Mature T-cell lymphoma
+Peripheral T-cell lymphoma
+T-cell lymphoma
+Peripheral T-cell lymphoma, large cell
+Peripheral T-cell lymphoma, pleomorphic medium and large cell
+Peripheral T-cell lymphoma, pleomorphic small cell
+T-zone lymphoma
+Lymphoepithelioid lymphoma
+Lennert lymphoma
+Follicular T-cell lymphoma
+Nodal peripheral T-cell lymphoma with T follicular helper phenotype"
+9705/3,513,/3,cancer,"Angioimmunoblastic T-cell lymphoma
+Angioimmunoblastic lymphoma
+Peripheral T-cell lymphoma, AILD (Angioimmunoblastic Lymphadenopathy with Dysproteinemia)"
+9708/3,514,/3,cancer,Subcutaneous panniculitis-like T-cell lymphoma
+9709/3,515,/3,cancer,"Cutaneous T-cell lymphoma
+Cutaneous lymphoma
+Primary cutaneous CD8-positive aggressive epidermotropic cytotoxic T-cell lymphoma
+Primary cutaneous acral CD8-positive T-cell lymphoma"
+9712/3,516,/3,cancer,"Intravascular large B-cell lymphoma
+Intravascular B-cell lymphoma
+Angioendotheliomatosis
+Angiotropic lymphoma"
+9714/3,517,/3,cancer,"Anaplastic large cell lymphoma, T-cell and Null-cell type
+Large cell (Ki-1+) lymphoma
+Anaplastic large cell lymphoma
+Anaplastic large cell lymphoma, CD30+
+Anaplastic large cell lymphoma, ALK positive"
+9715/3,518,/3,cancer,"Anaplastic large cell lymphoma, ALK negative
+Breast implant-associated anaplastic large cell lymphoma"
+9716/3,519,/3,cancer,"Hepatosplenic T-cell lymphoma
+Hepatosplenic gamma-delta cell lymphoma"
+9717/3,520,/3,cancer,"Intestinal T-cell lymphoma
+Enteropathy associated T-cell lymphoma
+Enteropathy type intestinal T-cell lymphoma
+Monomorphic epitheliotropic intestinal T-cell lymphoma"
+9718/3,521,/3,cancer,"Primary cutaneous anaplastic large cell lymphoma
+Primary cutaneous CD30+ large T-cell lymphoma"
+9719/3,522,/3,cancer,"NK/T-cell lymphoma, nasal and nasal type
+Malignant reticulosis
+Angiocentric T-cell lymphoma
+Extranodal NK/T-cell lymphoma, nasal type
+Malignant midline reticulosis
+Polymorphic reticulosis
+T/NK-cell lymphoma"
+9724/3,523,/3,cancer,Systemic EBV positive T-cell lymphoproliferative disease of childhood
+9726/3,524,/3,cancer,Primary cutaneous gamma-delta T-cell lymphoma
+9727/3,525,/3,cancer,"Precursor cell lymphoblastic lymphoma
+Malignant lymphoma, lymphoblastic
+Lymphoblastoma
+Malignant lymphoma, convoluted cell
+Blastic NK-cell lymphoma
+Blastic plasmacytoid dendritic cell neoplasm"
+9731/3,526,/3,cancer,"Plasmacytoma
+Plasma cell tumor
+Plasmacytoma of bone
+Solitary myeloma
+Solitary plasmacytoma"
+9732/3,527,/3,cancer,"Plasma cell myeloma
+Multiple myeloma
+Myeloma
+Myelomatosis"
+9733/3,528,/3,cancer,"Plasma cell leukemia
+Plasmacytic leukemia"
+9734/3,529,/3,cancer,"Plasmacytoma, extramedullary
+Extraosseous plasmacytoma"
+9735/3,530,/3,cancer,Plasmablastic lymphoma
+9737/3,531,/3,cancer,ALK positive large B-cell lymphoma
+9738/3,532,/3,cancer,"HHV8-positive diffuse large B-cell lymphoma
+Large B-cell lymphoma arising in HHV8-associated multicentric Castleman disease"
+9740/3,533,/3,cancer,"Mast cell sarcoma
+Malignant mast cell tumor
+Malignant mastocytoma"
+9741/3,534,/3,cancer,"Malignant mastocytosis
+Systemic tissue mast cell disease
+Aggressive systemic mastocytosis
+Systemic mastocytosis with AHNMD
+Systemic mastocytosis with associated hematological clonal non-mast cell disorder"
+9742/3,535,/3,cancer,Mast cell leukemia
+9749/3,536,/3,cancer,Erdheim-Chester disease
+9750/3,537,/3,cancer,"Malignant histiocytosis
+Histiocytic medullary reticulosis"
+9751/3,538,/3,cancer,"Langerhans cell histiocytosis, disseminated
+Langerhans cell granulomatosis
+Eosinophilic granuloma
+Acute progressive histiocytosis X
+Histiocytosis X
+Hand-Schuller-Christian disease
+Letterer-Siwe disease
+Nonlipid reticuloendotheliosis"
+9755/3,539,/3,cancer,"Histiocytic sarcoma
+True histiocytic lymphoma"
+9756/3,540,/3,cancer,Langerhans cell sarcoma
+9757/3,541,/3,cancer,"Interdigitating dendritic cell sarcoma
+Interdigitating cell sarcoma
+Dendritic cell sarcoma
+Indeterminate dendritic cell tumor"
+9758/3,542,/3,cancer,"Follicular dendritic cell sarcoma
+Follicular dendritic cell tumor"
+9759/3,543,/3,cancer,Fibroblastic reticular cell tumor
+9760/3,544,/3,cancer,Immunoproliferative disease
+9761/3,545,/3,cancer,Waldenstrom macroglobulinemia
+9762/3,546,/3,cancer,"Heavy chain disease
+Alpha heavy chain disease
+Gamma heavy chain disease
+Franklin disease
+Mu heavy chain disease"
+9764/3,547,/3,cancer,"Immunoproliferative small intestinal disease
+Mediterranean lymphoma"
+9766/3,548,/3,cancer,"Lymphomatoid granulomatosis, grade 3"
+9800/3,549,/3,cancer,"Leukemia
+Aleukemic leukemia
+Chronic leukemia
+Subacute leukemia"
+9801/3,550,/3,cancer,"Acute leukemia
+Blast cell leukemia
+Stem cell leukemia
+Undifferentiated leukemia"
+9805/3,551,/3,cancer,"Acute biphenotypic leukemia
+Acute bilineal leukemia
+Acute mixed lineage leukemia"
+9806/3,552,/3,cancer,Mixed phenotype acute leukemia with t(9;22)(q34;q11.2); BCR-ABL1
+9807/3,553,/3,cancer,Mixed phenotype acute leukemia with t(v;11q23); MLL rearranged
+9808/3,554,/3,cancer,"Mixed phenotype acute leukemia, B/myeloid"
+9809/3,555,/3,cancer,"Mixed phenotype acute leukemia, T/myeloid"
+9811/3,556,/3,cancer,"B lymphoblastic leukemia/lymphoma
+c-ALL
+Common ALL
+Common precursor B ALL
+Pre-B ALL
+Pre-pre-B ALL
+Pro-B ALL
+Precursor B-cell lymphoblastic lymphoma
+B lymphoblastic leukemia/lymphoma with iAMP21"
+9812/3,557,/3,cancer,B lymphoblastic leukemia/lymphoma with t(9;22)(q34;q11.2); BCR-ABL1
+9813/3,558,/3,cancer,B lymphoblastic leukemia/lymphoma with t(v;11q23); MLL rearranged
+9814/3,559,/3,cancer,B lymphoblastic leukemia/lymphoma with t(12;21)(p13;q22); TEL-AML1(ETV6-RUNX1)
+9815/3,560,/3,cancer,B lymphoblastic leukemia/lymphoma with hyperdiploidy
+9816/3,561,/3,cancer,B lymphoblastic leukemia/lymphoma with hypodiploidy(Hypodiploid ALL)
+9817/3,562,/3,cancer,B lymphoblastic leukemia/lymphoma with t(5;14)(q31;q32); IL3-IGH
+9818/3,563,/3,cancer,B lymphoblastic leukemia/lymphoma with t(1;19)(q23;p13.3); E2A-PBX1(TCF3-PBX1)
+9819/3,564,/3,cancer,"B lymphoblastic leukemia/lymphoma, BCR-ABL1-like"
+9820/3,565,/3,cancer,"Lymphoid leukemia
+Lymphatic leukemia
+Lymphocytic leukemia
+Aleukemic lymphoid leukemia
+Aleukemic lymphatic leukemia
+Aleukemic lymphocytic leukemia
+Lymphosarcoma cell leukemia
+Subacute lymphoid leukemia
+Subacute lymphatic leukemia
+Subacute lymphocytic leukemia"
+9823/3,566,/3,cancer,"B-cell chronic lymphocytic leukemia/small lymphocytic lymphoma
+Chronic lymphatic leukemia
+Chronic lymphocytic leukemia
+Chronic lymphocytic leukemia, B-cell type
+Chronic lymphoid leukemia
+Malignant lymphoma, small B lymphocytic
+Malignant lymphoma, lymphocytic
+Malignant lymphoma, lymphocytic, diffuse
+Malignant lymphoma, small cell
+Malignant lymphoma, small lymphocytic
+Malignant lymphoma, lymphocytic, well differentiated, diffuse
+Malignant lymphoma, small cell diffuse
+Malignant lymphoma, small lymphocytic, diffuse"
+9827/3,567,/3,cancer,"Adult T-cell leukemia/lymphoma (HTLV-1 positive)
+Adult T-cell leukemia
+Adult T-cell lymphoma
+Adult T-cell lymphoma/leukemia"
+9831/3,568,/3,cancer,"T-cell large granular lymphocytic leukemia
+Large granular lymphocytosis
+NK-cell large granular lymphocytic leukemia
+T-cell large granular lymphocytosis
+Chronic lymphoproliferative disorder of NK cells"
+9832/3,569,/3,cancer,Prolymphocytic leukemia
+9833/3,570,/3,cancer,"Prolymphocytic leukemia, B-cell type"
+9834/3,571,/3,cancer,"Prolymphocytic leukemia, T-cell type"
+9835/3,572,/3,cancer,"Precursor cell lymphoblastic leukemia
+Acute lymphoblastic leukemia
+Acute lymphoblastic leukemia, L2 type
+Acute lymphoblastic leukemia-lymphoma
+Lymphoblastic leukemia
+Acute lymphatic leukemia
+Acute lymphocytic leukemia
+Acute lymphoid leukemia
+FAB L1
+FAB L2
+Precursor cell lymphoblastic leukemia, not phenotyped
+Acute lymphoblastic leukemia, precursor-cell type"
+9837/3,573,/3,cancer,"Precursor T-cell lymphoblastic leukemia
+Cortical T ALL
+Mature T ALL
+Pre-T ALL
+Pro-T ALL
+Precursor T-cell lymphoblastic lymphoma
+T lymphoblastic leukemia/lymphoma
+Early T-cell precursor acute lymphoblastic leukemia"
+9840/3,574,/3,cancer,"Acute erythroid leukemia
+Acute myeloid leukemia, M6 type
+Acute erythremia
+Acute erythremic myelosis
+AML M6
+Di Guglielmo disease
+Erythremic myelosis
+Erythroleukemia
+FAB M6
+M6A
+M6B"
+9860/3,575,/3,cancer,"Myeloid leukemia
+Granulocytic leukemia
+Myelocytic leukemia
+Myelogenous leukemia
+Myelomonocytic leukemia
+Non-lymphocytic leukemia
+Aleukemic myeloid leukemia
+Aleukemic granulocytic leukemia
+Aleukemic myelogenous leukemia
+Aleukemic monocytic leukemia
+Chronic monocytic leukemia
+Eosinophilic leukemia
+Monocytic leukemia
+Subacute monocytic leukemia
+Subacute myeloid leukemia
+Subacute granulocytic leukemia
+Subacute myelogenous leukemia"
+9861/3,576,/3,cancer,"Acute myeloid leukemia
+Acute granulocytic leukemia
+Acute myelocytic leukemia
+Acute myelogenous leukemia
+Acute non-lymphocytic leukemia"
+9863/3,577,/3,cancer,"Chronic myeloid leukemia
+Chronic granulocytic leukemia
+Chronic myelocytic leukemia
+Chronic myelogenous leukemia"
+9865/3,578,/3,cancer,Acute myeloid leukemia with t(6;9)(p23;q34); DEK-NUP214
+9866/3,579,/3,cancer,"Acute promyelocytic leukemia, t(15;17)(q22;q11-12)
+Acute promyelocytic leukemia
+Acute myeloid leukemia, PML/RAR-alpha
+Acute myeloid leukemia, t(15;17)(q22;q11-12)
+Acute promyelocytic leukemia, PML/RAR-alpha
+FAB M3"
+9867/3,580,/3,cancer,"Acute myelomonocytic leukemia
+FAB M4"
+9869/3,581,/3,cancer,Acute myeloid leukemia with inv(3)(q21;q26.2) or t(3;3)(q21;q26.2); RPN1-EVI1
+9870/3,582,/3,cancer,Acute basophilic leukemia
+9871/3,583,/3,cancer,"Acute myeloid leukemia with abnormal marrow eosinophils
+Acute myeloid leukemia, CBF-beta/MYH11
+Acute myeloid leukemia, inv(16)(p13;q22)
+Acute myeloid leukemia, t(16;16)(p13;q11)
+Acute myelomonocytic leukemia with abnormal eosinophils
+FAB M4Eo"
+9872/3,584,/3,cancer,"Acute myeloid leukemia, minimal differentiation
+Acute myeloblastic leukemia
+FAB M0"
+9873/3,585,/3,cancer,"Acute myeloid leukemia without maturation
+FAB M1"
+9874/3,586,/3,cancer,"Acute myeloid leukemia with maturation
+FAB M2"
+9875/3,587,/3,cancer,"Chronic myelogenous leukemia, BCR/ABL positive
+Chronic granulocytic leukemia, BCR/ABL
+Chronic granulocytic leukemia, Philadelphia chromosome (Ph1) positive
+Chronic granulocytic leukemia, t(9;22)(q34;q11)
+Chronic myelogenous leukemia, Philadelphia chromosome (Ph1) positive
+Chronic myelogenous leukemia, t(9;22)(q34;q11)"
+9876/3,588,/3,cancer,"Atypical chronic myeloid leukemia, BCR/ABL negative
+Atypical chronic myeloid leukemia, Philadelphia chromosome (Ph1) negative"
+9877/3,589,/3,cancer,Acute myeloid leukemia with mutated NPM1
+9878/3,590,/3,cancer,Acute myeloid leukemia with biallelic mutation of CEBPA
+9879/3,591,/3,cancer,Acute myeloid leukemia with mutated RUNX1
+9891/3,592,/3,cancer,"Acute monocytic leukemia
+Monoblastic leukemia
+Acute monoblastic leukemia
+FAB M5
+Acute monoblastic and monocytic leukemia"
+9895/3,593,/3,cancer,"Acute myeloid leukemia with myelodysplasia-related changes
+Acute myeloid leukemia with multilineage dysplasia
+Acute myeloid leukemia with prior myelodysplastic syndrome
+Acute myeloid leukemia without prior myelodysplastic syndrome"
+9896/3,594,/3,cancer,"Acute myeloid leukemia, t(8;21)(q22;q22)
+Acute myeloid leukemia, AML1(CBF-alpha)/ETO
+Acute myeloid leukemia with t(8;21)(q22;q22); RUNX1-RUNX1T1
+FAB M2, AML1(CBF-alpha)/ETO
+FAB M2, t(8;21)(q22;q22)"
+9897/3,595,/3,cancer,"Acute myeloid leukemia, 11q23 abnormalities
+Acute myeloid leukemia, MLL
+Acute myeloid leukemia with t(9;11)(p22;q23); MLLT3-MLL"
+9898/3,596,/3,cancer,Myeloid leukemia associated with Down syndrome
+9910/3,597,/3,cancer,"Acute megakaryoblastic leukemia
+Megakaryocytic leukemia
+FAB M7"
+9911/3,598,/3,cancer,Acute myeloid leukemia (megakaryoblastic) with t(1;22)(p13;q13); RBM15-MKL1
+9912/3,599,/3,cancer,Acute myleoid leukemia with BCR-ABL1
+9920/3,600,/3,cancer,"Therapy-related myeloid neoplasm
+Therapy-related acute myeloid leukemia
+Therapy-related acute myeloid leukemia, alkylating agent related
+Therapy-related acute myeloid leukemia, epipodophyllotoxin-related"
+9930/3,601,/3,cancer,"Myeloid sarcoma
+Chloroma
+Granulocytic sarcoma"
+9931/3,602,/3,cancer,"Acute panmyelosis with myelofibrosis
+Acute myelosclerosis
+Acute panmyelosis
+Acute myelofibrosis
+Malignant myelosclerosis"
+9940/3,603,/3,cancer,"Hairy cell leukemia
+Leukemic reticuloendotheliosis"
+9945/3,604,/3,cancer,"Chronic myelomonocytic leukemia
+Chronic myelomonocytic leukemia, type I
+Chronic myelomonocytic leukemia, type II
+Chronic myelomonocytic leukemia in transformation"
+9946/3,605,/3,cancer,"Juvenile myelomonocytic leukemia
+Juvenile chronic myelomonocytic leukemia"
+9948/3,606,/3,cancer,Aggressive NK-cell leukemia
+9950/3,607,/3,cancer,"Polycythemia vera
+Chronic erythremia
+Polycythemia rubra vera
+Proliferative polycythemia"
+9960/3,608,/3,cancer,"Myeloproliferative neoplasm
+Chronic myeloproliferative disease
+Chronic myeloproliferative disorder
+Myeloproliferative disease"
+9961/3,609,/3,cancer,"Primary myelofibrosis
+Agnogenic myeloid metaplasia
+Chronic idiopathic myelofibrosis
+Megakaryocytic myelosclerosis
+Myelofibrosis as a result of myeloproliferative disease
+Myelofibrosis with myeloid metaplasia
+Myelosclerosis with myeloid metaplasia"
+9962/3,610,/3,cancer,"Essential thrombocythemia
+Essential hemorrhagic thrombocythemia
+Idiopathic hemorrhagic thrombocythemia
+Idiopathic thrombocythemia"
+9963/3,611,/3,cancer,Chronic neutrophilic leukemia
+9964/3,612,/3,cancer,"Chronic eosinophilic leukemia
+Hypereosinophilic syndrome"
+9965/3,613,/3,cancer,Myeloid or lymphoid neoplasm with PDGFRA rearrangement
+9966/3,614,/3,cancer,Myeloid neoplasm with PDGFRB rearrangement
+9967/3,615,/3,cancer,Myeloid or lymphoid neoplasm with FGFR1 abnormalities
+9968/3,616,/3,cancer,Myeloid or lymphoid neoplasm with PCM1-JAK2
+9975/3,617,/3,cancer,"Myeloproliferative neoplasm, unclassifiable
+Myelodysplastic/myeloproliferative neoplasm, unclassifiable"
+9980/3,618,/3,cancer,"Myelodysplastic syndrome with single lineage dysplasia
+Refractory anemia
+Refractory anemia without sideroblasts
+Refractory neutropenia
+Refractory thrombocytopenia"
+9982/3,619,/3,cancer,"Myelodysplastic syndrome with ring sideroblasts and single lineage dysplasia
+Refractory anemia with sideroblasts
+RARS
+Refractory anemia with ring sideroblasts associated with marked thrombocytosis
+Refractory anemia with ring sideroblasts
+Myelodysplastic syndrome with ring sideroblasts"
+9983/3,620,/3,cancer,"Myelodysplastic syndrome with excess blasts
+Refractory anemia with excess blasts
+RAEB
+RAEB I
+RAEB II"
+9984/3,621,/3,cancer,"Refractory anemia with excess blasts in transformation
+RAEB-T"
+9985/3,622,/3,cancer,"Myelodysplastic syndrome with multilineage dysplasia
+Refractory cytopenia with multilineage dysplasia
+Refractory cytopenia of childhood"
+9986/3,623,/3,cancer,"Myelodysplastic syndrome with isolated del (5q)
+Myelodysplastic syndrome with 5q deletion (5q-) syndrome"
+9987/3,624,/3,cancer,"Therapy-related myelodysplastic syndrome
+Therapy-related myelodysplastic syndrome, alkylating agent related
+Therapy-related myelodysplastic syndrome, epipodophyllotoxin-related"
+9989/3,625,/3,cancer,"Myelodysplastic syndrome
+Preleukemia
+Preleukemic syndrome
+Myelodysplastic syndrome, unclassifiable"

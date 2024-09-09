@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  province_id: MyString
+  province_thai: MyString
+  province_eng: MyString
+  region: MyString
+
+two:
+  province_id: MyString
+  province_thai: MyString
+  province_eng: MyString
+  region: MyString

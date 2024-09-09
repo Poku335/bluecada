@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idd: 1
+  beh: MyString
+  cancer_type: MyString
+  icdo_32: MyString
+  icdo_32_c: MyString
+  level: MyString
+  term_used: MyString
+  term_raw: MyString
+
+two:
+  idd: 1
+  beh: MyString
+  cancer_type: MyString
+  icdo_32: MyString
+  icdo_32_c: MyString
+  level: MyString
+  term_used: MyString
+  term_raw: MyString

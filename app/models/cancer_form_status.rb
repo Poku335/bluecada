@@ -1,0 +1,2 @@
+class CancerFormStatus < ApplicationRecord
+end

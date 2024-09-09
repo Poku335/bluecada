@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_surg: false
+  date_surg: MyString
+  is_radia: false
+  date_radia: MyString
+  is_chemo: false
+  date_chemo: MyString
+  is_target: false
+  date_target: MyString
+  is_hormone: false
+  date_hormone: MyString
+  is_immu: false
+  date_immu: MyString
+  is_inter_the: false
+  date_inter_the: MyString
+  is_nuclear: false
+  date_nuclear: MyString
+  is_stem_cell: false
+  date_stem_cell: MyString
+  is_bone_scan: false
+  date_bone_scan: MyString
+  is_supportive: false
+  is_treatment: false
+
+two:
+  is_surg: false
+  date_surg: MyString
+  is_radia: false
+  date_radia: MyString
+  is_chemo: false
+  date_chemo: MyString
+  is_target: false
+  date_target: MyString
+  is_hormone: false
+  date_hormone: MyString
+  is_immu: false
+  date_immu: MyString
+  is_inter_the: false
+  date_inter_the: MyString
+  is_nuclear: false
+  date_nuclear: MyString
+  is_stem_cell: false
+  date_stem_cell: MyString
+  is_bone_scan: false
+  date_bone_scan: MyString
+  is_supportive: false
+  is_treatment: false

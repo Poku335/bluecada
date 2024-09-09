@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sub_district_id: MyString
+  sub_district_thai_short: MyString
+  sub_district_eng_short: MyString
+  district: one
+
+two:
+  sub_district_id: MyString
+  sub_district_thai_short: MyString
+  sub_district_eng_short: MyString
+  district: two

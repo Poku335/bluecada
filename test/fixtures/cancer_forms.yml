@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  primary: 1
+  is_editing: false
+  current_user: one
+  treatment_follow_up: one
+  information_diagnose: one
+  treatment_information: one
+  cancer_information: one
+  patient: one
+  cancer_form_status: one
+  additional_field_jsonb: 
+  tumor_id: MyString
+
+two:
+  primary: 1
+  is_editing: false
+  current_user: two
+  treatment_follow_up: two
+  information_diagnose: two
+  treatment_information: two
+  cancer_information: two
+  patient: two
+  cancer_form_status: two
+  additional_field_jsonb: 
+  tumor_id: MyString

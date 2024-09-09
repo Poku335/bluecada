@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  present: one
+  dls: MyString
+  death_stat: one
+  refer_from: one
+  date_refer_from: MyString
+  refer_to: one
+  date_refer_to: MyString
+
+two:
+  present: two
+  dls: MyString
+  death_stat: two
+  refer_from: two
+  date_refer_from: MyString
+  refer_to: two
+  date_refer_to: MyString

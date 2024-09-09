@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  topography_description: MyString
+  basis: one
+  topography_code: one
+  laterality: one
+  morphology_description: MyString
+  behavior: one
+  lab: one
+  lab_num: MyString
+  lab_date: MyString
+  t_stage: MyString
+  n_stage: MyString
+  m_stage: MyString
+  stage: one
+  stage_other: one
+  extent: one
+  metastasis_site: one
+  is_recrr: false
+  recurr_date: MyString
+  grad: one
+  icdo: one
+  icd_10: MyString
+  age_at_diagnosis: MyString
+
+two:
+  topography_description: MyString
+  basis: two
+  topography_code: two
+  laterality: two
+  morphology_description: MyString
+  behavior: two
+  lab: two
+  lab_num: MyString
+  lab_date: MyString
+  t_stage: MyString
+  n_stage: MyString
+  m_stage: MyString
+  stage: two
+  stage_other: two
+  extent: two
+  metastasis_site: two
+  is_recrr: false
+  recurr_date: MyString
+  grad: two
+  icdo: two
+  icd_10: MyString
+  age_at_diagnosis: MyString

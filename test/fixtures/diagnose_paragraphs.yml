@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  diagnose_paragraph: MyString
+  cancer_information: one
+  diag_date: 2024-09-09
+
+two:
+  diagnose_paragraph: MyString
+  cancer_information: two
+  diag_date: 2024-09-09

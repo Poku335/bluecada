@@ -1,0 +1,2 @@
+class Laterality < ApplicationRecord
+end
