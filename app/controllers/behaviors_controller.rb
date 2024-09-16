@@ -5,6 +5,7 @@ class BehaviorsController < ApplicationController
   # GET /behaviors.json
   def index
     @behaviors = Behavior.all
+      render json: @behaviors
   end
 
   # GET /behaviors/1

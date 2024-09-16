@@ -5,11 +5,13 @@ class TreatmentFollowUpsController < ApplicationController
   # GET /treatment_follow_ups.json
   def index
     @treatment_follow_ups = TreatmentFollowUp.all
+    render json: @treatment_follow_ups
   end
 
   # GET /treatment_follow_ups/1
   # GET /treatment_follow_ups/1.json
   def show
+    render json: @treatment_follow_up
   end
 
   # POST /treatment_follow_ups
@@ -18,7 +20,7 @@ class TreatmentFollowUpsController < ApplicationController
     @treatment_follow_up = TreatmentFollowUp.new(treatment_follow_up_params)
 
     if @treatment_follow_up.save
-      render :show, status: :created, location: @treatment_follow_up
+      render json: @treatment_follow_up, status: :created, location: @treatment_follow_up
     else
       render json: @treatment_follow_up.errors, status: :unprocessable_entity
     end
@@ -28,7 +30,7 @@ class TreatmentFollowUpsController < ApplicationController
   # PATCH/PUT /treatment_follow_ups/1.json
   def update
     if @treatment_follow_up.update(treatment_follow_up_params)
-      render :show, status: :ok, location: @treatment_follow_up
+      render json: @treatment_follow_up
     else
       render json: @treatment_follow_up.errors, status: :unprocessable_entity
     end

@@ -5,11 +5,13 @@ class TreatmentInformationsController < ApplicationController
   # GET /treatment_informations.json
   def index
     @treatment_informations = TreatmentInformation.all
+      render json: @treatment_informations
   end
 
   # GET /treatment_informations/1
   # GET /treatment_informations/1.json
   def show
+    render json: @treatment_information
   end
 
   # POST /treatment_informations
@@ -18,7 +20,7 @@ class TreatmentInformationsController < ApplicationController
     @treatment_information = TreatmentInformation.new(treatment_information_params)
 
     if @treatment_information.save
-      render :show, status: :created, location: @treatment_information
+      render json: @treatment_information, status: :created
     else
       render json: @treatment_information.errors, status: :unprocessable_entity
     end
@@ -28,7 +30,7 @@ class TreatmentInformationsController < ApplicationController
   # PATCH/PUT /treatment_informations/1.json
   def update
     if @treatment_information.update(treatment_information_params)
-      render :show, status: :ok, location: @treatment_information
+      render json: @treatment_information, status: :ok
     else
       render json: @treatment_information.errors, status: :unprocessable_entity
     end
@@ -48,6 +50,8 @@ class TreatmentInformationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def treatment_information_params
-      params.require(:treatment_information).permit(:is_surg, :date_surg, :is_radia, :date_radia, :is_chemo, :date_chemo, :is_target, :date_target, :is_hormone, :date_hormone, :is_immu, :date_immu, :is_inter_the, :date_inter_the, :is_nuclear, :date_nuclear, :is_stem_cell, :date_stem_cell, :is_bone_scan, :date_bone_scan, :is_supportive, :is_treatment)
+      params.require(:treatment_information).permit(:is_surg, :date_surg, :is_radia, :date_radia, :is_chemo, :date_chemo, :is_target, 
+      :date_target, :is_hormone, :date_hormone, :is_immu, :date_immu, :is_inter_the, :date_inter_the, :is_nuclear, :date_nuclear, 
+      :is_stem_cell, :date_stem_cell, :is_bone_scan, :date_bone_scan, :is_supportive, :is_treatment)
     end
 end

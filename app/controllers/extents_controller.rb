@@ -5,6 +5,7 @@ class ExtentsController < ApplicationController
   # GET /extents.json
   def index
     @extents = Extent.all
+    render json: @extents
   end
 
   # GET /extents/1

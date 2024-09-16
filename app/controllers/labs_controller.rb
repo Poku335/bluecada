@@ -5,6 +5,7 @@ class LabsController < ApplicationController
   # GET /labs.json
   def index
     @labs = Lab.all
+    render json: @labs
   end
 
   # GET /labs/1

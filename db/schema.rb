@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_033427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
     t.boolean "is_editing"
     t.bigint "current_user_id"
     t.bigint "treatment_follow_up_id"
-    t.bigint "information_diagnose_id"
     t.bigint "treatment_information_id"
     t.bigint "cancer_information_id"
     t.bigint "patient_id"
@@ -57,10 +56,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
     t.string "tumor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "information_diagnosis_id"
     t.index ["cancer_form_status_id"], name: "index_cancer_forms_on_cancer_form_status_id"
     t.index ["cancer_information_id"], name: "index_cancer_forms_on_cancer_information_id"
     t.index ["current_user_id"], name: "index_cancer_forms_on_current_user_id"
-    t.index ["information_diagnose_id"], name: "index_cancer_forms_on_information_diagnose_id"
+    t.index ["information_diagnosis_id"], name: "index_cancer_forms_on_information_diagnosis_id"
     t.index ["patient_id"], name: "index_cancer_forms_on_patient_id"
     t.index ["treatment_follow_up_id"], name: "index_cancer_forms_on_treatment_follow_up_id"
     t.index ["treatment_information_id"], name: "index_cancer_forms_on_treatment_information_id"
@@ -91,10 +91,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
     t.string "age_at_diagnosis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "case_types_id"
+    t.bigint "case_type_id"
     t.index ["basis_id"], name: "index_cancer_informations_on_basis_id"
     t.index ["behavior_id"], name: "index_cancer_informations_on_behavior_id"
-    t.index ["case_types_id"], name: "index_cancer_informations_on_case_types_id"
+    t.index ["case_type_id"], name: "index_cancer_informations_on_case_type_id"
     t.index ["extent_id"], name: "index_cancer_informations_on_extent_id"
     t.index ["grad_id"], name: "index_cancer_informations_on_grad_id"
     t.index ["icdo_id"], name: "index_cancer_informations_on_icdo_id"
@@ -192,10 +192,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
   end
 
   create_table "information_diagnoses", force: :cascade do |t|
-    t.string "tumor_marker"
-    t.string "tumor_suppressor_gene"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tumor_marker_ca_19"
+    t.string "tumor_marker_cea"
+    t.string "tumor_marker_her_2"
+    t.string "tumor_marker_afp"
+    t.string "tumor_marker_hcg"
+    t.string "tumor_marker_psa"
+    t.string "tumor_suppressor_gene_brca_1"
+    t.string "tumor_suppressor_gene_brca_2"
   end
 
   create_table "labs", force: :cascade do |t|
@@ -356,12 +362,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
 
   create_table "treatment_follow_ups", force: :cascade do |t|
     t.bigint "present_id"
-    t.string "dls"
+    t.date "dls"
     t.bigint "death_stat_id"
     t.bigint "refer_from_id"
-    t.string "date_refer_from"
+    t.date "date_refer_from"
     t.bigint "refer_to_id"
-    t.string "date_refer_to"
+    t.date "date_refer_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["death_stat_id"], name: "index_treatment_follow_ups_on_death_stat_id"
@@ -409,14 +415,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_034555) do
 
   add_foreign_key "cancer_forms", "cancer_form_statuses"
   add_foreign_key "cancer_forms", "cancer_informations"
-  add_foreign_key "cancer_forms", "information_diagnoses", column: "information_diagnose_id"
+  add_foreign_key "cancer_forms", "information_diagnoses"
   add_foreign_key "cancer_forms", "patients"
   add_foreign_key "cancer_forms", "treatment_follow_ups"
   add_foreign_key "cancer_forms", "treatment_informations"
   add_foreign_key "cancer_forms", "users", column: "current_user_id"
   add_foreign_key "cancer_informations", "bases"
   add_foreign_key "cancer_informations", "behaviors"
-  add_foreign_key "cancer_informations", "case_types", column: "case_types_id"
+  add_foreign_key "cancer_informations", "case_types"
   add_foreign_key "cancer_informations", "extents"
   add_foreign_key "cancer_informations", "grads"
   add_foreign_key "cancer_informations", "icdos"

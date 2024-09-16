@@ -5,20 +5,22 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.all
+    render json: @patients
   end
 
   # GET /patients/1
   # GET /patients/1.json
   def show
+    render json: @patient
   end
-
+  
   # POST /patients
   # POST /patients.json
   def create
     @patient = Patient.new(patient_params)
-
     if @patient.save
-      render :show, status: :created, location: @patient
+      form = @patient.create_form_data
+      render json:  {patient: @patient ,form: form}
     else
       render json: @patient.errors, status: :unprocessable_entity
     end
@@ -28,14 +30,14 @@ class PatientsController < ApplicationController
   # PATCH/PUT /patients/1.json
   def update
     if @patient.update(patient_params)
-      render :show, status: :ok, location: @patient
+      render json: @patient 
     else
       render json: @patient.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /patients/1
-  # DELETE /patients/1.json
+
   def destroy
     @patient.destroy!
   end
@@ -48,6 +50,7 @@ class PatientsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def patient_params
-      params.require(:patient).permit(:hos_no, :hospital_id, :name, :citizen_id, :sex_id, :age, :birth_date, :address_detail, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :regis_date, :id_finding, :province_id, :district_id, :sub_distric_id)
+      params.require(:patient).permit(:hos_no, :hospital_id, :name, :citizen_id, :sex_id, :age, :birth_date, :address_detail, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :regis_date, :id_finding, :province_id, :district_id, :sub_district_id)
     end
+
 end

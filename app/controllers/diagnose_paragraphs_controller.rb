@@ -1,3 +1,4 @@
+
 class DiagnoseParagraphsController < ApplicationController
   before_action :set_diagnose_paragraph, only: %i[ show update destroy ]
 
@@ -5,11 +6,13 @@ class DiagnoseParagraphsController < ApplicationController
   # GET /diagnose_paragraphs.json
   def index
     @diagnose_paragraphs = DiagnoseParagraph.all
+    render json: @diagnose_paragraphs
   end
 
   # GET /diagnose_paragraphs/1
   # GET /diagnose_paragraphs/1.json
   def show
+    render json: @diagnose_paragraph
   end
 
   # POST /diagnose_paragraphs

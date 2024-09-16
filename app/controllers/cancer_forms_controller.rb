@@ -5,11 +5,18 @@ class CancerFormsController < ApplicationController
   # GET /cancer_forms.json
   def index
     @cancer_forms = CancerForm.all
+    if params[:patient_id] && params[:primary]
+    cancer_form = CancerForm.find_by(patient_id: params[:patient_id], primary: params[:primary])
+      render json: cancer_form, status: :ok
+    else
+      render json: @cancer_forms, sstatus: :ok
+    end
   end
 
   # GET /cancer_forms/1
   # GET /cancer_forms/1.json
   def show
+    render json: @cancer_form
   end
 
   # POST /cancer_forms
@@ -18,7 +25,7 @@ class CancerFormsController < ApplicationController
     @cancer_form = CancerForm.new(cancer_form_params)
 
     if @cancer_form.save
-      render :show, status: :created, location: @cancer_form
+      render json: @cancer_form, status: :created, location: @cancer_form
     else
       render json: @cancer_form.errors, status: :unprocessable_entity
     end
@@ -48,6 +55,8 @@ class CancerFormsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cancer_form_params
-      params.require(:cancer_form).permit(:primary, :is_editing, :current_user_id, :treatment_follow_up_id, :information_diagnose_id, :treatment_information_id, :cancer_information_id, :patient_id, :cancer_form_status_id, :additional_field_jsonb, :tumor_id)
+      params.require(:cancer_form).permit(:primary, :is_editing, :current_user_id, :treatment_follow_up_id, 
+                                          :information_diagnose_id, :treatment_information_id, :cancer_information_id, 
+                                          :patient_id, :cancer_form_status_id, :additional_field_jsonb, :tumor_id)
     end
 end

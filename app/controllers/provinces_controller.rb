@@ -5,6 +5,7 @@ class ProvincesController < ApplicationController
   # GET /provinces.json
   def index
     @provinces = Province.all
+    render json: @provinces
   end
 
   # GET /provinces/1

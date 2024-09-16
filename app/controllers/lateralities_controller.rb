@@ -5,6 +5,7 @@ class LateralitiesController < ApplicationController
   # GET /lateralities.json
   def index
     @lateralities = Laterality.all
+      render json: @lateralities
   end
 
   # GET /lateralities/1

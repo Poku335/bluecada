@@ -5,6 +5,7 @@ class DeathStatsController < ApplicationController
   # GET /death_stats.json
   def index
     @death_stats = DeathStat.all
+    render json: @death_stats
   end
 
   # GET /death_stats/1

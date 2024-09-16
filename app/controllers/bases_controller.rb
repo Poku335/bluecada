@@ -5,6 +5,7 @@ class BasesController < ApplicationController
   # GET /bases.json
   def index
     @bases = Basis.all
+    render json: @bases
   end
 
   # GET /bases/1

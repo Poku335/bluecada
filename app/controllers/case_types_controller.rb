@@ -5,6 +5,7 @@ class CaseTypesController < ApplicationController
   # GET /case_types.json
   def index
     @case_types = CaseType.all
+      render json: @case_types
   end
 
   # GET /case_types/1

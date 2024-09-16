@@ -4,7 +4,10 @@ class SubDistrictsController < ApplicationController
   # GET /sub_districts
   # GET /sub_districts.json
   def index
-    @sub_districts = SubDistrict.all
+    district = params[:district_id].to_i
+    sub_districts = SubDistrict.where(district_id: district)
+
+    render json: sub_districts
   end
 
   # GET /sub_districts/1

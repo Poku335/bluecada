@@ -5,6 +5,7 @@ class MetastasisSitesController < ApplicationController
   # GET /metastasis_sites.json
   def index
     @metastasis_sites = MetastasisSite.all
+    render json: @metastasis_sites
   end
 
   # GET /metastasis_sites/1

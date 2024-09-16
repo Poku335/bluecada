@@ -5,6 +5,7 @@ class TopographyCodesController < ApplicationController
   # GET /topography_codes.json
   def index
     @topography_codes = TopographyCode.all
+    render json: @topography_codes
   end
 
   # GET /topography_codes/1

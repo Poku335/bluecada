@@ -5,6 +5,7 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses.json
   def index
     @marital_statuses = MaritalStatus.all
+    render json: @marital_statuses
   end
 
   # GET /marital_statuses/1

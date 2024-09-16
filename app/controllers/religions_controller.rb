@@ -5,6 +5,7 @@ class ReligionsController < ApplicationController
   # GET /religions.json
   def index
     @religions = Religion.all
+    render json: @religions
   end
 
   # GET /religions/1

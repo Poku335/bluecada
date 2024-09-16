@@ -5,6 +5,7 @@ class RacesController < ApplicationController
   # GET /races.json
   def index
     @races = Race.all
+    render json: @races
   end
 
   # GET /races/1

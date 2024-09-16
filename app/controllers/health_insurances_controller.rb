@@ -5,6 +5,7 @@ class HealthInsurancesController < ApplicationController
   # GET /health_insurances.json
   def index
     @health_insurances = HealthInsurance.all
+      render json: @health_insurances
   end
 
   # GET /health_insurances/1

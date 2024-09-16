@@ -5,6 +5,7 @@ class PresentsController < ApplicationController
   # GET /presents.json
   def index
     @presents = Present.all
+    render json: @presents
   end
 
   # GET /presents/1

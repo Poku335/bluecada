@@ -10,6 +10,7 @@ class InformationDiagnosesController < ApplicationController
   # GET /information_diagnoses/1
   # GET /information_diagnoses/1.json
   def show
+    render json: @information_diagnosis
   end
 
   # POST /information_diagnoses
@@ -18,7 +19,7 @@ class InformationDiagnosesController < ApplicationController
     @information_diagnosis = InformationDiagnosis.new(information_diagnosis_params)
 
     if @information_diagnosis.save
-      render :show, status: :created, location: @information_diagnosis
+      render json: @information_diagnosis, status: :created
     else
       render json: @information_diagnosis.errors, status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class InformationDiagnosesController < ApplicationController
   # PATCH/PUT /information_diagnoses/1.json
   def update
     if @information_diagnosis.update(information_diagnosis_params)
-      render :show, status: :ok, location: @information_diagnosis
+      render json: @information_diagnosis, status: :ok
     else
       render json: @information_diagnosis.errors, status: :unprocessable_entity
     end
@@ -48,6 +49,6 @@ class InformationDiagnosesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def information_diagnosis_params
-      params.require(:information_diagnosis).permit(:tumor_marker, :tumor_suppressor_gene)
+      params.require(:information_diagnosis).permit(:tumor_marker_ca_19, :tumor_marker_cea, :tumor_marker_her_2, :tumor_marker_afp, :tumor_marker_hcg, :tumor_marker_psa, :tumor_suppressor_gene_brca_1, :tumor_suppressor_gene_brca_2)
     end
 end

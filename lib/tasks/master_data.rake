@@ -4,6 +4,12 @@ namespace :db do
   desc 'Create master data'
   task create_master_data: :environment do
 
+    create_or_update_data class: CancerFormStatus, keys: [:id], reset_pkey: false,
+      data: [
+        {id: 1, name: "กำลังดำเนินการ"},
+        {id: 2, name: "เสร็จสิ้น"},
+      ]
+
     create_or_update_data class: Role, keys: [:id], reset_pkey: false,
       data: [
         {id: 1, name: "Admin"},
@@ -163,6 +169,11 @@ namespace :db do
         {id: 1, name: "มะเร็ง", code: 1},
         {id: 2, name: "อื่นๆ", code: 2},
         {id: 3, name: "ไม่ทราบ", code: 9}
+      ]
+
+    create_or_update_data class: User, keys: [:id], reset_pkey: false,
+      data: [
+        {id: 1, name: "Admin", user_name: "Admin", password: "0000", role_id: 1},
       ]
   
 

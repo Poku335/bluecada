@@ -3,23 +3,6 @@ class ApplicationRecord < ActiveRecord::Base
 
   IS_FETCH_FROM_CACHE = false
 
-  def create_both(hsh = {})
-    cls = hsh[:class]  
-    data = hsh[:data]    
-  
-    ActiveRecord::Base.transaction do
-     
-      first_db_record = cls.create!(data)
-      first_db_record.save
-    
-      second_db_connection = ActiveRecord::Base.establish_connection(:hospitals).connection
-      second_db_connection.transaction do
-  
-        cls.using(:hospitals).create!(data)
-      end
-    end
-  end
-
   def as_json(params = {})
     params[:only] ||= []
     params[:except] ||= %i[created_at updated_at]

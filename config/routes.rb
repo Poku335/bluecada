@@ -37,8 +37,11 @@ Rails.application.routes.draw do
   resources :users
   resources :hospitals
   resources :roles
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  post '/import/patient', to: 'application#import_patient'
+  post "/login", to: "application#login" 
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  post '/import/diagnose', to: 'application#import_diag_paragraph'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

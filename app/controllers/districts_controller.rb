@@ -4,7 +4,9 @@ class DistrictsController < ApplicationController
   # GET /districts
   # GET /districts.json
   def index
-    @districts = District.all
+    province = params[:province_id].to_i
+    districts = District.where(province_id: province)
+    render json: districts
   end
 
   # GET /districts/1
