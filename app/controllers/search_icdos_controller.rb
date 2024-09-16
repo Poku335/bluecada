@@ -10,6 +10,7 @@ class SearchIcdosController < ApplicationController
   # GET /search_icdos/1
   # GET /search_icdos/1.json
   def show
+    render json: @search_icdo
   end
 
   # POST /search_icdos

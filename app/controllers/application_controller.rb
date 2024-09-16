@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate!
   skip_before_action :authenticate! , only: [:login]
   require 'csv'
-  
+  include ExceptionHandler
 
   # def export
   #   csv_file_path = Rails.root.join('lib', 'csv_files', 'Exported_Patient.csv')
