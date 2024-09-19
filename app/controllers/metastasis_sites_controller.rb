@@ -11,6 +11,7 @@ class MetastasisSitesController < ApplicationController
   # GET /metastasis_sites/1
   # GET /metastasis_sites/1.json
   def show
+    render json: @metastasis_site
   end
 
   # POST /metastasis_sites

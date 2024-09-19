@@ -11,6 +11,7 @@ class HospitalsController < ApplicationController
   # GET /hospitals/1
   # GET /hospitals/1.json
   def show
+    render json: @hospital
   end
 
   # POST /hospitals

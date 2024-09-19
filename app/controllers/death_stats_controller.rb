@@ -11,6 +11,7 @@ class DeathStatsController < ApplicationController
   # GET /death_stats/1
   # GET /death_stats/1.json
   def show
+    render json: @death_stat
   end
 
   # POST /death_stats

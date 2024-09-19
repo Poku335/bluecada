@@ -5,11 +5,13 @@ class AddressCodesController < ApplicationController
   # GET /address_codes.json
   def index
     @address_codes = AddressCode.all
+    render json: @address_codes
   end
 
   # GET /address_codes/1
   # GET /address_codes/1.json
   def show
+    render json: @address_code
   end
 
   # POST /address_codes

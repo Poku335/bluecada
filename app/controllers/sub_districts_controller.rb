@@ -13,6 +13,7 @@ class SubDistrictsController < ApplicationController
   # GET /sub_districts/1
   # GET /sub_districts/1.json
   def show
+    render json: @sub_district
   end
 
   # POST /sub_districts

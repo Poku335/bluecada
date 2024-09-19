@@ -11,6 +11,7 @@ class HealthInsurancesController < ApplicationController
   # GET /health_insurances/1
   # GET /health_insurances/1.json
   def show
+    render json: @health_insurance
   end
 
   # POST /health_insurances

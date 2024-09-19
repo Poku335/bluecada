@@ -11,6 +11,7 @@ class ExtentsController < ApplicationController
   # GET /extents/1
   # GET /extents/1.json
   def show
+    render json: @extent
   end
 
   # POST /extents

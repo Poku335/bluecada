@@ -11,6 +11,7 @@ class GradsController < ApplicationController
   # GET /grads/1
   # GET /grads/1.json
   def show
+    render json: @grad
   end
 
   # POST /grads

@@ -11,6 +11,7 @@ class CaseTypesController < ApplicationController
   # GET /case_types/1
   # GET /case_types/1.json
   def show
+    render json: @case_type
   end
 
   # POST /case_types

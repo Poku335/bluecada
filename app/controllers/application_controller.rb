@@ -60,8 +60,6 @@ class ApplicationController < ActionController::Base
     send_file csv_file_path, type: 'text/csv', disposition: 'attachment', filename: 'Exported_patient_datas.csv'
   end
 
-
-
   def import_diag_paragraph
     if params[:file].present?
       input_file = params[:file].path
@@ -79,7 +77,7 @@ class ApplicationController < ActionController::Base
       render json: { error: "No file uploaded" }, status: :unprocessable_entity
     end
   end
-  
+
   def import_patient
     if params[:file].present?
       file = params[:file]
@@ -123,13 +121,19 @@ class ApplicationController < ActionController::Base
           end
   
           health_in_id = nil
-  
+          health_in_mapping = {
+            'สิทธิข้าราชการ' => 'ข้าราชการ, ต้นสังกัด'
+          }# Add more mappings here
+            
           health_in_names = row['HealthIn'].to_s.split('/')
           health_in_names.each do |health_in_name|
             health_in_name.strip!
             next if health_in_name.empty?
-  
-            health_in = HealthInsurance.find_by("name ILIKE ?", "%#{health_in_name}%")
+
+            # Map user input to database value if exists
+            mapped_health_in_name = health_in_mapping[health_in_name] || health_in_name
+
+            health_in = HealthInsurance.find_by("name ILIKE ?", "%#{mapped_health_in_name}%")
             if health_in.nil?
               errors << "ไม่พบสิทธิพิเศษ '#{health_in_name}'"
               next

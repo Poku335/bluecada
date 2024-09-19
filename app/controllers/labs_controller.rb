@@ -11,6 +11,7 @@ class LabsController < ApplicationController
   # GET /labs/1
   # GET /labs/1.json
   def show
+    render json: @lab
   end
 
   # POST /labs

@@ -11,6 +11,7 @@ class ProvincesController < ApplicationController
   # GET /provinces/1
   # GET /provinces/1.json
   def show
+    render json: @province
   end
 
   # POST /provinces

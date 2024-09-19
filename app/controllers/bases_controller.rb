@@ -1,7 +1,7 @@
 class BasesController < ApplicationController
   before_action :set_basis, only: %i[ show update destroy ]
 
-  # GET /bases
+  # GET /bases?p=1
   # GET /bases.json
   def index
     @bases = Basis.all
@@ -11,6 +11,7 @@ class BasesController < ApplicationController
   # GET /bases/1
   # GET /bases/1.json
   def show
+    render json: @basis
   end
 
   # POST /bases

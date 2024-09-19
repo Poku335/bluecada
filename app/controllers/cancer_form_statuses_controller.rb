@@ -5,11 +5,13 @@ class CancerFormStatusesController < ApplicationController
   # GET /cancer_form_statuses.json
   def index
     @cancer_form_statuses = CancerFormStatus.all
+    render json: @cancer_form_statuses
   end
 
   # GET /cancer_form_statuses/1
   # GET /cancer_form_statuses/1.json
   def show
+    render json: @cancer_form_status
   end
 
   # POST /cancer_form_statuses

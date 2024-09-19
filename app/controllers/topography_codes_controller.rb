@@ -11,6 +11,7 @@ class TopographyCodesController < ApplicationController
   # GET /topography_codes/1
   # GET /topography_codes/1.json
   def show
+    render json: @topography_code
   end
 
   # POST /topography_codes

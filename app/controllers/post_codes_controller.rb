@@ -10,6 +10,7 @@ class PostCodesController < ApplicationController
   # GET /post_codes/1
   # GET /post_codes/1.json
   def show
+    render json: @post_code
   end
 
   # POST /post_codes

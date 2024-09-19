@@ -15,7 +15,7 @@ class CancerInformation < ApplicationRecord
   def as_json(options = {})
   # icd10 = topography_code&.icd_10&.split('.')&.join('')
     hsh = super(options.merge(except: [:case_type_id, :basis_id, :topography_code_id, :laterality_id, :behavior_id, :lab_id, :stage_id, :stage_other_id, :extent_id, :metastasis_site_id, :grad_id])).merge(
-      basis: basis ,
+      basis: basis,
       topography_code: topography_code,
       case_type: case_type,
       laterality: laterality,
@@ -29,6 +29,4 @@ class CancerInformation < ApplicationRecord
     )
     hsh
   end
-
-
 end
