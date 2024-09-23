@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_085554) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_23_055000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -377,14 +377,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_085554) do
 
   create_table "treatment_follow_ups", force: :cascade do |t|
     t.bigint "present_id"
-    t.date "dls"
     t.bigint "death_stat_id"
     t.bigint "refer_from_id"
-    t.date "date_refer_from"
     t.bigint "refer_to_id"
-    t.date "date_refer_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "dls"
+    t.date "date_refer_from"
+    t.date "date_refer_to"
     t.index ["death_stat_id"], name: "index_treatment_follow_ups_on_death_stat_id"
     t.index ["present_id"], name: "index_treatment_follow_ups_on_present_id"
     t.index ["refer_from_id"], name: "index_treatment_follow_ups_on_refer_from_id"
