@@ -6,8 +6,8 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
-ENV SECRET_KEY_BASE=9b7c55e2a40b9413c98d41948d2bc8008efedc3817a3ee25d4bff311238fbab87c157bf37ff3bdbb64a9eae5cd79742db147e2b5c9b2f248dd3ae7578d
-
+ENV SECRET_KEY_BASE=afe9b7c55e2a40b9413c98d41948d2bc80a08efaeedc3817a3ee25d4bff311238fbab87c157bf37ff3bdbb64a9eae5cd79742db147e2b5c9b2f248dd3ae7578d
+ENV RAILS_MASTER_KEY=211b3761794f3d292306120af97e435e
 
 # Set working directory
 WORKDIR /usr/src/app
