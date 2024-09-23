@@ -1,67 +1,36 @@
-# syntax = docker/dockerfile:1
+FROM ruby:3.3.3
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3.3
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
-
-# Rails app lives here
-WORKDIR /rails
-
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
-
-
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build gems
+# Install necessary dependencies
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config postgresql-client dos2unix && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install application gems
+# Set environment variables
+ENV SECRET_KEY_BASE=9b7c55e2a40b9413c98d41948d2bc8008efedc3817a3ee25d4bff311238fbab87c157bf37ff3bdbb64a9eae5cd79742db147e2b5c9b2f248dd3ae7578d
+
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
 
-# Copy application code
+# Install gems
+RUN bundle install --jobs 4 --retry 3
+
+# Copy the rest of the application code
 COPY . .
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+# Fix EOL characters for scripts
+RUN find /usr/src/app -type f -exec dos2unix {} \;
 
-# Adjust binfiles to be executable on Linux
-RUN chmod +x bin/* && \
-    sed -i "s/\r$//g" bin/* && \
-    sed -i 's/ruby\.exe$/ruby/' bin/*
+RUN dos2unix bin/delayed_job
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Ensure the bin/rails and bin/delayed_job scripts are executable
+RUN chmod +x bin/rails bin/delayed_job
 
-
-# Final stage for app image
-FROM base
-
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
-
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
+# Expose the port the app runs on
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+
+# Start the Rails server and delayed_job
+CMD ["sh", "-c", "bin/rails db:seed && bin/rails server -b 0.0.0.0 -p 3000 & bin/delayed_job start"]

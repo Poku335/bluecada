@@ -44,6 +44,8 @@ gem "bcrypt", "~> 3.1.7"
 
 gem 'jwt'
 
+gem 'daemons'
+
 gem 'delayed_job_active_record'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

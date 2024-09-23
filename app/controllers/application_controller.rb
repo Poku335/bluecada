@@ -83,12 +83,18 @@ class ApplicationController < ActionController::Base
       file = params[:file]
       csv_file_path = file.path
       errors = []
+      total_patient_count = 0
+      new_patient_count = 0
+      error_patient_count = 0
+  
       CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8') do |row|
+        total_patient_count += 1
         begin
           add_code = AddressCode.find_by(code: row['AddCode'])
           add_code_id = add_code&.id
           if add_code_id.nil?
             errors << "Address Code '#{row['AddCode']}' ไม่ถูกต้อง"
+            error_patient_count += 1
             next
           end
   
@@ -96,6 +102,7 @@ class ApplicationController < ActionController::Base
           post_code_id = post_code&.id
           if post_code_id.nil?
             errors << "รหัสไปรษณีย์ '#{row['Post']}' ไม่ถูกต้อง"
+            error_patient_count += 1
             next
           end
   
@@ -103,6 +110,7 @@ class ApplicationController < ActionController::Base
           province_id = province&.id
           if province_id.nil?
             errors << "ชื่อจังหวัด '#{row['จังหวัด']}' ไม่ถูกต้อง"
+            error_patient_count += 1
             next
           end
   
@@ -110,6 +118,7 @@ class ApplicationController < ActionController::Base
           district_id = district&.id
           if district_id.nil?
             errors << "ชื่ออำเภอ '#{row['district']}' ไม่ถูกต้อง"
+            error_patient_count += 1
             next
           end
   
@@ -117,22 +126,23 @@ class ApplicationController < ActionController::Base
           sub_district_id = sub_district&.id
           if sub_district_id.nil?
             errors << "ชื่อตำบล '#{row['sub_district']}' ไม่ถูกต้อง"
+            error_patient_count += 1
             next
           end
   
           health_in_id = nil
           health_in_mapping = {
             'สิทธิข้าราชการ' => 'ข้าราชการ, ต้นสังกัด'
-          }# Add more mappings here
-            
+          } # Add more mappings here
+  
           health_in_names = row['HealthIn'].to_s.split('/')
           health_in_names.each do |health_in_name|
             health_in_name.strip!
             next if health_in_name.empty?
-
+  
             # Map user input to database value if exists
             mapped_health_in_name = health_in_mapping[health_in_name] || health_in_name
-
+  
             health_in = HealthInsurance.find_by("name ILIKE ?", "%#{mapped_health_in_name}%")
             if health_in.nil?
               errors << "ไม่พบสิทธิพิเศษ '#{health_in_name}'"
@@ -143,6 +153,7 @@ class ApplicationController < ActionController::Base
           end
   
           if health_in_id.nil? && health_in_names.any?
+            error_patient_count += 1
             next # Skip this row if none of the health insurance names were found
           end
   
@@ -153,6 +164,7 @@ class ApplicationController < ActionController::Base
           race_id = race&.id
           if race_id.nil?
             errors << "ไม่พบสัญชาติ '#{row['Race']} ในฐานข้อมูล'"
+            error_patient_count += 1
             next
           end
   
@@ -160,10 +172,16 @@ class ApplicationController < ActionController::Base
           sex_id = sex&.id
           if sex_id.nil?
             errors << "ไม่พบเพศ '#{row['Sex']}'"
+            error_patient_count += 1
             next
           end
   
           patient = Patient.find_or_initialize_by(hos_no: row['HosNo1'])
+          if patient.new_record?
+            new_patient_count += 1
+         
+          end
+  
           patient.assign_attributes(
             name: row['name'],
             age: row['Age'],
@@ -195,12 +213,22 @@ class ApplicationController < ActionController::Base
             )
           else
             errors << "Failed to save patient for row hn #{row['HosNo1']}: #{row["Id"]} - Error: #{patient.errors.full_messages.join(', ')}"
+            error_patient_count += 1
           end
   
         rescue ActiveRecord::RecordInvalid => e
           errors << "Failed to save record for row hn #{row['HosNo1']}: - Error: #{e.message}"
+          error_patient_count += 1
         end
       end
+
+      ImportPatient.create!(
+        date: Time.now,
+        total_patient_count: total_patient_count,
+        new_patient_count: new_patient_count,
+        existing_patient_count: Patient.all.count,
+        error_patient_count: error_patient_count
+      )
   
       if errors.any?
         render json: { error: "Data import failed", details: errors }
@@ -226,18 +254,21 @@ class ApplicationController < ActionController::Base
     token = request.headers["Authorization"]&.split(" ")&.last
     if token
       begin
-        decoded = JsonWebToken.decode(token) 
+        decoded = JsonWebToken.decode(token)
         if decoded[:user_id]
-          @current_user = User.find_by(id: decoded[:user_id])
+          cache_key = "user_#{decoded[:user_id]}"
+          @current_user = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+            User.find_by(id: decoded[:user_id])
+          end
         end
       rescue JWT::ExpiredSignature, JWT::DecodeError => e
-        render json: { error: e.message }, status: :unauthorized 
+        render json: { error: e.message }, status: :unauthorized
         return
       end
     end
 
     unless @current_user
-      render json: { error: "Unauthorized" }, status: :unauthorized  
+      render json: { error: "Unauthorized" }, status: :unauthorized
     end
   end
 

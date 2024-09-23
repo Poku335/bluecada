@@ -1,10 +1,12 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
-  port: <%= ENV.fetch('DATABASE_PORT') { 5432 } %>
-  username: <%= ENV.fetch('POSTGRES_USER') { 'riseplus' } %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD') { 'riseplus' } %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  host: <%= ENV.fetch('DB_HOST') { 'cancer_sri-db' } %>
+  port: <%= ENV.fetch('DB_PORT') { 5432 } %>
+  username: <%= ENV.fetch('DB_USER') { 'riseplus' } %>
+  password: <%= ENV.fetch('DB_PASS') { 'riseplus' } %>
+  database: <%= ENV.fetch('DB_NAME') { 'cancer_sri' } %>
 
 development:
   primary:
