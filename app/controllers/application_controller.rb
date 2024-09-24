@@ -132,8 +132,10 @@ class ApplicationController < ActionController::Base
   
           health_in_id = nil
           health_in_mapping = {
-            'สิทธิข้าราชการ' => 'ข้าราชการ, ต้นสังกัด'
-          } # Add more mappings here
+            'สิทธิข้าราชการ' => 'ข้าราชการ, ต้นสังกัด',
+            'สิทธิประกันสังคม' => 'ประกันสังคม',
+            'สิทธิรัฐวิสาหกิจ' => 'ข้าราชการ, ต้นสังกัด',
+          } 
   
           health_in_names = row['HealthIn'].to_s.split('/')
           health_in_names.each do |health_in_name|
@@ -145,7 +147,7 @@ class ApplicationController < ActionController::Base
   
             health_in = HealthInsurance.find_by("name ILIKE ?", "%#{mapped_health_in_name}%")
             if health_in.nil?
-              errors << "ไม่พบสิทธิพิเศษ '#{health_in_name}'"
+              errors << "ไม่พบสิทธิพิเศษ '#{health_in_name}' ของ #{row['HosNo1']}"
               next
             else
               health_in_id = health_in.id
@@ -154,7 +156,7 @@ class ApplicationController < ActionController::Base
   
           if health_in_id.nil? && health_in_names.any?
             error_patient_count += 1
-            next # Skip this row if none of the health insurance names were found
+            next 
           end
   
           mars = MaritalStatus.find_by("name ILIKE ?", "%#{row['MarS']}%")
