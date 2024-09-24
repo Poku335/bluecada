@@ -4,7 +4,7 @@ class BasesController < ApplicationController
   # GET /bases?p=1
   # GET /bases.json
   def index
-    @bases = Basis.all
+    @bases = Basis.cached_basis
     render json: @bases
   end
 
