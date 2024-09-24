@@ -4,8 +4,26 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
-    render json: @patients
+    if params[:datatable]
+      limit = (params[:limit] || 10).to_i
+      page = (params[:page] || 1).to_i
+      offset = (page - 1) * limit
+
+      @patients = Patient.order(params[:order] || 'created_at desc')
+                        .page(params[:page])
+                        .per(params[:limit] || 10)
+      render json: {
+        patients: @patients,
+        limit: params[:limit].to_i,
+        page: @patients.current_page,
+        offset: offset,
+        total_pages: @patients.total_pages,
+        total_count: @patients.total_count
+      }
+    else
+      @patients = Patient.all
+      render json: @patients
+    end
   end
 
   # GET /patients/1

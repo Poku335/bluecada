@@ -43,6 +43,7 @@ gem 'pg_search'
 gem "bcrypt", "~> 3.1.7"
 
 gem 'jwt'
+gem 'kaminari'
 
 gem 'delayed_job_active_record'
 

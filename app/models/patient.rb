@@ -18,7 +18,8 @@ class Patient < ApplicationRecord
 
 
   def as_json(options = {})
-    hsh = super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
+  Rails.cache.fetch([self, options]) do
+    super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
       hospital: hospital,
       sex: sex,
       post_code: post_code,
@@ -29,11 +30,11 @@ class Patient < ApplicationRecord
       health_insurance: health_insurance,
       province: province,
       district: district,
-      sub_district:sub_district,
+      sub_district: sub_district,
       cancer_forms: cancer_forms.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
     )
-    hsh
   end
+end
 
   def save_post_code_and_address_code
     province = Province.find_by(id: self.province_id)&.province_thai

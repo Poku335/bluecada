@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
@@ -50,6 +50,7 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
+  
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
