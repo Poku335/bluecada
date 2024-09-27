@@ -7,6 +7,10 @@ class ImportDiagParagraphJob < ApplicationJob
     errors = []
     CSV.foreach(output_file, headers: true, encoding: 'bom|utf-8') do |row|
       begin
+        reqdate = Date.strptime(row['REQDATE'], '%m/%d/%y').strftime('%Y-%m-%d')
+      rescue ArgumentError
+        reqdate = nil
+      
         hn = row['HN_N']
         patient = Patient.find_by(hos_no: hn)
         if patient.nil?
@@ -23,7 +27,7 @@ class ImportDiagParagraphJob < ApplicationJob
         diag_para = DiagnoseParagraph.create!(
           cancer_information_id: cancer_form.cancer_information_id,
           diagnose_paragraph: row['DIAGNOSIS'],
-          diag_date: row['REQDATE']
+          diag_date: reqdate
         )
 
         icdo_results = []
@@ -67,7 +71,7 @@ class ImportDiagParagraphJob < ApplicationJob
         end
 
         if icdo_results.empty?
-          # สร้าง SearchIcdo เปล่าๆ ถ้าไม่มี icdo_results
+          
           SearchIcdo.create!(
             diagnose_paragraph_id: diag_para.id,
             icdo_id: nil
@@ -92,7 +96,6 @@ class ImportDiagParagraphJob < ApplicationJob
     end
 
     if errors.any?
-      # คุณสามารถบันทึก errors ลงในไฟล์หรือฐานข้อมูลเพื่อการตรวจสอบภายหลัง
       Rails.logger.error("Data import failed: #{errors.join(', ')}")
     else
       Rails.logger.info("Data imported successfully from uploaded file")
@@ -105,7 +108,6 @@ class ImportDiagParagraphJob < ApplicationJob
     CSV.open(output_file, 'w', write_headers: false, force_quotes: true) do |csv_out|
       CSV.foreach(input_file, headers: false) do |row|
         formatted_row = row.map do |field|
-          # แทนที่ newline ด้วย space ในแต่ละฟิลด์
           field.nil? ? '' : field.gsub(/\r\n|\n/, ' ').strip
         end
         csv_out << formatted_row

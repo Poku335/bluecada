@@ -135,7 +135,7 @@ class ApplicationController < ActionController::Base
             'สิทธิข้าราชการ' => 'ข้าราชการ, ต้นสังกัด',
             'สิทธิประกันสังคม' => 'ประกันสังคม',
             'สิทธิรัฐวิสาหกิจ' => 'ข้าราชการ, ต้นสังกัด'
-          }# Add more mappings here
+          }
             
           health_in_names = row['HealthIn'].to_s.split('/')
           health_in_names.each do |health_in_name|
@@ -203,21 +203,47 @@ class ApplicationController < ActionController::Base
           )
   
           if patient.save
-            CancerForm.create!(
-              patient_id: patient.id,
-              primary: patient.cancer_forms.count + 1,
-              is_editing: false,
-              treatment_follow_up_id: TreatmentFollowUp.create!.id,
-              information_diagnosis_id: InformationDiagnosis.create!.id,
-              treatment_information_id: TreatmentInformation.create!.id,
-              cancer_information_id: CancerInformation.create!(icd_10: row["icd10"]).id,
-              cancer_form_status_id: CancerFormStatus.find(1).id
-            )
+            ActiveRecord::Base.transaction do
+              begin
+
+                existing_cancer_form = CancerForm.joins(:cancer_information)
+                                       .where(patient_id: patient.id, cancer_informations: { icd_10: row["icd10"] })
+                                       .first
+                if existing_cancer_form
+                  Rails.logger.info "CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. Skipping creation of CancerForm."
+                  errors << "CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. maybe duplicate information"
+                  next
+                end
+                # Create only once for each patient
+                cancer_information = CancerInformation.create!(icd_10: row["icd10"])
+                Rails.logger.info "Created CancerInformation with id: #{cancer_information.id} and icd_10: #{row['icd10']}"
+          
+                treatment_follow_up = TreatmentFollowUp.create!
+                information_diagnosis = InformationDiagnosis.create!
+                treatment_information = TreatmentInformation.create!
+          
+                cancer_form = CancerForm.create!(
+                  patient_id: patient.id,
+                  primary: patient.cancer_forms.count + 1,
+                  is_editing: false,
+                  treatment_follow_up_id: treatment_follow_up.id,
+                  information_diagnosis_id: information_diagnosis.id,
+                  treatment_information_id: treatment_information.id,
+                  cancer_information_id: cancer_information.id,
+                  cancer_form_status_id: CancerFormStatus.find(1).id
+                )
+                Rails.logger.info "Created CancerForm with id: #{cancer_form.id} for Patient ID: #{patient.id}"
+                
+              rescue => e
+                Rails.logger.error "Failed to create CancerForm or related records for Patient ID: #{patient.id} - Error: #{e.message}"
+                raise ActiveRecord::Rollback
+              end
+            end
           else
             errors << "Failed to save patient for row hn #{row['HosNo1']}: #{row["Id"]} - Error: #{patient.errors.full_messages.join(', ')}"
             error_patient_count += 1
           end
-  
+
         rescue ActiveRecord::RecordInvalid => e
           errors << "Failed to save record for row hn #{row['HosNo1']}: - Error: #{e.message}"
           error_patient_count += 1

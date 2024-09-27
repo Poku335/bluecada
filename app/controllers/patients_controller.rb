@@ -4,26 +4,8 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    if params[:datatable]
-      limit = (params[:limit] || 10).to_i
-      page = (params[:page] || 1).to_i
-      offset = (page - 1) * limit
-
-      @patients = Patient.order(params[:order] || 'created_at desc')
-                        .page(params[:page])
-                        .per(params[:limit] || 10)
-      render json: {
-        patients: @patients,
-        limit: params[:limit].to_i,
-        page: @patients.current_page,
-        offset: offset,
-        total_pages: @patients.total_pages,
-        total_count: @patients.total_count
-      }
-    else
-      @patients = Patient.all
-      render json: @patients
-    end
+    @patients = Patient.search(params)
+    render json: @patients
   end
 
   # GET /patients/1
@@ -66,7 +48,7 @@ class PatientsController < ApplicationController
       @patient = Patient.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Only allow. a list of trusted parameters through.
     def patient_params
       params.require(:patient).permit(:hos_no, :hospital_id, :name, :citizen_id, :sex_id, :age, :birth_date, :address_detail, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :regis_date, :id_finding, :province_id, :district_id, :sub_district_id)
     end

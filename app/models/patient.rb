@@ -17,27 +17,21 @@ class Patient < ApplicationRecord
   validates :citizen_id, uniqueness: true
 
   def as_json(options = {})
-  cache_key = "patient_as_json_#{self.id}"
-  Rails.logger.info("Fetching cache for key: #{cache_key}")
-  Rails.cache.fetch(cache_key, expires_in: 12.hours) do
-    Rails.logger.info("Cache miss for key: #{cache_key}")
-    super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
-      hospital: hospital,
-      sex: sex,
-      post_code: post_code,
-      address_code: address_code,
-      marital_status: marital_status,
-      race: race,
-      religion: religion,
-      health_insurance: health_insurance,
-      province: province,
-      district: district,
-      sub_district: sub_district,
-      cancer_forms: cancer_forms.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
-    )
-    end
+      super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
+        hospital: hospital,
+        sex: sex,
+        post_code: post_code,
+        address_code: address_code,
+        marital_status: marital_status,
+        race: race,
+        religion: religion,
+        health_insurance: health_insurance,
+        province: province, 
+        district: district, 
+        sub_district: sub_district, 
+        cancer_forms: cancer_forms&.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
+      )
   end
-end
 
   def save_post_code_and_address_code
     province = Province.find_by(id: self.province_id)&.province_thai
@@ -67,4 +61,49 @@ end
       cancer_form_status_id: 1
     )
   end
+
+  def self.search(params = {})
+    start_date = params[:start_date]
+    start_time = params[:start_time] || '00:00:00'
+    end_date = params[:end_date]
+    end_time = params[:end_time] || '23:59:59'
+
+    data = all
+
+    data = data.select %(
+      patients.*,
+      cancer_forms.id AS cancer_form_id,
+      cancer_forms.primary AS cancer_form_primary,
+      cancer_forms.cancer_form_status_id AS cancer_form_status, 
+      cancer_form_statuses.name AS cancer_form_status_name,
+      cancer_informations.icd_10 AS icd_10,
+      case_types.name AS case_type_name,
+      users.name AS current_user_name,
+      races.name AS race_name,
+      hospitals.name AS hospital_name,
+      sexes.name AS sex_name,
+      post_codes.code AS post_code,
+      address_codes.code AS address_code,
+      marital_statuses.name AS marital_status_name,
+      religions.name AS religion_name,
+      health_insurances.name AS health_insurance_name,
+      provinces.province_thai AS province_name,
+      districts.district_thai_short AS district_name,
+      sub_districts.sub_district_thai_short AS sub_district_name
+    )
+
+    params[:inner_joins] = %i[]
+    params[:left_joins] = %i[races hospitals sexes post_codes address_codes marital_statuses religions 
+                            health_insurances provinces districts sub_districts]
+    data = data.joins('LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id')
+                .joins('LEFT JOIN cancer_form_statuses ON cancer_forms.cancer_form_status_id = cancer_form_statuses.id')
+                .joins('LEFT JOIN users ON users.id = cancer_forms.current_user_id')
+                .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
+                .joins('LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id')
+    params[:keywords_columns] = ["patients.id"]
+    params[:order] = params[:order] || "patients.id"
+    data = super(params.merge!(data: data))
+
+  end
 end
+

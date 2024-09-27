@@ -6,23 +6,33 @@ class CancerForm < ApplicationRecord
   belongs_to :cancer_information, optional: true
   belongs_to :patient
   belongs_to :cancer_form_status, optional: true
-  before_create :create_form_data
 
 
   def create_form_data
-    treatment_follow_up = TreatmentFollowUp.create!
-    information_diagnosis = InformationDiagnosis.create!
-    treatment_information = TreatmentInformation.create!
-    cancer_information = CancerInformation.create!
-    
-    primary_value = CancerForm.where(patient_id: self.patient_id).count + 1
-    self.is_editing = false
-    self.treatment_follow_up_id = treatment_follow_up.id
-    self.information_diagnosis_id = information_diagnosis.id
-    self.cancer_information_id = cancer_information.id
-    self.treatment_information_id = treatment_information.id
-    self.primary = primary_value
-    self.cancer_form_status_id = 1
+    ActiveRecord::Base.transaction do
+      begin
+        cancer_information = CancerInformation.create!
+        
+        treatment_follow_up = TreatmentFollowUp.create!
+        
+        information_diagnosis = InformationDiagnosis.create!
+        
+        treatment_information = TreatmentInformation.create!
+        
+        self.primary = self.patient.cancer_forms.count + 1
+        self.is_editing = false
+        self.cancer_information = cancer_information
+        self.treatment_follow_up = treatment_follow_up
+        self.information_diagnosis = information_diagnosis
+        self.treatment_information = treatment_information
+        self.cancer_form_status = CancerFormStatus.find(1) 
+        
+        self
+      rescue => e
+        Rails.logger.error "Failed to create related records for CancerForm - Error: #{e.message}"
+        raise ActiveRecord::Rollback
+      end
+    end
   end
 
 end

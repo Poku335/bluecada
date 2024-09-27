@@ -1,7 +1,14 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  IS_FETCH_FROM_CACHE = false
+  # belongs_to :creator, class_name: "User", foreign_key: "creator_id"
+  # belongs_to :updater, class_name: "User", foreign_key: "updater_id"
+
+  attr_accessor :current_user_id, :skip_callback
+
+  def skip_callback?
+    self.skip_callback
+  end
 
   def as_json(params = {})
     params[:only] ||= []
@@ -9,45 +16,30 @@ class ApplicationRecord < ActiveRecord::Base
     params[:extra_cols] ||= []
     columns = self.class.column_names
     columns += params[:extra_cols]
-    cols = params[:only].empty? ? columns : params[:only]
-    cols = cols.map(&:to_s) - (params[:except].map(&:to_s) - params[:only].map(&:to_s))
-    super(only: cols, methods: params[:extra_cols])
+    cols = params[:only].size > 0 ? params[:only] : columns
+    cols = cols.map { |e| e.to_s } - (params[:except].map { |e| e.to_s } - params[:only].map { |e| e.to_s })
+    hsh = super(only: cols, methods: params[:extra_cols])
+    # hsh.merge!(creator_username:creator.nil? ? "" : creator.username) if self.class.column_names.include?("creator_id")
+    # hsh.merge!(updater_username:updater.nil? ? "" : updater.username) if self.class.column_names.include?("updater_id")
+    hsh
   end
 
-  def self.fetch_all_cache_key(params = {})
-    "#{table_name}:fetch_all:#{params.sort.to_s}"
-  end
-
-  def self.fetch_all(params = {})
-    if self::IS_FETCH_FROM_CACHE
-      cache_data = Rails.cache.fetch(fetch_all_cache_key(params), expires_in: 1.day) do
-        search(params).to_a.to_json
-      end
-      result = JSON.parse(cache_data)
-    else
-      result = search(params).to_a
-    end
-    result
-  end
-
-  def self.fetch_cache_key(id)
-    "#{self.table_name}:fetch:#{id}"
-  end
-
-  def self.fetch(id)
-    if self::IS_FETCH_FROM_CACHE
-      cache_data = Rails.cache.fetch(fetch_cache_key(id), expires_in: 1.day) do
-        find(id).as_json.to_json
-      end
-      result = JSON.parse(cache_data)
-    else
-      result = find(id).as_json.to_json
-    end
-    result
+  def to_s
+    has_attribute?(:name) ? name : ""
   end
 
   def self.search(params = {})
-    data = params[:data] || all
+    data = params[:data] || all.select(column_names.map{|c| "#{table_name}.\"#{c}\"" if !["created_at","updated_at"].include?(c)}.compact.join(","))
+
+    # # creator, updater
+    # if column_names.include?("creator_id")
+    #   data = data.select "creators.username as creator_username"
+    #   data = data.joins "left outer join users creators on creators.id = #{table_name}.creator_id"
+    # end
+    # if column_names.include?("updater_id")
+    #   data = data.select "updaters.username as updater_username"
+    #   data = data.joins "left outer join users updaters on updaters.id = #{table_name}.updater_id"
+    # end
 
     # default params
     params[:keywords_columns] ||= ["#{table_name}.name"]
@@ -58,7 +50,7 @@ class ApplicationRecord < ActiveRecord::Base
         if j.instance_of?(Symbol) || j.instance_of?(String)
           tbname = j.to_s
           fkey = "#{tbname.singularize}_id"
-        else
+        else 
           tbname = j[:table_name].to_s
           fkey = j[:foreign_key].to_s
         end
@@ -79,63 +71,105 @@ class ApplicationRecord < ActiveRecord::Base
       end
     end
 
-    # soft delete
-    if column_names.include?('is_soft_deleted') && params[:show_is_soft_deleted].blank?
-      if params[:is_soft_deleted].blank?
-        data = data.where "#{table_name}.is_soft_deleted is not true"
-      else
-        data = data.where "#{table_name}.is_soft_deleted = true"
-      end
-    end
-    params.delete :show_is_soft_deleted
-    params.delete :is_soft_deleted
-
-    # filters all params[:column_name]
+    # filters
     if params[:omit_default_filters].blank?
       column_names.each do |cname|
-        data = data.where "#{table_name}.#{cname} = ?", params[cname.to_sym] if params[cname.to_sym].present? && cname != "data"
-        if cname.split('_').last == 'id' && params["#{cname}s".to_sym].present?
-          data = data.where "#{table_name}.#{cname} in (#{JSON.parse(params["#{cname}s".to_sym].to_s).join(',')})"
+        # data = data.where "#{table_name}.#{cname} = ?", params[cname.to_sym] if params[cname.to_sym].present?
+        if params.has_key?(cname.to_sym)
+          params[cname.to_sym] = nil if params[cname.to_sym].blank?
+          data = data.where("#{table_name}.#{cname}" => params[cname.to_sym])
         end
+        data = data.where "#{table_name}.#{cname} in (#{JSON.parse(params[("#{cname}s").to_sym].to_s).join(",")})" if cname.split("_").last == "id" && params[("#{cname}s").to_sym].present?
       end
     end
 
     # keywords
     if params[:keywords].present? && params[:keywords_columns].present?
-      params[:keywords].split(' ').each do |k|
+
+      if params[:keywords_columns] == [:"patients.first_name || ' ' || patients.last_name", :tel] || params[:keywords_columns] == [:"doctors.first_name || ' ' || doctors.last_name", :tel] || params[:keywords_columns] == [:code, :"patients.first_name || ' ' || patients.last_name", :"doctors.first_name || ' ' || doctors.last_name"]
+
+        keywords = params[:keywords].split
+
+        if keywords.length > 1
+          first_key = params[:keywords].split(" ").first
+          last_key = params[:keywords].split(" ").last
+          encoded_first_key = Patient.encode_name(first_key)
+          encoded_last_key = Patient.encode_name(last_key)
+
+          matching_first_key_patient = Patient.where("first_name ILIKE :keyword", keyword: "%#{encoded_first_key}%")
+          matching_last_key_patient = Patient.where("last_name ILIKE :keyword", keyword: "%#{encoded_last_key}%")
+
+          matching_first_key_doctor = Doctor.where("first_name ILIKE :keyword", keyword: "%#{encoded_first_key}%")
+          matching_last_key_doctor = Doctor.where("last_name ILIKE :keyword", keyword: "%#{encoded_last_key}%")
+
+          if matching_first_key_patient.present? && matching_last_key_patient.present?
+            params[:keywords] = "#{encoded_first_key} #{encoded_last_key}"
+          elsif matching_first_key_doctor.present? && matching_last_key_doctor.present?
+            params[:keywords] = "#{encoded_first_key} #{encoded_last_key}"
+            p "==========================="
+            p "params[:keywords] = #{params[:keywords]}"
+            p "==========================="
+          else
+            params[:keywords] = encoded_first_key
+            p "==========================="
+            p "params[:keywords] = #{params[:keywords]}"
+            p "==========================="
+          end
+        else
+          encoded_keywords = Patient.encode_name(params[:keywords])
+
+          matching_patient = Patient.where("first_name ILIKE :keyword OR last_name ILIKE :keyword", keyword: "%#{encoded_keywords}%")
+          matching_doctor = Doctor.where("first_name ILIKE :keyword OR last_name ILIKE :keyword", keyword: "%#{encoded_keywords}%")
+
+          if matching_patient.present? || matching_doctor.present?
+            params[:keywords] = encoded_keywords
+          end
+        end
+      end
+
+      params[:keywords].split(" ").each do |k|
         kw_sqls = []
         kws = []
         params[:keywords_columns].each do |cname|
           kw_sqls << "#{cname} ~* ?"
           kws << k
         end
-        data = data.where(kw_sqls.join(' or '), *kws)
+        data = data.where(kw_sqls.join(" or "), *kws)
       end
+    end
+
+    # soft delete
+    if column_names.include?("is_soft_deleted") && params[:is_soft_deleted].blank?
+      data = data.where "#{table_name}.is_soft_deleted is null or #{table_name}.is_soft_deleted = false"
     end
 
     # get total data (before limit,offset)
     total_query = data
-    total_query = total_query.except(:select).select('COUNT(*) as total')
+    total_query = total_query.except(:select).select("COUNT(*) as total")
     total_sql = total_query.to_sql
 
     order = params[:order]
     offset = params[:offset].to_i
     limit = params[:limit].to_i
     page = params[:page].to_i
-    offset = (page - 1) * limit if page.positive?
+    offset = (page - 1) * limit if page > 0
 
     data = data.order(order)
     data = data.offset(offset) if offset
-    data = data.limit(limit) if limit.positive?
+    data = data.limit(limit) if limit > 0
 
     # use as_json instead of direct query
-    if params[:use_as_json].present?
+    if params[:use_as_json]
       results = connection.execute data.except(:select).to_sql
-      columns = column_names
+      columns = self.column_names
       columns += (params[:extra_cols] || [])
       results = results.map do |attr|
-        attr.each { |k, _v| attr.delete(k) unless columns.include?(k) }
-        obj = new attr
+        if attr["id"].blank?
+          attr.each { |k, _v| attr.delete(k) unless columns.include?(k) }
+          obj = new attr
+        else
+          obj = find attr["id"]
+        end
         obj.as_json(params[:as_json_option] ||= {})
       end
     else
@@ -144,28 +178,79 @@ class ApplicationRecord < ActiveRecord::Base
 
     if params[:datatable]
       total = connection.execute total_sql
-      total_record = total[0]['total'].to_i
-      total_page = limit.zero? ? 1 : (total_record.to_f / limit).ceil
-      page = limit.zero? ? 1 : 1 + (offset / limit)
+      if total.any?
+        total_record = total[0]["total"].to_i
+        total_page = limit == 0 ? 1 : (total_record.to_f / limit).ceil
+        page = limit == 0 ? 1 : 1 + (offset / limit)
 
-      items = []
-      results.to_a.each do |item|
-        read_only_cfg = find(item['id']).get_read_only
-        item.merge!({ read_only: read_only_cfg[:is_read_only], editable_fields: read_only_cfg[:editable_fields] })
-        items << item
+        results = {
+          data: results.to_a,
+          total: total_record,
+          total_page: total_page,
+          page: page,
+          limit: limit,
+          offset: offset,
+        }
+      else
+        results = {
+          data: [],
+          total: 0,
+          total_page: 0,
+          page: 0,
+          limit: limit,
+          offset: offset,
+        }
       end
+    end
 
-      {
-        data: items,
-        total: total_record,
-        total_page: total_page,
-        page: page,
-        limit: limit,
-        offset: offset
-      }
-    else
-      results
+    # filter output keys resp_keys
+    if params[:resp_keys].present?
+      resp_keys = params[:resp_keys].map{|e| e.to_s.strip}
+      arr_data = params[:datatable].blank? ? (results = results.to_a; results) : (results[:data] ||= [])
+      arr_data.each {|e| e.keys.each{|k| e.delete(k) if !resp_keys.include?(k.to_s)} }
+    end
+
+    results
+  end
+
+  after_save :publish, if: :is_publish?
+  after_destroy :publish, if: :is_publish?
+
+  # publish to redis class's methods
+  def self.publish(obj_id = nil, hsh_msg = {}, is_publish_all = true)
+    ch_name = model_name.plural
+    hsh_msg[:message] ||= "updated"
+    hsh_msg["#{model_name.singular}_id"] = obj_id if obj_id
+
+    # publish all
+    if is_publish_all
+      begin
+        $redis.publish(ch_name, hsh_msg.to_json)
+      rescue StandardError
+        nil
+      end
+      p "publish to #{ch_name} , hsh_msg: #{hsh_msg}"
+    end
+
+    # publish one
+    if obj_id
+      ch_name_one = "#{ch_name}/#{obj_id}"
+      begin
+        $redis.publish(ch_name_one, hsh_msg.to_json)
+      rescue StandardError
+        nil
+      end
+      p "publish to #{ch_name_one} , hsh_msg: #{hsh_msg}"
     end
   end
-  
+
+  # publish to redis object's methods
+  def publish(hsh_msg = {}, is_publish_all = true)
+    self.class.publish(id, hsh_msg, is_publish_all)
+  end
+
+  def is_publish?
+    false
+  end
+
 end

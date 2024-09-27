@@ -23,7 +23,7 @@ class CancerFormsController < ApplicationController
   # POST /cancer_forms.json
   def create
     @cancer_form = CancerForm.new(cancer_form_params)
-
+    @cancer_form = @cancer_form.create_form_data
     if @cancer_form.save
       render json: @cancer_form, status: :created, location: @cancer_form
     else
