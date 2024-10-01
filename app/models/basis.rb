@@ -4,4 +4,9 @@ class Basis < ApplicationRecord
       Basis.all.to_a
     end
   end
+
+  def as_json(options = {})
+    super(options.merge(except: [:created_at, :updated_at]))
+  end
+  
 end

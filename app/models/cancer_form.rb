@@ -12,11 +12,8 @@ class CancerForm < ApplicationRecord
     ActiveRecord::Base.transaction do
       begin
         cancer_information = CancerInformation.create!
-        
         treatment_follow_up = TreatmentFollowUp.create!
-        
         information_diagnosis = InformationDiagnosis.create!
-        
         treatment_information = TreatmentInformation.create!
         
         self.primary = self.patient.cancer_forms.count + 1
@@ -32,6 +29,17 @@ class CancerForm < ApplicationRecord
         Rails.logger.error "Failed to create related records for CancerForm - Error: #{e.message}"
         raise ActiveRecord::Rollback
       end
+    end
+  end
+
+
+  def self.cancer_form
+    @cancer_forms = CancerForm.all
+    if params[:patient_id] && params[:primary]
+    cancer_form = CancerForm.find_by(patient_id: params[:patient_id], primary: params[:primary])
+       cancer_form
+    else
+      @cancer_forms
     end
   end
 

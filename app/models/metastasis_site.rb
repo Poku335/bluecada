@@ -1,2 +1,3 @@
 class MetastasisSite < ApplicationRecord
+  
 end

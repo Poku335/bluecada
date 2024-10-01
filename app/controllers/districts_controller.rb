@@ -4,14 +4,14 @@ class DistrictsController < ApplicationController
   # GET /districts
   # GET /districts.json
   def index
-    province = params[:province_id].to_i
-    districts = District.where(province_id: province)
+    districts = District.find_districts(params)
     render json: districts
   end
 
   # GET /districts/1
   # GET /districts/1.json
   def show
+    render json: @district
   end
 
   # POST /districts

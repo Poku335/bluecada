@@ -5,12 +5,7 @@ class CancerFormsController < ApplicationController
   # GET /cancer_forms.json
   def index
     @cancer_forms = CancerForm.all
-    if params[:patient_id] && params[:primary]
-    cancer_form = CancerForm.find_by(patient_id: params[:patient_id], primary: params[:primary])
-      render json: cancer_form, status: :ok
-    else
-      render json: @cancer_forms, sstatus: :ok
-    end
+    render json: @cancer_forms
   end
 
   # GET /cancer_forms/1

@@ -86,47 +86,35 @@ class ApplicationRecord < ActiveRecord::Base
     # keywords
     if params[:keywords].present? && params[:keywords_columns].present?
 
-      if params[:keywords_columns] == [:"patients.first_name || ' ' || patients.last_name", :tel] || params[:keywords_columns] == [:"doctors.first_name || ' ' || doctors.last_name", :tel] || params[:keywords_columns] == [:code, :"patients.first_name || ' ' || patients.last_name", :"doctors.first_name || ' ' || doctors.last_name"]
-
+      if params[:keywords_columns] == [:"patients.name || ' ' || patients.hos_no", :citizen_id, :id_finding]
+    
         keywords = params[:keywords].split
-
+    
         if keywords.length > 1
           first_key = params[:keywords].split(" ").first
           last_key = params[:keywords].split(" ").last
           encoded_first_key = Patient.encode_name(first_key)
           encoded_last_key = Patient.encode_name(last_key)
-
-          matching_first_key_patient = Patient.where("first_name ILIKE :keyword", keyword: "%#{encoded_first_key}%")
+    
+          matching_first_key_patient = Patient.where("name ILIKE :keyword", keyword: "%#{encoded_first_key}%")
           matching_last_key_patient = Patient.where("last_name ILIKE :keyword", keyword: "%#{encoded_last_key}%")
-
-          matching_first_key_doctor = Doctor.where("first_name ILIKE :keyword", keyword: "%#{encoded_first_key}%")
-          matching_last_key_doctor = Doctor.where("last_name ILIKE :keyword", keyword: "%#{encoded_last_key}%")
-
+    
           if matching_first_key_patient.present? && matching_last_key_patient.present?
             params[:keywords] = "#{encoded_first_key} #{encoded_last_key}"
-          elsif matching_first_key_doctor.present? && matching_last_key_doctor.present?
-            params[:keywords] = "#{encoded_first_key} #{encoded_last_key}"
-            p "==========================="
-            p "params[:keywords] = #{params[:keywords]}"
-            p "==========================="
           else
             params[:keywords] = encoded_first_key
-            p "==========================="
-            p "params[:keywords] = #{params[:keywords]}"
-            p "==========================="
           end
         else
           encoded_keywords = Patient.encode_name(params[:keywords])
-
-          matching_patient = Patient.where("first_name ILIKE :keyword OR last_name ILIKE :keyword", keyword: "%#{encoded_keywords}%")
-          matching_doctor = Doctor.where("first_name ILIKE :keyword OR last_name ILIKE :keyword", keyword: "%#{encoded_keywords}%")
-
-          if matching_patient.present? || matching_doctor.present?
+          
+          matching_patient = Patient.where("first_name ILIKE :keyword OR last_name ILIKE :keyword OR hos_no ILIKE :keyword OR citizen_id ILIKE :keyword OR id_finding ILIKE :keyword", keyword: "%#{encoded_keywords}%")
+    
+          if matching_patient.present?
             params[:keywords] = encoded_keywords
           end
         end
       end
-
+    
       params[:keywords].split(" ").each do |k|
         kw_sqls = []
         kws = []

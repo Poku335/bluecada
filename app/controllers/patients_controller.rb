@@ -8,6 +8,16 @@ class PatientsController < ApplicationController
     render json: @patients
   end
 
+  def import_patient
+    @patients = Patient.import_patient(params)
+    render json: @patients
+  end
+
+  def export_patients
+    csv_file_path = Patient.export_patients(params)
+    send_file csv_file_path, type: 'text/csv', disposition: 'attachment', filename: 'Exported_patient_datas.csv'
+  end
+
   # GET /patients/1
   # GET /patients/1.json
   def show

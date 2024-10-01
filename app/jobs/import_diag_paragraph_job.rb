@@ -71,7 +71,6 @@ class ImportDiagParagraphJob < ApplicationJob
         end
 
         if icdo_results.empty?
-          
           SearchIcdo.create!(
             diagnose_paragraph_id: diag_para.id,
             icdo_id: nil
@@ -87,7 +86,7 @@ class ImportDiagParagraphJob < ApplicationJob
 
       rescue CSV::MalformedCSVError => e
         errors << "Failed to save record for HN: #{hn} - Error: #{e.message}"
-        next # Skip the malformed line
+        next 
       rescue ActiveRecord::RecordInvalid => e
         errors << "Failed to save record for HN: #{hn} - Error: #{e.message}"
       rescue => e

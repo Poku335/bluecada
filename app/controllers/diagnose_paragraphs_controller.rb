@@ -5,7 +5,12 @@ class DiagnoseParagraphsController < ApplicationController
   # GET /diagnose_paragraphs
   # GET /diagnose_paragraphs.json
   def index
-    @diagnose_paragraphs = DiagnoseParagraph.all
+    @diagnose_paragraphs = DiagnoseParagraph.search(params)
+    render json: @diagnose_paragraphs
+  end
+
+  def import_diag
+    @diagnose_paragraphs = DiagnoseParagraph.import_diag_paragraph(params)
     render json: @diagnose_paragraphs
   end
 
