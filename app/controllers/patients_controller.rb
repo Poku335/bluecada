@@ -18,6 +18,11 @@ class PatientsController < ApplicationController
     send_file csv_file_path, type: 'text/csv', disposition: 'attachment', filename: 'Exported_patient_datas.csv'
   end
 
+  def preview_data_patients
+    @patients = Patient.preview_patients(params)
+    render json: @patients
+  end
+
   # GET /patients/1
   # GET /patients/1.json
   def show
@@ -50,6 +55,7 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient.destroy!
+    render json: {message: "Patient id #{@patient.id} deleted successfully"}
   end
 
   private

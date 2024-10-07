@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show update destroy ]
-  skip_before_action :authenticate!, only: [:login , :create]
+  skip_before_action :authenticate!, only: [:login]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.search(params)
     render json: @users
   end
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render :show, status: :created, location: @user
+      render json: {message: "User created"}, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if @user.update(user_params)
-      render :show, status: :ok, location: @user
+      render @user, status: :ok, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy!
+    render json: {message: "User id #{params[:id]} deleted successfully"}
   end
 
   private
@@ -56,6 +57,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :user_name, :password_digest, :role_id)
+      params.require(:user).permit(:first_name, :user_name, :password, :role_id, :last_name, :tel, :password_confirmation)
     end
 end

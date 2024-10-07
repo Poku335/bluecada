@@ -10,20 +10,22 @@ class ImportDiagParagraphJob < ApplicationJob
         reqdate = Date.strptime(row['REQDATE'], '%m/%d/%y').strftime('%Y-%m-%d')
       rescue ArgumentError
         reqdate = nil
-      
-        hn = row['HN_N']
-        patient = Patient.find_by(hos_no: hn)
-        if patient.nil?
-          errors << "ไม่พบผู้ป่วยที่มี HN: #{hn}"
-          next
-        end
+      end
 
-        cancer_form = CancerForm.find_by(patient_id: patient.id)
-        if cancer_form.nil?
-          errors << "ไม่พบข้อมูล CancerForm สำหรับผู้ป่วยที่มี HN: #{hn}"
-          next
-        end
+      hn = row['HN_N']
+      patient = Patient.find_by(hos_no: hn)
+      if patient.nil?
+        errors << "ไม่พบผู้ป่วยที่มี HN: #{hn}"
+        next
+      end
 
+      cancer_form = CancerForm.find_by(patient_id: patient.id)
+      if cancer_form.nil?
+        errors << "ไม่พบข้อมูล CancerForm สำหรับผู้ป่วยที่มี HN: #{hn}"
+        next
+      end
+
+      begin
         diag_para = DiagnoseParagraph.create!(
           cancer_information_id: cancer_form.cancer_information_id,
           diagnose_paragraph: row['DIAGNOSIS'],

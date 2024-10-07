@@ -11,27 +11,27 @@ class Patient < ApplicationRecord
   belongs_to :province, optional: true
   belongs_to :district, optional: true
   belongs_to :sub_district, optional: true
-  has_many :cancer_forms
+  has_many :cancer_forms, dependent: :destroy
   after_create :save_post_code_and_address_code
 
   validates :hos_no, uniqueness: true
   validates :citizen_id, uniqueness: true
 
   def as_json(options = {})
-      super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
-        hospital: hospital,
-        sex: sex,
-        post_code: post_code,
-        address_code: address_code,
-        marital_status: marital_status,
-        race: race,
-        religion: religion,
-        health_insurance: health_insurance,
-        province: province, 
-        district: district, 
-        sub_district: sub_district, 
-        cancer_forms: cancer_forms&.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
-      )
+    super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
+      hospital: hospital,
+      sex: sex,
+      post_code: post_code,
+      address_code: address_code,
+      marital_status: marital_status,
+      race: race,
+      religion: religion,
+      health_insurance: health_insurance,
+      province: province, 
+      district: district, 
+      sub_district: sub_district, 
+      cancer_forms: cancer_forms&.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
+    )
   end
 
   def save_post_code_and_address_code
@@ -64,43 +64,122 @@ class Patient < ApplicationRecord
   end
 
   def self.search(params = {})
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    
+    if params[:preview]
+      data = all
 
-    data = all
+      data = data.select %(
+        cancer_forms.id AS cancer_form_id,
+        patients.hos_no AS patient_hn,
+        patients.name AS patient_name,
+        hospitals.code AS hospital_code,
+        sexes.code AS sex_code,
+        post_codes.code AS post_code,
+        address_codes.code AS address_code,
+        marital_statuses.code AS marital_status_code,
+        races.code AS race_code,
+        religions.code AS religion_code,
+        health_insurances.code AS health_insurance_code,
+        bases.code AS basis_code,
+        topography_codes.code AS top_code,
+        lateralities.code AS latera_code,
+        behaviors.code AS beh_code,
+        labs.code AS lab_code,
+        stages.code AS stage_code,
+        extents.code AS extent_code,
+        metastasis_sites.code AS met_code,
+        grads.code AS grad_code,
+        case_types.code AS case_type_code,
+        presents.code AS present_code,
+        death_stats.code AS death_stat_code,
+        refer_from_hospitals.code AS refer_from_code,
+        refer_to_hospitals.code AS refer_to_code,
+        CASE WHEN treatment_informations.is_radia IS TRUE THEN 1 WHEN treatment_informations.is_radia IS FALSE THEN 2 ELSE NULL END AS is_radia,
+        CASE WHEN treatment_informations.is_chemo IS TRUE THEN 1 WHEN treatment_informations.is_chemo IS FALSE THEN 2 ELSE NULL END AS is_chemo,
+        CASE WHEN treatment_informations.is_target IS TRUE THEN 1 WHEN treatment_informations.is_target IS FALSE THEN 2 ELSE NULL END AS is_target,
+        CASE WHEN treatment_informations.is_hormone IS TRUE THEN 1 WHEN treatment_informations.is_hormone IS FALSE THEN 2 ELSE NULL END AS is_hormone,
+        CASE WHEN treatment_informations.is_immu IS TRUE THEN 1 WHEN treatment_informations.is_immu IS FALSE THEN 2 ELSE NULL END AS is_immu,
+        CASE WHEN treatment_informations.is_inter_the IS TRUE THEN 1 WHEN treatment_informations.is_inter_the IS FALSE THEN 2 ELSE NULL END AS is_inter_the,
+        CASE WHEN treatment_informations.is_nuclear IS TRUE THEN 1 WHEN treatment_informations.is_nuclear IS FALSE THEN 2 ELSE NULL END AS is_nuclear,
+        CASE WHEN treatment_informations.is_stem_cell IS TRUE THEN 1 WHEN treatment_informations.is_stem_cell IS FALSE THEN 2 ELSE NULL END AS is_stem_cell,
+        CASE WHEN treatment_informations.is_bone_scan IS TRUE THEN 1 WHEN treatment_informations.is_bone_scan IS FALSE THEN 2 ELSE NULL END AS is_bone_scan,
+        CASE WHEN treatment_informations.is_supportive IS TRUE THEN 1 WHEN treatment_informations.is_supportive IS FALSE THEN 2 ELSE NULL END AS is_supportive,
+        CASE WHEN treatment_informations.is_treatment IS TRUE THEN 1 WHEN treatment_informations.is_treatment IS FALSE THEN 2 ELSE NULL END AS is_treatment
+      )
 
-    data = data.select %(
-      patients.*,
-      cancer_forms.id AS cancer_form_id,
-      cancer_forms.primary AS cancer_form_primary,
-      cancer_forms.cancer_form_status_id AS cancer_form_status, 
-      cancer_form_statuses.name AS cancer_form_status_name,
-      cancer_informations.icd_10 AS icd_10,
-      case_types.name AS case_type_name,
-      users.name AS current_user_name,
-      races.name AS race_name,
-      hospitals.name AS hospital_name,
-      sexes.name AS sex_name,
-      post_codes.code AS post_code,
-      address_codes.code AS address_code,
-      marital_statuses.name AS marital_status_name,
-      religions.name AS religion_name,
-      health_insurances.name AS health_insurance_name,
-      provinces.province_thai AS province_name,
-      districts.district_thai_short AS district_name,
-      sub_districts.sub_district_thai_short AS sub_district_name
-    )
+      data = data.joins('LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id')
+                 .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
+                 .joins('LEFT JOIN bases ON cancer_informations.basis_id = bases.id')
+                 .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
+                 .joins('LEFT JOIN lateralities ON cancer_informations.laterality_id = lateralities.id')
+                 .joins('LEFT JOIN behaviors ON cancer_informations.behavior_id = behaviors.id')
+                 .joins('LEFT JOIN labs ON cancer_informations.lab_id = labs.id')
+                 .joins('LEFT JOIN stages ON cancer_informations.stage_id = stages.id')
+                 .joins('LEFT JOIN extents ON cancer_informations.extent_id = extents.id')
+                 .joins('LEFT JOIN metastasis_sites ON cancer_informations.metastasis_site_id = metastasis_sites.id')
+                 .joins('LEFT JOIN grads ON cancer_informations.grad_id = grads.id')
+                 .joins('LEFT JOIN treatment_follow_ups ON cancer_forms.treatment_follow_up_id = treatment_follow_ups.id')
+                 .joins('LEFT JOIN treatment_informations ON cancer_forms.treatment_information_id = treatment_informations.id')
+                 .joins('LEFT JOIN hospitals ON patients.hospital_id = hospitals.id')
+                 .joins('LEFT JOIN sexes ON patients.sex_id = sexes.id')
+                 .joins('LEFT JOIN post_codes ON patients.post_code_id = post_codes.id')
+                 .joins('LEFT JOIN address_codes ON patients.address_code_id = address_codes.id')
+                 .joins('LEFT JOIN marital_statuses ON patients.marital_status_id = marital_statuses.id')
+                 .joins('LEFT JOIN races ON patients.race_id = races.id')
+                 .joins('LEFT JOIN religions ON patients.religion_id = religions.id')
+                 .joins('LEFT JOIN health_insurances ON patients.health_insurance_id = health_insurances.id')
+                 .joins('LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id')
+                 .joins('LEFT JOIN presents ON treatment_follow_ups.present_id = presents.id')
+                 .joins('LEFT JOIN death_stats ON treatment_follow_ups.death_stat_id = death_stats.id')
+                 .joins('LEFT JOIN hospitals AS refer_from_hospitals ON treatment_follow_ups.refer_from_id = refer_from_hospitals.id')
+                 .joins('LEFT JOIN hospitals AS refer_to_hospitals ON treatment_follow_ups.refer_to_id = refer_to_hospitals.id')
+                
+      if start_date.present? && end_date.present?
+        data = data.where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
+      end
+      
+      params[:order] = "patients.#{params[:order]}" || "patients.id"
 
-    params[:inner_joins] = %i[]
-    params[:left_joins] = %i[races hospitals sexes post_codes address_codes marital_statuses 
-                            religions health_insurances provinces districts sub_districts]
-    data = data.joins('LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id')
-               .joins('LEFT JOIN cancer_form_statuses ON cancer_forms.cancer_form_status_id = cancer_form_statuses.id')
-               .joins('LEFT JOIN users ON users.id = cancer_forms.current_user_id')
-               .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
-               .joins('LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id')
-    params[:keywords_columns] = ["patients.name", "patients.hos_no", :citizen_id, :id_finding]
-    params[:order] = params[:order] || "patients.id"
-    data = super(params.merge!(data: data))
+      data = super(params.merge!(data: data))
+    else
+      data = all
 
+      data = data.select %(
+        patients.*,
+        cancer_forms.id AS cancer_form_id,
+        cancer_forms.primary AS cancer_form_primary,
+        cancer_forms.cancer_form_status_id AS cancer_form_status, 
+        cancer_form_statuses.name AS cancer_form_status_name,
+        cancer_informations.icd_10 AS icd_10,
+        case_types.name AS case_type_name,
+        users.first_name AS current_user_name,
+        races.name AS race_name,
+        hospitals.name AS hospital_name,
+        sexes.name AS sex_name,
+        post_codes.code AS post_code,
+        address_codes.code AS address_code,
+        marital_statuses.name AS marital_status_name,
+        religions.name AS religion_name,
+        health_insurances.name AS health_insurance_name,
+        provinces.province_thai AS province_name,
+        districts.district_thai_short AS district_name,
+        sub_districts.sub_district_thai_short AS sub_district_name
+      )
+
+      params[:inner_joins] = %i[]
+      params[:left_joins] = %i[races hospitals sexes post_codes address_codes marital_statuses 
+                              religions health_insurances provinces districts sub_districts]
+      data = data.joins('LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id')
+                 .joins('LEFT JOIN cancer_form_statuses ON cancer_forms.cancer_form_status_id = cancer_form_statuses.id')
+                 .joins('LEFT JOIN users ON users.id = cancer_forms.current_user_id')
+                 .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
+                 .joins('LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id')
+      params[:keywords_columns] = ["patients.name", "patients.hos_no", :citizen_id, :id_finding]
+      params[:order] = params[:order] || "patients.id"
+      data = super(params.merge!(data: data))
+    end
   end
 
   def self.import_patient(params)
@@ -167,7 +246,6 @@ class Patient < ApplicationRecord
             health_in_name.strip!
             next if health_in_name.empty?
 
-            # Map user input to database value if exists
             mapped_health_in_name = health_in_mapping[health_in_name] || health_in_name
   
             health_in = HealthInsurance.find_by("name ILIKE ?", "%#{mapped_health_in_name}%")
@@ -178,7 +256,7 @@ class Patient < ApplicationRecord
               health_in_id = health_in.id
             end
           end
-
+  
           if health_in_id.nil? && health_in_names.any?
             error_patient_count += 1
             next 
@@ -229,16 +307,16 @@ class Patient < ApplicationRecord
           if patient.save
             ActiveRecord::Base.transaction do
               begin
-
+  
                 existing_cancer_form = CancerForm.joins(:cancer_information)
-                                       .where(patient_id: patient.id, cancer_informations: { icd_10: row["icd10"] })
-                                       .first
+                                                 .where(patient_id: patient.id, cancer_informations: { icd_10: row["icd10"] })
+                                                 .first
                 if existing_cancer_form
                   Rails.logger.info "CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. Skipping creation of CancerForm."
                   errors << "CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. maybe duplicate information"
                   next
                 end
-                # Create only once for each patient
+                
                 cancer_information = CancerInformation.create!(icd_10: row["icd10"])
                 Rails.logger.info "Created CancerInformation with id: #{cancer_information.id} and icd_10: #{row['icd10']}"
           
@@ -267,13 +345,13 @@ class Patient < ApplicationRecord
             errors << "Failed to save patient for row hn #{row['HosNo1']}: #{row["Id"]} - Error: #{patient.errors.full_messages.join(', ')}"
             error_patient_count += 1
           end
-
+  
         rescue ActiveRecord::RecordInvalid => e
           errors << "Failed to save record for row hn #{row['HosNo1']}: - Error: #{e.message}"
           error_patient_count += 1
         end
       end
-
+  
       ImportPatient.create!(
         date: Time.now,
         total_patient_count: total_patient_count,
@@ -362,6 +440,66 @@ class Patient < ApplicationRecord
 
   def boolean_to_integer(value)
     value.nil? ? nil : (value ? 1 : 2)
+  end
+
+  def self.preview_patients(params = {})
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+
+    patients = if start_date.present? && end_date.present?
+                Patient.includes(cancer_forms: [:cancer_information, :treatment_follow_up, :treatment_information])
+                      .where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
+                      .references(:cancer_information)
+              else
+                Patient.includes(cancer_forms: [:cancer_information, :treatment_follow_up, :treatment_information])
+              end
+
+    preview_data = []
+
+    patients.find_each do |patient|
+      patient.cancer_forms.each do |cancer_form|
+        preview_data << {
+          id: cancer_form.id,
+          hospital: patient.hospital&.code || '',
+          hn: patient.hos_no || '',
+          name: patient.name || '',
+          sex: patient.sex&.code || '',
+          post: patient.post_code&.code || '',
+          add_code: patient.address_code&.code || '',
+          mar_code: patient.marital_status&.code || '',
+          race: patient.race&.code || '',
+          rel: patient.religion&.code || '',
+          health_in: patient.health_insurance&.code || '',
+          basis: cancer_form.cancer_information&.basis&.code || '',
+          top_code: cancer_form.cancer_information&.topography_code&.code || '',
+          latera: cancer_form.cancer_information&.laterality&.code || '',
+          beh: cancer_form.cancer_information&.behavior&.code || '',
+          lab: cancer_form.cancer_information&.lab&.code || '',
+          stag: cancer_form.cancer_information&.stage&.code || '',
+          ext: cancer_form.cancer_information&.extent&.code || '',
+          met: cancer_form.cancer_information&.metastasis_site&.code || '',
+          grad: cancer_form.cancer_information&.grad&.code || '',
+          case_type: cancer_form.cancer_information&.case_type&.code || '',
+          present: cancer_form.treatment_follow_up&.present&.code || '',
+          death_stat: cancer_form.treatment_follow_up&.death_stat&.code || '',
+          refer_fr: cancer_form.treatment_follow_up&.refer_from&.code || '',
+          refer_to: cancer_form.treatment_follow_up&.refer_to&.code || '',
+          is_surg: patient.boolean_to_integer(cancer_form.treatment_information&.is_surg),
+          is_radia: patient.boolean_to_integer(cancer_form.treatment_information&.is_radia),
+          is_chemo: patient.boolean_to_integer(cancer_form.treatment_information&.is_chemo),
+          is_target: patient.boolean_to_integer(cancer_form.treatment_information&.is_target),
+          is_hormone: patient.boolean_to_integer(cancer_form.treatment_information&.is_hormone),
+          is_immu: patient.boolean_to_integer(cancer_form.treatment_information&.is_immu),
+          is_inter_the: patient.boolean_to_integer(cancer_form.treatment_information&.is_inter_the),
+          is_nuclear: patient.boolean_to_integer(cancer_form.treatment_information&.is_nuclear),
+          is_stem_cell: patient.boolean_to_integer(cancer_form.treatment_information&.is_stem_cell),
+          is_bone_scan: patient.boolean_to_integer(cancer_form.treatment_information&.is_bone_scan),
+          is_supportive: patient.boolean_to_integer(cancer_form.treatment_information&.is_supportive),
+          is_treatment: patient.boolean_to_integer(cancer_form.treatment_information&.is_treatment)
+        }
+        end
+      end
+      preview_data
   end
 
 end

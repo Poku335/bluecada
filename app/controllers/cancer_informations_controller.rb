@@ -14,6 +14,11 @@ class CancerInformationsController < ApplicationController
     render json: @cancer_information
   end
 
+  def update_icdo
+    @cancer_information = CancerInformation.update_icdo(params)
+    render json: @cancer_information
+  end
+
   # POST /cancer_informations
   # POST /cancer_informations.json
   def create

@@ -11,6 +11,8 @@ class CancerInformation < ApplicationRecord
   belongs_to :grad, optional: true
   belongs_to :icdo, optional: true
   belongs_to :case_type, optional: true
+  
+  
 
   def as_json(options = {})
   # icd10 = topography_code&.icd_10&.split('.')&.join('')
@@ -29,4 +31,17 @@ class CancerInformation < ApplicationRecord
     )
     hsh
   end
+
+  def self.update_icdo(params)
+    paragraph_id = params[:diagnose_paragraph_id]
+    diag = DiagnoseParagraph.find(paragraph_id)
+    date = diag&.diag_date
+    cancer_information = diag&.cancer_information&.id
+    if cancer_information
+      diag.cancer_information.update(icdo_id: params[:icdo_id], lab_date: date)
+    else
+      { error: "Cancer information not found" }
+    end
+  end
+  
 end

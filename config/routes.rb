@@ -55,6 +55,10 @@ Rails.application.routes.draw do
       match '/export/patient', to: 'patients#export_patients', via: %i[options get]
       match '/import/diagnose', to: 'diagnose_paragraphs#import_diag', via: %i[options post]
       match '/import/patient', to: 'patients#import_patient', via: %i[options post]
+      match '/preview/patients', to: 'patients#preview_data_patients', via: %i[options get]
+      match '/update/icdo', to: 'cancer_informations#update_icdo', via: %i[options post]
+      match '/check/editing', to: 'cancer_forms#check_editing', via: %i[options get]
+      match '/change/editing/status', to: 'cancer_forms#change_editing_status', via: %i[options post]
       
       %i[
         case_types
