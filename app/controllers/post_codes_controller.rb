@@ -4,7 +4,8 @@ class PostCodesController < ApplicationController
   # GET /post_codes
   # GET /post_codes.json
   def index
-    @post_codes = PostCode.all
+    @post_code = PostCode.get_post_code(params)
+    render json: @post_code
   end
 
   # GET /post_codes/1
