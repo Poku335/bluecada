@@ -177,14 +177,14 @@ namespace :db do
       ]
   
 
-    # import_provinces
-    # import_districts
-    # import_sub_districts
-    # import_postcode_data
-    # import_address_code_data
-    # import_hospital
-    # import_topo
-    # import_icdo
+    import_provinces
+    import_districts
+    import_sub_districts
+    import_postcode_data
+    import_address_code_data
+    import_hospital
+    import_topo
+    import_icdo
   end
 
 end
