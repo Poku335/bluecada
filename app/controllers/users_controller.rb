@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def login
     token = User.login(params)
-    render json: token
+    render json: token, status: token[:status]
   end
 
   # GET /users/1

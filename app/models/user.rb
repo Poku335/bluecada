@@ -8,9 +8,9 @@ class User < ApplicationRecord
     user = User.find_by(user_name: params[:user_name])
     if user && user.authenticate(params[:password])
       token = JsonWebToken.encode({ user_id: user.id })
-      { user_id: user.id ,token: token, message: "Login successfully" }
+      { user_id: user.id, token: token, message: "Login successfully", status: :ok }
     else
-      { error: "Username or password incorrect" }
+      { error: "Username or password incorrect", status: :unauthorized }
     end
   end
 
