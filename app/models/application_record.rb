@@ -1,6 +1,12 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
+  connects_to shards: {
+    # pri: { writing: :primary },
+    int: { writing: :internal },
+    ext: { writing: :external }
+  }
+
   # belongs_to :creator, class_name: "User", foreign_key: "creator_id"
   # belongs_to :updater, class_name: "User", foreign_key: "updater_id"
 

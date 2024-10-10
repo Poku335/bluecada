@@ -7,13 +7,23 @@ default: &default
   password: <%= ENV.fetch('POSTGRES_PASSWORD') { 'riseplus' } %>
 
 development:
-  primary:
+  # primary:
+  #   <<: *default
+  #   database: <%= ENV.fetch('POSTGRES_DB_PRIMARY') { 'ca-data-center' } %>
+  internal:
     <<: *default
-    database: <%= ENV.fetch('POSTGRES_DB_PRIMARY') { 'cancer_in_Srinagarind_hospital' } %>
+    database: <%= ENV.fetch('POSTGRES_DB_INTERNAL') { 'ca-data-center-int' } %>
+  external:
+    <<: *default
+    database: <%= ENV.fetch('POSTGRES_DB_EXTERNAL') { 'ca-data-center-ext' } %>
 
 production:
-  primary:
+  # primary:
+  #   <<: *default
+  #   database: <%= ENV.fetch('POSTGRES_DB_PRIMARY') { 'ca-data-center' } %>
+  internal:
     <<: *default
-    database: <%= ENV.fetch('POSTGRES_DB_PRIMARY') { 'cancer_in_Srinagarind_hospital_production' } %>
-  
-
+    database: <%= ENV.fetch('POSTGRES_DB_INTERNAL') { 'ca-data-center-int' } %>
+  external:
+    <<: *default
+    database: <%= ENV.fetch('POSTGRES_DB_EXTERNAL') { 'ca-data-center-ext' } %>
