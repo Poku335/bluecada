@@ -39,7 +39,7 @@
 # in a proc. See guides for an example.
 #
 Rails.application.configure do
-  config.active_record.shard_selector = { lock: true }
+  config.active_record.shard_selector = { lock: false }
   config.active_record.shard_resolver = ->(request) {
     subdomain = request.subdomain
     # tenant = Tenant.find_by_subdomain!(subdomain)

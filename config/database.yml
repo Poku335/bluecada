@@ -13,9 +13,11 @@ development:
   internal:
     <<: *default
     database: <%= ENV.fetch('POSTGRES_DB_INTERNAL') { 'ca-data-center-int' } %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   external:
     <<: *default
     database: <%= ENV.fetch('POSTGRES_DB_EXTERNAL') { 'ca-data-center-ext' } %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 production:
   # primary:

@@ -173,7 +173,7 @@ namespace :db do
 
     create_or_update_data class: User, keys: [:id], reset_pkey: false,
       data: [
-        {id: 1, name: "Admin", user_name: "Admin", password: "0000", role_id: 1},
+        {id: 1, first_name: "Admin", user_name: "Admin", password: "0000", password_confirmation: "0000", role_id: 1},
       ]
   
 
