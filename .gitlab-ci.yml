@@ -1,5 +1,6 @@
 stages:
   - publish
+  - deploy
 
 variables:
   TAG_LATEST: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:latest
@@ -15,3 +16,18 @@ publish:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $TAG_COMMIT
     - docker push $TAG_LATEST
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk update && apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh -o StrictHostKeyChecking=no riseplus@dev.riseplus.tech ls
+    - ssh-keyscan riseplus@dev.riseplus.tech >> ~/.ssh/authorized_keys
+  script:
+    - ssh riseplus@dev.riseplus.tech 'docker pull registry.gitlab.com/riseplus/ca-data-center/ca-data-center-api/sit:latest && cd projects && cd ca-data-center && docker compose up -d'
+  only:
+    - sit
