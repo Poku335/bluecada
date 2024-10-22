@@ -11,6 +11,8 @@ class CancerInformation < ApplicationRecord
   belongs_to :grad, optional: true
   belongs_to :icdo, optional: true
   belongs_to :case_type, optional: true
+  has_many :cancer_forms
+
   before_create :set_case_type
 
   def set_case_type
@@ -21,6 +23,7 @@ class CancerInformation < ApplicationRecord
   # icd10 = topography_code&.icd_10&.split('.')&.join('')
     hsh = super(options.merge(except: [:case_type_id, :basis_id, :topography_code_id, :laterality_id, :behavior_id, :lab_id, :stage_id, :stage_other_id, :extent_id, :metastasis_site_id, :grad_id])).merge(
       basis: basis,
+      tumor_id: cancer_forms&.first&.tumor_id,
       topography_code: topography_code,
       case_type: case_type,
       laterality: laterality,
