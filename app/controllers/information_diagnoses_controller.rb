@@ -49,6 +49,6 @@ class InformationDiagnosesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def information_diagnosis_params
-      params.require(:information_diagnosis).permit(:tumor_marker_ca_19, :tumor_marker_cea, :tumor_marker_her_2, :tumor_marker_afp, :tumor_marker_hcg, :tumor_marker_psa, :tumor_suppressor_gene_brca_1, :tumor_suppressor_gene_brca_2)
+      params.require(:information_diagnosis).permit(:tumor_marker_ca_19, :tumor_marker_cea, :tumor_marker_her_2, :tumor_marker_afp, :tumor_marker_hcg, :tumor_marker_psa, :tumor_suppressor_gene_brca_1, :tumor_suppressor_gene_brca_2, :case_type_id)
     end
 end

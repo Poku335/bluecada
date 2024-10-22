@@ -11,8 +11,11 @@ class CancerInformation < ApplicationRecord
   belongs_to :grad, optional: true
   belongs_to :icdo, optional: true
   belongs_to :case_type, optional: true
-  
-  
+  before_create :set_case_type
+
+  def set_case_type
+    self.case_type_id = 1
+  end
 
   def as_json(options = {})
   # icd10 = topography_code&.icd_10&.split('.')&.join('')

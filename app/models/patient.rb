@@ -18,9 +18,18 @@ class Patient < ApplicationRecord
   validates :citizen_id, uniqueness: true
 
   def as_json(options = {})
+    diagnosis_age = 
+    if cancer_forms.first&.cancer_information&.diagnosis_date.present? && self.birth_date.present?
+      diagnosis_date = cancer_forms.first.cancer_information.diagnosis_date
+      ((diagnosis_date - birth_date) / 365.25).to_i
+    else
+      nil
+    end
+
     super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
       hospital: hospital,
       sex: sex,
+      diagnosis_age: diagnosis_age,
       post_code: post_code,
       address_code: address_code,
       marital_status: marital_status,
@@ -29,7 +38,7 @@ class Patient < ApplicationRecord
       health_insurance: health_insurance,
       province: province, 
       district: district, 
-      sub_district: sub_district, 
+      sub_district: sub_district,
       cancer_forms: cancer_forms&.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
     )
   end
@@ -71,7 +80,9 @@ class Patient < ApplicationRecord
       data = all
 
       data = data.select %(
+        patients.id,
         cancer_forms.id AS cancer_form_id,
+        cancer_forms.tumor_id AS cancer_form_tumor_id,
         patients.hos_no AS patient_hn,
         patients.name AS patient_name,
         hospitals.code AS hospital_code,
@@ -96,6 +107,7 @@ class Patient < ApplicationRecord
         death_stats.code AS death_stat_code,
         refer_from_hospitals.code AS refer_from_code,
         refer_to_hospitals.code AS refer_to_code,
+        topography_codes.icd_10 AS topography_code,
         CASE WHEN treatment_informations.is_radia IS TRUE THEN 1 WHEN treatment_informations.is_radia IS FALSE THEN 2 ELSE NULL END AS is_radia,
         CASE WHEN treatment_informations.is_chemo IS TRUE THEN 1 WHEN treatment_informations.is_chemo IS FALSE THEN 2 ELSE NULL END AS is_chemo,
         CASE WHEN treatment_informations.is_target IS TRUE THEN 1 WHEN treatment_informations.is_target IS FALSE THEN 2 ELSE NULL END AS is_target,
@@ -109,8 +121,14 @@ class Patient < ApplicationRecord
         CASE WHEN treatment_informations.is_treatment IS TRUE THEN 1 WHEN treatment_informations.is_treatment IS FALSE THEN 2 ELSE NULL END AS is_treatment
       )
 
-      data = data.joins('LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id')
-                 .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
+      data = data.joins("LEFT JOIN (
+          SELECT *,
+            ROW_NUMBER() OVER (PARTITION BY patient_id ORDER BY created_at ASC) AS rn
+          FROM cancer_forms
+        ) AS cancer_forms ON cancer_forms.patient_id = patients.id AND cancer_forms.rn = 1"
+      )
+
+      data = data.joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
                  .joins('LEFT JOIN bases ON cancer_informations.basis_id = bases.id')
                  .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
                  .joins('LEFT JOIN lateralities ON cancer_informations.laterality_id = lateralities.id')
@@ -135,13 +153,15 @@ class Patient < ApplicationRecord
                  .joins('LEFT JOIN death_stats ON treatment_follow_ups.death_stat_id = death_stats.id')
                  .joins('LEFT JOIN hospitals AS refer_from_hospitals ON treatment_follow_ups.refer_from_id = refer_from_hospitals.id')
                  .joins('LEFT JOIN hospitals AS refer_to_hospitals ON treatment_follow_ups.refer_to_id = refer_to_hospitals.id')
+                 .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
                 
       if start_date.present? && end_date.present?
         data = data.where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
       end
-      
-      params[:order] = "patients.#{params[:order]}" || "patients.id"
 
+      data = data.where("case_types.id = #{params[:case_type_id]}") if params[:case_type_id].present?
+      
+      params[:order] = "patients.#{params[:order]}" if params[:order].present?
       data = super(params.merge!(data: data))
     else
       data = all
@@ -149,6 +169,7 @@ class Patient < ApplicationRecord
       data = data.select %(
         patients.*,
         cancer_forms.id AS cancer_form_id,
+        cancer_forms.tumor_id AS cancer_form_tumor_id,
         cancer_forms.primary AS cancer_form_primary,
         cancer_forms.cancer_form_status_id AS cancer_form_status, 
         cancer_form_statuses.name AS cancer_form_status_name,
@@ -159,6 +180,7 @@ class Patient < ApplicationRecord
         hospitals.name AS hospital_name,
         sexes.name AS sex_name,
         post_codes.code AS post_code,
+        topography_codes.icd_10 AS topography_code,
         address_codes.code AS address_code,
         marital_statuses.name AS marital_status_name,
         religions.name AS religion_name,
@@ -171,13 +193,22 @@ class Patient < ApplicationRecord
       params[:inner_joins] = %i[]
       params[:left_joins] = %i[races hospitals sexes post_codes address_codes marital_statuses 
                               religions health_insurances provinces districts sub_districts]
-      data = data.joins('LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id')
-                 .joins('LEFT JOIN cancer_form_statuses ON cancer_forms.cancer_form_status_id = cancer_form_statuses.id')
+      data = data.joins("LEFT JOIN (
+          SELECT *,
+            ROW_NUMBER() OVER (PARTITION BY patient_id ORDER BY created_at ASC) AS rn
+          FROM cancer_forms
+        ) AS cancer_forms ON cancer_forms.patient_id = patients.id AND cancer_forms.rn = 1"
+      )
+
+      data = data.joins('LEFT JOIN cancer_form_statuses ON cancer_forms.cancer_form_status_id = cancer_form_statuses.id')
                  .joins('LEFT JOIN users ON users.id = cancer_forms.current_user_id')
                  .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
                  .joins('LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id')
+                 .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
       params[:keywords_columns] = ["patients.name", "patients.hos_no", :citizen_id, :id_finding]
       params[:order] = params[:order] || "patients.id"
+
+      data = data.where("case_types.id = #{params[:case_type_id]}") if params[:case_type_id].present?
       data = super(params.merge!(data: data))
     end
   end
@@ -378,17 +409,20 @@ class Patient < ApplicationRecord
       "ReferFr", "ReferTo", "Surg", "Radia", "Chemo", "Target", "Hormone", "Immu", "InterThe", "Nuclear", 
       "StemCell", "BoneScan", "Supp", "NonTreat"
     ]
-
+    case_type_id = params[:case_type_id] if params[:case_type_id].present?
     start_date = params[:start_date]
     end_date = params[:end_date]
-
-    patients = if start_date.present? && end_date.present?
-                Patient.includes(cancer_forms: [:cancer_information, :treatment_follow_up, :treatment_information])
-                      .where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
-                      .references(:cancer_information)
-              else
-                Patient.includes(cancer_forms: [:cancer_information, :treatment_follow_up, :treatment_information])
-              end
+    
+    patients =  if start_date.present? && end_date.present?
+                  Patient.joins(cancer_forms: :cancer_information)
+                          .includes(cancer_forms: [:treatment_follow_up, :treatment_information])
+                          .where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
+                          .where('cancer_informations.case_type_id = ?', case_type_id) if case_type_id.present?
+                else
+                  Patient.joins(cancer_forms: :cancer_information)
+                          .includes(cancer_forms: [:treatment_follow_up, :treatment_information])
+                          .where('cancer_informations.case_type_id = ?', case_type_id) if case_type_id.present?
+                end
 
     CSV.open(csv_file_path, 'w', write_headers: true, headers: headers) do |csv|
       patients.find_each do |patient|
