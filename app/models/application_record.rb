@@ -2,7 +2,6 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   connects_to shards: {
-    # pri: { writing: :primary },
     int: { writing: :internal },
     ext: { writing: :external }
   }

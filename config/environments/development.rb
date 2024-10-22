@@ -19,6 +19,7 @@ Rails.application.configure do
 
   # ใช้ Redis เป็น cache store
   config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/1' }
+  
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

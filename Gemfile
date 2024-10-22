@@ -45,7 +45,7 @@ gem "bcrypt", "~> 3.1.7"
 gem 'jwt'
 gem 'kaminari'
 
-gem 'acts_as_tenant'
+# gem 'acts_as_tenant'
 
 gem 'daemons'
 
