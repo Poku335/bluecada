@@ -163,7 +163,7 @@ class Patient < ApplicationRecord
 
       data = data.where("case_types.id = #{params[:case_type_id]}") if params[:case_type_id].present?
       
-      params[:order] = "patients.#{params[:order]}" if params[:order].present?
+      params[:order] = params[:order] || "#{table_name}.id"
       data = super(params.merge!(data: data))
     else
       data = all

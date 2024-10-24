@@ -26,7 +26,7 @@ class SearchIcdo < ApplicationRecord
     params[:inner_joins] = %i[]
     params[:left_joins] = %i[diagnose_paragraphs icdos]
     params[:keywords_columns] = ["search_icdos.id"]
-    params[:order] = params[:order] || "search_icdos.id"
+    params[:order] = params[:order] || "#{table_name}.id"
 
     # diagnose_paragraphs = DiagnoseParagraph.where(cancer_information_id: params[:cancer_information_id]) 
     data = super(params.merge!(data: data))
