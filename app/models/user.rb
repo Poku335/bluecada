@@ -36,7 +36,7 @@ class User < ApplicationRecord
     params[:inner_joins] = %i[]
     
     params[:keywords_columns] = []
-    params[:order] = params[:order] || "#{table_name}.id"
+    params[:order] = "users.#{params[:order]}" || "#{table_name}.id"
 
     data = super(params.merge!(data: data))
   end
