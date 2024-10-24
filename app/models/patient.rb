@@ -108,6 +108,7 @@ class Patient < ApplicationRecord
         refer_from_hospitals.code AS refer_from_code,
         refer_to_hospitals.code AS refer_to_code,
         topography_codes.icd_10 AS topography_code,
+        icdos.icdo_32_c AS morphology_code,
         CASE WHEN treatment_informations.is_radia IS TRUE THEN 1 WHEN treatment_informations.is_radia IS FALSE THEN 2 ELSE NULL END AS is_radia,
         CASE WHEN treatment_informations.is_chemo IS TRUE THEN 1 WHEN treatment_informations.is_chemo IS FALSE THEN 2 ELSE NULL END AS is_chemo,
         CASE WHEN treatment_informations.is_target IS TRUE THEN 1 WHEN treatment_informations.is_target IS FALSE THEN 2 ELSE NULL END AS is_target,
@@ -154,6 +155,7 @@ class Patient < ApplicationRecord
                  .joins('LEFT JOIN hospitals AS refer_from_hospitals ON treatment_follow_ups.refer_from_id = refer_from_hospitals.id')
                  .joins('LEFT JOIN hospitals AS refer_to_hospitals ON treatment_follow_ups.refer_to_id = refer_to_hospitals.id')
                  .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
+                 .joins('LEFT JOIN icdos ON cancer_informations.icdo_id = icdos.id')
                 
       if start_date.present? && end_date.present?
         data = data.where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
@@ -181,6 +183,7 @@ class Patient < ApplicationRecord
         sexes.name AS sex_name,
         post_codes.code AS post_code,
         topography_codes.icd_10 AS topography_code,
+        icdos.icdo_32_c AS morphology_code,
         address_codes.code AS address_code,
         marital_statuses.name AS marital_status_name,
         religions.name AS religion_name,
@@ -205,6 +208,7 @@ class Patient < ApplicationRecord
                  .joins('LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id')
                  .joins('LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id')
                  .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
+                 .joins('LEFT JOIN icdos ON cancer_informations.icdo_id = icdos.id')
       params[:keywords_columns] = ["patients.name", "patients.hos_no", :citizen_id, :id_finding]
       params[:order] = params[:order] || "patients.id"
 
@@ -227,8 +231,9 @@ class Patient < ApplicationRecord
         begin
           add_code = AddressCode.find_by(code: row['AddCode'])
           add_code_id = add_code&.id
+
           if add_code_id.nil?
-            errors << "Address Code '#{row['AddCode']}' ไม่ถูกต้อง"
+            errors << "#{row['name']}: Address Code '#{row['AddCode']}' ไม่ถูกต้อง"
             error_patient_count += 1
             next
           end
@@ -236,7 +241,7 @@ class Patient < ApplicationRecord
           post_code = PostCode.find_by(code: row['Post'])
           post_code_id = post_code&.id
           if post_code_id.nil?
-            errors << "รหัสไปรษณีย์ '#{row['Post']}' ไม่ถูกต้อง"
+            errors << "#{row['name']}: รหัสไปรษณีย์ '#{row['Post']}' ไม่ถูกต้อง"
             error_patient_count += 1
             next
           end
@@ -244,7 +249,7 @@ class Patient < ApplicationRecord
           province = Province.find_by('province_thai ILIKE ?', "%#{row['จังหวัด']}%")
           province_id = province&.id
           if province_id.nil?
-            errors << "ชื่อจังหวัด '#{row['จังหวัด']}' ไม่ถูกต้อง"
+            errors << "#{row['name']}: ชื่อจังหวัด '#{row['จังหวัด']}' ไม่ถูกต้อง"
             error_patient_count += 1
             next
           end
@@ -252,7 +257,7 @@ class Patient < ApplicationRecord
           district = District.find_by('district_thai_short ILIKE ?', "%#{row['อำเภอ']}%")
           district_id = district&.id
           if district_id.nil?
-            errors << "ชื่ออำเภอ '#{row['district']}' ไม่ถูกต้อง"
+            errors << "#{row['name']}: ชื่ออำเภอ '#{row['district']}' ไม่ถูกต้อง"
             error_patient_count += 1
             next
           end
@@ -260,7 +265,7 @@ class Patient < ApplicationRecord
           sub_district = SubDistrict.find_by('sub_district_thai_short ILIKE ?', "%#{row['ตำบล']}%")
           sub_district_id = sub_district&.id
           if sub_district_id.nil?
-            errors << "ชื่อตำบล '#{row['sub_district']}' ไม่ถูกต้อง"
+            errors << "#{row['name']}: ชื่อตำบล '#{row['sub_district']}' ไม่ถูกต้อง"
             error_patient_count += 1
             next
           end
@@ -281,7 +286,7 @@ class Patient < ApplicationRecord
   
             health_in = HealthInsurance.find_by("name ILIKE ?", "%#{mapped_health_in_name}%")
             if health_in.nil?
-              errors << "ไม่พบสิทธิพิเศษ '#{health_in_name}'"
+              errors << "#{row['name']}: ไม่พบสิทธิพิเศษ '#{health_in_name}'"
               next
             else
               health_in_id = health_in.id
@@ -299,7 +304,7 @@ class Patient < ApplicationRecord
           race = Race.find_by(name: row['Race'])
           race_id = race&.id
           if race_id.nil?
-            errors << "ไม่พบสัญชาติ '#{row['Race']} ในฐานข้อมูล'"
+            errors << "#{row['name']}: ไม่พบสัญชาติ '#{row['Race']} ในฐานข้อมูล'"
             error_patient_count += 1
             next
           end
@@ -307,7 +312,7 @@ class Patient < ApplicationRecord
           sex = Sex.find_by(name: row["Sex"])
           sex_id = sex&.id
           if sex_id.nil?
-            errors << "ไม่พบเพศ '#{row['Sex']}'"
+            errors << "#{row['name']}: ไม่พบเพศ '#{row['Sex']}'"
             error_patient_count += 1
             next
           end
@@ -344,7 +349,7 @@ class Patient < ApplicationRecord
                                                  .first
                 if existing_cancer_form
                   Rails.logger.info "CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. Skipping creation of CancerForm."
-                  errors << "CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. maybe duplicate information"
+                  errors << "#{row['name']}: CancerForm with icd_10: #{row['icd10']} already exists for Patient ID: #{patient.id}. maybe duplicate information"
                   next
                 end
                 
@@ -373,12 +378,12 @@ class Patient < ApplicationRecord
               end
             end
           else
-            errors << "Failed to save patient for row hn #{row['HosNo1']}: #{row["Id"]} - Error: #{patient.errors.full_messages.join(', ')}"
+            errors << "#{row['name']}: Failed to save patient for row hn #{row['HosNo1']}: #{row["Id"]} - Error: #{patient.errors.full_messages.join(', ')}"
             error_patient_count += 1
           end
   
         rescue ActiveRecord::RecordInvalid => e
-          errors << "Failed to save record for row hn #{row['HosNo1']}: - Error: #{e.message}"
+          errors << "#{row['name']}: Failed to save record for row hn #{row['HosNo1']}: - Error: #{e.message}"
           error_patient_count += 1
         end
       end
