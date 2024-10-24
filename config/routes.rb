@@ -51,6 +51,12 @@ Rails.application.routes.draw do
 
 
     scope '' do
+      match "user_info", to: "users#index", via: [:options, :get]
+      match "user_info/:id", to: "users#show", via: [:options, :get]
+      match "user_info", to: "users#create", via: [:options, :post]
+      match "user_info/:id", to: "users#update", via: [:options, :put]
+      match "user_info/:id", to: "users#destroy", via: [:options, :delete]
+
       match '/login', to: 'users#login', via: %i[options post]
       match '/export/patient', to: 'patients#export_patients', via: %i[options get]
       match '/import/diagnose', to: 'diagnose_paragraphs#import_diag', via: %i[options post]
