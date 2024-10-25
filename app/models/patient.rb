@@ -163,7 +163,7 @@ class Patient < ApplicationRecord
 
       data = data.where("case_types.id = #{params[:case_type_id]}") if params[:case_type_id].present?
       
-      params[:order] = params[:order] || "#{table_name}.id"
+      params[:order] = "patients.#{params[:order]}" || "#{table_name}.id"
       data = super(params.merge!(data: data))
     else
       data = all
@@ -210,7 +210,7 @@ class Patient < ApplicationRecord
                  .joins('LEFT JOIN topography_codes ON cancer_informations.topography_code_id = topography_codes.id')
                  .joins('LEFT JOIN icdos ON cancer_informations.icdo_id = icdos.id')
       params[:keywords_columns] = ["patients.name", "patients.hos_no", :citizen_id, :id_finding]
-      params[:order] = params[:order] || "patients.id"
+      params[:order] = "patients.#{params[:order]}" || "patients.id"
 
       data = data.where("case_types.id = #{params[:case_type_id]}") if params[:case_type_id].present?
       data = super(params.merge!(data: data))
