@@ -4,7 +4,7 @@ class TopographyCodesController < ApplicationController
   # GET /topography_codes
   # GET /topography_codes.json
   def index
-    @topography_codes = TopographyCode.all
+    @topography_codes = TopographyCode.search(params)
     render json: @topography_codes
   end
 
