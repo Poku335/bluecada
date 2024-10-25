@@ -40,4 +40,15 @@ class User < ApplicationRecord
 
     data = super(params.merge!(data: data))
   end
+
+  def self.read_sql_data(params = {})
+    sql_body = params[:sql_body]
+    results = []
+
+    conn = ActiveRecord::Base.connection
+
+    results = conn.execute(%{#{sql_body}}).to_a
+
+    results
+  end
 end

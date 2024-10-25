@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show update destroy ]
   # skip_before_action :authenticate!, only: [:login]
+  
+  def read_sql_data
+    @users = User.read_sql_data(params)
+    render json: @users
+  end
 
   # GET /users
   # GET /users.json

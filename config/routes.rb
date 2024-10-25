@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
 
     scope '' do
+      match "user_info/read_sql_data", to: "users#read_sql_data", via: [:options, :get]
       match "user_info", to: "users#index", via: [:options, :get]
       match "user_info/:id", to: "users#show", via: [:options, :get]
       match "user_info", to: "users#create", via: [:options, :post]
