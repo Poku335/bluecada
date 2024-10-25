@@ -40,7 +40,15 @@ class DiagnoseParagraph < ApplicationRecord
       output_file = "#{Rails.root}/tmp/preprocessed_#{File.basename(input_file)}"
       
       safe_input_file = "#{Rails.root}/tmp/#{File.basename(input_file)}"
+
       FileUtils.cp(input_file, safe_input_file)
+
+      if File.exist?(safe_input_file)
+        p "File already exists. Deleting it now."
+      else
+        p "File does not exist. Creating it now."
+        return { error: "File does not exist" }
+      end
       
       ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
       
