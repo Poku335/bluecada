@@ -44,7 +44,10 @@ class DiagnoseParagraph < ApplicationRecord
       FileUtils.cp(input_file, safe_input_file)
 
       if File.exist?(safe_input_file) 
-        ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
+        Thread.new do
+          sleep 30
+          ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
+        end
 
         { message: "Data import started. You will be notified once it's completed." }
       else
