@@ -39,20 +39,13 @@ class DiagnoseParagraph < ApplicationRecord
       input_file = params[:file].path
       output_file = "#{Rails.root}/tmp/preprocessed_#{File.basename(input_file)}"
       
-      safe_input_file = "#{Rails.root}/tmp/#{File.basename(input_file)}"
+      safe_input_file = Rails.root.join('tmp', File.basename(input_file)).to_s
 
       FileUtils.cp(input_file, safe_input_file)
-
-      if File.exist?(safe_input_file) 
-        Thread.new do
-          sleep 30
-          ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
-        end
-
-        { message: "Data import started. You will be notified once it's completed." }
-      else
-        return { error: "File does not exist" }
-      end
+      
+      ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
+      
+      { message: "Data import started. You will be notified once it's completed." }
     else
       { error: "No file uploaded" }
     end
