@@ -43,16 +43,13 @@ class DiagnoseParagraph < ApplicationRecord
 
       FileUtils.cp(input_file, safe_input_file)
 
-      if File.exist?(safe_input_file)
-        p "File already exists. Deleting it now."
+      if File.exist?(safe_input_file) 
+        ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
+
+        { message: "Data import started. You will be notified once it's completed." }
       else
-        p "File does not exist. Creating it now."
         return { error: "File does not exist" }
       end
-      
-      ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
-      
-      { message: "Data import started. You will be notified once it's completed." }
     else
       { error: "No file uploaded" }
     end
