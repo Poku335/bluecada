@@ -106,14 +106,20 @@ class ImportDiagParagraphJob < ApplicationJob
   private
 
   def format_csv(input_file, output_file)
-    CSV.open(output_file, 'w', write_headers: false, force_quotes: true) do |csv_out|
-      CSV.foreach(input_file, headers: false) do |row|
-        formatted_row = row.map do |field|
-          field.nil? ? '' : field.gsub(/\r\n|\n/, ' ').strip
+    # Check and create output file if it doesn't exist
+    FileUtils.touch(output_file) unless File.exist?(output_file)
+  
+    if File.exist?(input_file) && File.exist?(output_file)
+      CSV.open(output_file, 'w', write_headers: false, force_quotes: true) do |csv_out|
+        CSV.foreach(input_file, headers: false) do |row|
+          formatted_row = row.map { |field| field.nil? ? '' : field.gsub(/\r\n|\n/, ' ').strip }
+          csv_out << formatted_row
         end
-        csv_out << formatted_row
       end
+      puts "Finished processing CSV"
+    else
+      puts "Input or output file is missing"
     end
-    puts "Finished processing CSV"
   end
+  
 end
