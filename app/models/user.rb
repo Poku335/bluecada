@@ -4,6 +4,14 @@ class User < ApplicationRecord
   validates :user_name, presence: true, uniqueness: true
   validate :confirm_password
 
+  
+  def as_json(options = {})
+    super.merge!({
+      role_name: role.name
+    })
+  end
+
+
   def self.login(params)
     user = User.find_by(user_name: params[:user_name])
     if user && user.authenticate(params[:password])
