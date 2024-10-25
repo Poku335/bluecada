@@ -38,17 +38,39 @@ class DiagnoseParagraph < ApplicationRecord
     if params[:file].present?
       input_file = params[:file].path
       output_file = "#{Rails.root}/tmp/preprocessed_#{File.basename(input_file)}"
-      
       safe_input_file = Rails.root.join('tmp', File.basename(input_file)).to_s
 
-      FileUtils.cp(input_file, safe_input_file)
-      
-      # ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
-      
+      # Log input_file and safe_input_file
+      Rails.logger.info("Input file path: #{input_file}")
+      Rails.logger.info("Safe input file path: #{safe_input_file}")
+
+      unless File.exist?(input_file)
+        Rails.logger.error("Input file does not exist at #{input_file}")
+        return { error: "Input file does not exist" }
+      end
+
+      # Ensure tmp directory exists and is writable
+      FileUtils.mkdir_p(Rails.root.join('tmp'))
+      begin
+        FileUtils.chmod(0o777, Rails.root.join('tmp')) # Make tmp writable
+        FileUtils.cp(input_file, safe_input_file)
+        Rails.logger.info("File copied to #{safe_input_file}")
+      rescue Errno::EACCES => e
+        Rails.logger.error("Permission error while copying file: #{e.message}")
+        return { error: "Permission error while copying the file" }
+      rescue => e
+        Rails.logger.error("Error copying file: #{e.message}")
+        return { error: "File copy failed: #{e.message}" }
+      end
+
+      # Optionally start the job
+      ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
+
       { message: "Data import started. You will be notified once it's completed." }
     else
       { error: "No file uploaded" }
     end
   end
+
 
 end
