@@ -2,15 +2,13 @@ class User < ApplicationRecord
   belongs_to :role
   has_secure_password
   validates :user_name, presence: true, uniqueness: true
-  validate :confirm_password
-
+  validate :confirm_password, if: :new_record?
   
   def as_json(options = {})
     super.merge!({
       role_name: role.name
     })
   end
-
 
   def self.login(params)
     user = User.find_by(user_name: params[:user_name])

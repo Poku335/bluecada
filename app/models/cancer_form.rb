@@ -6,7 +6,7 @@ class CancerForm < ApplicationRecord
   belongs_to :cancer_information, optional: true, dependent: :destroy
   belongs_to :patient 
   belongs_to :cancer_form_status, optional: true
-  before_create :generate_tumor_id
+  # before_create :generate_tumor_id
 
   def as_json(options = {})
     hsh = super(options.merge(except: [ :current_user_id])).merge(
@@ -80,9 +80,9 @@ class CancerForm < ApplicationRecord
     end
   end
 
-  def generate_tumor_id
+  def self.generate_tumor_id(diagnosis_date, cancer_information_id)
     hospital_code = "01"
-    current_year = Time.now.year + 543
+    current_year = diagnosis_date.year + 543
     year_code = current_year.to_s[-2..-1]
     last_tumor_id = CancerForm.order(:created_at).last&.tumor_id
     if last_tumor_id.present?
@@ -92,8 +92,9 @@ class CancerForm < ApplicationRecord
       new_sequence = 1
     end
     sequence_code = new_sequence.to_s.rjust(4, '0')
-    self.tumor_id = "#{hospital_code}#{year_code}#{sequence_code}"
-    p "#{hospital_code}#{year_code}#{sequence_code}"
+    cancer_form = CancerForm.find_by(cancer_information_id: cancer_information_id)
+    tumor_no = "#{hospital_code}#{year_code}#{sequence_code}"
+    cancer_form.update(tumor_id: tumor_no)
   end
 
 end

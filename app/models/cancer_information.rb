@@ -14,6 +14,24 @@ class CancerInformation < ApplicationRecord
   has_many :cancer_forms
 
   before_create :set_case_type
+  before_update :check_tumor_id
+
+  def check_tumor_id
+    case_type_id = self.case_type_id
+    if self.diagnosis_date.present?
+      case when case_type_id == 1
+            CancerForm.update(tumor_id: nil)
+           when case_type_id == 2
+            CancerForm.generate_tumor_id(self.diagnosis_date, self.id)
+          when case_type_id == 3
+            CancerForm.update(tumor_id: nil)
+          when case_type_id == 4
+            CancerForm.generate_tumor_id(self.diagnosis_date, self.id)
+          when case_type_id == 5
+            CancerForm.generate_tumor_id(self.diagnosis_date, self.id)
+      end
+    end
+  end
 
   def set_case_type
     self.case_type_id = 1
