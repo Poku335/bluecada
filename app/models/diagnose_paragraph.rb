@@ -43,7 +43,7 @@ class DiagnoseParagraph < ApplicationRecord
 
       FileUtils.cp(input_file, safe_input_file)
       
-      ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
+      # ImportDiagParagraphJob.perform_later(safe_input_file, output_file)
       
       { message: "Data import started. You will be notified once it's completed." }
     else
