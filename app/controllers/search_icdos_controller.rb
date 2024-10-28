@@ -1,6 +1,11 @@
 class SearchIcdosController < ApplicationController
   before_action :set_search_icdo, only: %i[ show update destroy ]
 
+  def drop_down
+    @search_icdos = SearchIcdo.drop_down(params)
+    render json: @search_icdos
+  end
+
   # GET /search_icdos
   # GET /search_icdos.json
   def index

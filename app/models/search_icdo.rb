@@ -33,4 +33,23 @@ class SearchIcdo < ApplicationRecord
     
   end
 
+  def self.drop_down(params = {})
+    results = []
+
+    conn = ActiveRecord::Base.connection
+
+    results = conn.execute(%{
+      SELECT DISTINCT
+        icdos.id,
+        icdos.icdo_32 || ' ' || icdos.term_used AS term
+      FROM search_icdos
+      LEFT OUTER JOIN icdos ON icdos.id = search_icdos.icdo_id
+      WHERE TRUE
+      #{"AND search_icdos.diagnose_paragraph_id IN (#{params[:diagnose_paragraph_ids].join(',')})" if params[:diagnose_paragraph_ids].present?}
+      #{"AND icdos.id IN (#{params[:icdo_ids].join(',')})" if params[:icdo_ids].present?}
+    }).to_a
+
+    results
+  end
+
 end

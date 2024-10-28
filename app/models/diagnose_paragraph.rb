@@ -23,6 +23,7 @@ class DiagnoseParagraph < ApplicationRecord
     # data = data.where("diagnose_paragraphs.id in (#{params[:ids]})") if params[:ids].present?
 
     data = data.where("diagnose_paragraphs.id in (#{params[:ids].join(",")})") if params[:ids].present?
+    data = data.where("diagnose_paragraphs.cancer_information_id in (#{params[:cancer_information_ids].join(",")})") if params[:cancer_information_ids].present?
   
     params[:inner_joins] = %i[]
     params[:left_joins] = %i[]
