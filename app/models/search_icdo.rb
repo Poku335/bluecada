@@ -47,6 +47,7 @@ class SearchIcdo < ApplicationRecord
       WHERE TRUE
       #{"AND search_icdos.diagnose_paragraph_id IN (#{params[:diagnose_paragraph_ids].join(',')})" if params[:diagnose_paragraph_ids].present?}
       #{"AND icdos.id IN (#{params[:icdo_ids].join(',')})" if params[:icdo_ids].present?}
+      ORDER BY icdos.id
     }).to_a
 
     results
