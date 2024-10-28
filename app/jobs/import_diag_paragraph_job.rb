@@ -114,6 +114,9 @@ class ImportDiagParagraphJob < ApplicationJob
         reqdate = nil
       end
 
+      vali_date = Date.strptime(row['VALIDATE'], '%m/%d/%y').strftime('%Y-%m-%d') rescue nil
+      received_date = Date.strptime(row['RECEIVED DATE'], '%m/%d/%y').strftime('%Y-%m-%d') rescue nil
+
       hn = row['HN_N']
       patient = Patient.find_by(hos_no: hn)
       if patient.nil?
@@ -128,10 +131,13 @@ class ImportDiagParagraphJob < ApplicationJob
       end
 
       begin
+
         diag_para = DiagnoseParagraph.create!(
           cancer_information_id: cancer_form.cancer_information_id,
           diagnose_paragraph: row['DIAGNOSIS'],
-          diag_date: reqdate
+          diag_date: reqdate,
+          vali_date: vali_date,
+          received_date: received_date
         )
 
         # ใช้ฟังก์ชัน search_terms เพื่อค้นหา Icdo objects ที่ตรงกับคำใน DIAGNOSIS

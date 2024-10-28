@@ -56,6 +56,6 @@ class DiagnoseParagraphsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def diagnose_paragraph_params
-      params.require(:diagnose_paragraph).permit(:diagnose_paragraph, :cancer_information_id, :diag_date)
+      params.require(:diagnose_paragraph).permit(:diagnose_paragraph, :cancer_information_id, :diag_date, :vali_date, :received_date)
     end
 end
