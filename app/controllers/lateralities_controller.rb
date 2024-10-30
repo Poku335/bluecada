@@ -11,6 +11,7 @@ class LateralitiesController < ApplicationController
   # GET /lateralities/1
   # GET /lateralities/1.json
   def show
+    render json: @laterality
   end
 
   # POST /lateralities

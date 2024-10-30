@@ -10,6 +10,7 @@ class ImportPatientsController < ApplicationController
   # GET /import_patients/1
   # GET /import_patients/1.json
   def show
+    render json: @import_patient
   end
 
   # POST /import_patients

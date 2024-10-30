@@ -11,6 +11,7 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses/1
   # GET /marital_statuses/1.json
   def show
+    render json: @marital_status
   end
 
   # POST /marital_statuses

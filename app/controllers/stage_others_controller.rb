@@ -5,11 +5,13 @@ class StageOthersController < ApplicationController
   # GET /stage_others.json
   def index
     @stage_others = StageOther.all
+    render json: @stage_others
   end
 
   # GET /stage_others/1
   # GET /stage_others/1.json
   def show
+    render json: @stage_other
   end
 
   # POST /stage_others

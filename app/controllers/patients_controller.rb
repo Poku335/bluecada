@@ -4,7 +4,22 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
+    @patients = Patient.search(params)
+    render json: @patients
+  end
+
+  def import_patient
+    @patients = Patient.import_patient(params)
+    render json: @patients
+  end
+
+  def export_patients
+    csv_file_path = Patient.export_patients(params)
+    send_file csv_file_path, type: 'text/csv', disposition: 'attachment', filename: 'Exported_patient_datas.csv'
+  end
+
+  def preview_data_patients
+    @patients = Patient.preview_patients(params)
     render json: @patients
   end
 
@@ -40,6 +55,7 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient.destroy!
+    render json: {message: "Patient id #{@patient.id} deleted successfully"}
   end
 
   private
@@ -48,7 +64,7 @@ class PatientsController < ApplicationController
       @patient = Patient.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Only allow. a list of trusted parameters through.
     def patient_params
       params.require(:patient).permit(:hos_no, :hospital_id, :name, :citizen_id, :sex_id, :age, :birth_date, :address_detail, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :regis_date, :id_finding, :province_id, :district_id, :sub_district_id)
     end

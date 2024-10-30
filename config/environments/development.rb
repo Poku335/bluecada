@@ -13,10 +13,13 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-
+  config.action_controller.perform_caching = true
   # Enable server timing
   config.server_timing = true
 
+  # ใช้ Redis เป็น cache store
+  config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/1' }
+  
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -24,7 +27,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
-    config.cache_store = :memory_store
+    config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/1' }
     config.public_file_server.headers = {
       "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }

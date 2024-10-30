@@ -11,6 +11,7 @@ class PresentsController < ApplicationController
   # GET /presents/1
   # GET /presents/1.json
   def show
+    render json: @present
   end
 
   # POST /presents

@@ -5,17 +5,24 @@ class CancerFormsController < ApplicationController
   # GET /cancer_forms.json
   def index
     @cancer_forms = CancerForm.all
-    if params[:patient_id] && params[:primary]
-    cancer_form = CancerForm.find_by(patient_id: params[:patient_id], primary: params[:primary])
-      render json: cancer_form, status: :ok
-    else
-      render json: @cancer_forms, sstatus: :ok
-    end
+    render json: @cancer_forms
   end
 
   # GET /cancer_forms/1
   # GET /cancer_forms/1.json
   def show
+    # cancer_form = CancerForm.includes(:current_user).find(params[:id])
+    #   render json: cancer_form
+    render json: @cancer_form
+  end
+
+  def check_editing
+    @cancer_form = CancerForm.check_editing(params)
+    render json: @cancer_form
+  end
+
+  def change_editing_status
+    @cancer_form = CancerForm.change_editing_status(params[:cancer_form_id])
     render json: @cancer_form
   end
 
@@ -23,7 +30,7 @@ class CancerFormsController < ApplicationController
   # POST /cancer_forms.json
   def create
     @cancer_form = CancerForm.new(cancer_form_params)
-
+    @cancer_form = @cancer_form.create_form_data
     if @cancer_form.save
       render json: @cancer_form, status: :created, location: @cancer_form
     else
@@ -34,8 +41,9 @@ class CancerFormsController < ApplicationController
   # PATCH/PUT /cancer_forms/1
   # PATCH/PUT /cancer_forms/1.json
   def update
+    @cancer_form = CancerForm.find(params[:id])
     if @cancer_form.update(cancer_form_params)
-      render :show, status: :ok, location: @cancer_form
+      render json: @cancer_form, status: :ok
     else
       render json: @cancer_form.errors, status: :unprocessable_entity
     end
@@ -52,7 +60,7 @@ class CancerFormsController < ApplicationController
     def set_cancer_form
       @cancer_form = CancerForm.find(params[:id])
     end
-
+    
     # Only allow a list of trusted parameters through.
     def cancer_form_params
       params.require(:cancer_form).permit(:primary, :is_editing, :current_user_id, :treatment_follow_up_id, 

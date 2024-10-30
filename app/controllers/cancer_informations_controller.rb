@@ -14,6 +14,11 @@ class CancerInformationsController < ApplicationController
     render json: @cancer_information
   end
 
+  def update_icdo
+    @cancer_information = CancerInformation.update_icdo(params)
+    render json: @cancer_information
+  end
+
   # POST /cancer_informations
   # POST /cancer_informations.json
   def create
@@ -50,6 +55,6 @@ class CancerInformationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cancer_information_params
-      params.require(:cancer_information).permit(:topography_description,:case_type_id, :basis_id, :topography_code_id, :laterality_id, :morphology_description, :behavior_id, :lab_id, :lab_num, :lab_date, :t_stage, :n_stage, :m_stage, :stage_id, :stage_other_id, :extent_id, :metastasis_site_id, :is_recrr, :recurr_date, :grad_id, :icdo_id, :icd_10, :age_at_diagnosis)
+      params.require(:cancer_information).permit(:topography_description,:case_type_id, :basis_id, :topography_code_id, :laterality_id, :morphology_description, :behavior_id, :lab_id, :lab_num, :lab_date, :t_stage, :n_stage, :m_stage, :stage_id, :stage_other_id, :extent_id, :metastasis_site_id, :is_recrr, :recurr_date, :grad_id, :icdo_id, :icd_10, :age_at_diagnosis, :diagnosis_date)
     end
 end

@@ -10,6 +10,7 @@ class RolesController < ApplicationController
   # GET /roles/1
   # GET /roles/1.json
   def show
+    render json: @role
   end
 
   # POST /roles

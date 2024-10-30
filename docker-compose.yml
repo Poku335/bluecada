@@ -1,0 +1,51 @@
+services:
+  ca-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: riseplus
+      POSTGRES_PASSWORD: riseplus
+      POSTGRES_DB_INTERNAL: ca-data-center-int
+      POSTGRES_DB_EXTERNAL: ca-data-center-ext
+    networks:
+      - ca-network
+    volumes:
+      - /home/riseplus/projects/ca-data-center/db-data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+
+  ca-api:
+    image: registry.gitlab.com/riseplus/ca-data-center/ca-data-center-api:latest
+    command: ["./bin/rails", "server", "-b", "0.0.0.0"]
+    volumes:
+      - .:/rails
+    ports:
+      - "3033:3000"
+    environment:
+      DATABASE_HOST: ca-db
+      DATABASE_PORT: 5432
+      POSTGRES_USER: riseplus
+      POSTGRES_PASSWORD: riseplus
+      POSTGRES_DB_INTERNAL: ca-data-center-int
+      POSTGRES_DB_EXTERNAL: ca-data-center-ext
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - ca-db
+      - redis 
+    networks:
+      - ca-network
+
+  # cancer-web:
+  #   image: registry.gitlab.com/riseplus/ca-data-center/ca-data-center:latest
+  #   ports:
+  #     - "8086:80"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379"
+    networks:
+      - ca-network
+
+networks:
+  ca-network:
+    driver: bridge

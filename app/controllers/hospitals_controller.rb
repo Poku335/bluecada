@@ -4,13 +4,14 @@ class HospitalsController < ApplicationController
   # GET /hospitals
   # GET /hospitals.json
   def index
-    @hospitals = Hospital.all
+    @hospitals = Hospital.cached_hospitals
     render json: @hospitals
   end
 
   # GET /hospitals/1
   # GET /hospitals/1.json
   def show
+    render json: @hospital
   end
 
   # POST /hospitals

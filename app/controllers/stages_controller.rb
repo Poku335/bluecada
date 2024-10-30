@@ -11,6 +11,7 @@ class StagesController < ApplicationController
   # GET /stages/1
   # GET /stages/1.json
   def show
+    render json: @stage
   end
 
   # POST /stages

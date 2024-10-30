@@ -5,7 +5,12 @@ class DiagnoseParagraphsController < ApplicationController
   # GET /diagnose_paragraphs
   # GET /diagnose_paragraphs.json
   def index
-    @diagnose_paragraphs = DiagnoseParagraph.all
+    @diagnose_paragraphs = DiagnoseParagraph.search(params)
+    render json: @diagnose_paragraphs
+  end
+
+  def import_diag
+    @diagnose_paragraphs = DiagnoseParagraph.import_diag_paragraph(params)
     render json: @diagnose_paragraphs
   end
 
@@ -21,7 +26,7 @@ class DiagnoseParagraphsController < ApplicationController
     @diagnose_paragraph = DiagnoseParagraph.new(diagnose_paragraph_params)
 
     if @diagnose_paragraph.save
-      render :show, status: :created, location: @diagnose_paragraph
+      render json: @diagnose_paragraph
     else
       render json: @diagnose_paragraph.errors, status: :unprocessable_entity
     end
@@ -51,6 +56,6 @@ class DiagnoseParagraphsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def diagnose_paragraph_params
-      params.require(:diagnose_paragraph).permit(:diagnose_paragraph, :cancer_information_id, :diag_date)
+      params.require(:diagnose_paragraph).permit(:diagnose_paragraph, :cancer_information_id, :diag_date, :vali_date, :received_date, :hos_no)
     end
 end

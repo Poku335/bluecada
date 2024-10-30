@@ -10,6 +10,7 @@ class SexesController < ApplicationController
   # GET /sexes/1
   # GET /sexes/1.json
   def show
+    render json: @sex
   end
 
   # POST /sexes

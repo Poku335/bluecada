@@ -10,6 +10,7 @@ class DiagnoseInformationsController < ApplicationController
   # GET /diagnose_informations/1
   # GET /diagnose_informations/1.json
   def show
+    render json: @diagnose_information
   end
 
   # POST /diagnose_informations

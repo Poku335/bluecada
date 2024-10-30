@@ -11,6 +11,7 @@ class ReligionsController < ApplicationController
   # GET /religions/1
   # GET /religions/1.json
   def show
+    render json: @religion
   end
 
   # POST /religions

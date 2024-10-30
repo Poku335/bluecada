@@ -11,6 +11,7 @@ class BehaviorsController < ApplicationController
   # GET /behaviors/1
   # GET /behaviors/1.json
   def show
+    render json: @behavior
   end
 
   # POST /behaviors
