@@ -1,5 +1,5 @@
 class DiagnoseParagraph < ApplicationRecord
-  belongs_to :cancer_information
+  belongs_to :cancer_information, optional: true
   has_many :search_icdos
   
   def as_json(options = {})

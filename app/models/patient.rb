@@ -370,6 +370,15 @@ class Patient < ApplicationRecord
                   cancer_information_id: cancer_information.id,
                   cancer_form_status_id: CancerFormStatus.find(1).id
                 )
+
+                get_diagnose_paragraphs = DiagnoseParagraph.where(hos_no: patient.hos_no, cancer_information_id: nil)
+
+                if get_diagnose_paragraphs.present?
+                  get_diagnose_paragraphs.each do |diagnose_paragraph|
+                    diagnose_paragraph.update(cancer_information_id: cancer_information.id)
+                  end
+                end
+
                 Rails.logger.info "Created CancerForm with id: #{cancer_form.id} for Patient ID: #{patient.id}"
                 
               rescue => e
