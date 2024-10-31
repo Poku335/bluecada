@@ -42,9 +42,9 @@ Rails.application.configure do
   config.active_record.shard_selector = { lock: false }
   config.active_record.shard_resolver = ->(request) {
     subdomain = request.subdomain
-    if subdomain == 'int.uat.api.cancer.dev'
+    if subdomain == 'int.api.cancer.dev'
       'int'
-    elsif subdomain == 'ext.uat.api.cancer.dev'
+    elsif subdomain == 'ext.api.cancer.dev'
       'ext'
     end
     # tenant = Tenant.find_by_subdomain!(subdomain)
