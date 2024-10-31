@@ -4,7 +4,7 @@ class ReligionsController < ApplicationController
   # GET /religions
   # GET /religions.json
   def index
-    @religions = Religion.all
+    @religions = Religion.search(params)
     render json: @religions
   end
 

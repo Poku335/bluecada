@@ -4,7 +4,7 @@ class MetastasisSitesController < ApplicationController
   # GET /metastasis_sites
   # GET /metastasis_sites.json
   def index
-    @metastasis_sites = MetastasisSite.all
+    @metastasis_sites = MetastasisSite.search(params)
     render json: @metastasis_sites
   end
 
@@ -20,7 +20,7 @@ class MetastasisSitesController < ApplicationController
     @metastasis_site = MetastasisSite.new(metastasis_site_params)
 
     if @metastasis_site.save
-      render :show, status: :created, location: @metastasis_site
+      render json: @metastasis_site
     else
       render json: @metastasis_site.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class MetastasisSitesController < ApplicationController
   # PATCH/PUT /metastasis_sites/1.json
   def update
     if @metastasis_site.update(metastasis_site_params)
-      render :show, status: :ok, location: @metastasis_site
+      render json: @metastasis_site
     else
       render json: @metastasis_site.errors, status: :unprocessable_entity
     end

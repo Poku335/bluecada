@@ -4,7 +4,7 @@ class HealthInsurancesController < ApplicationController
   # GET /health_insurances
   # GET /health_insurances.json
   def index
-    @health_insurances = HealthInsurance.all
+    @health_insurances = HealthInsurance.search(params)
       render json: @health_insurances
   end
 
@@ -20,7 +20,7 @@ class HealthInsurancesController < ApplicationController
     @health_insurance = HealthInsurance.new(health_insurance_params)
 
     if @health_insurance.save
-      render :show, status: :created, location: @health_insurance
+      render json: @health_insurance
     else
       render json: @health_insurance.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class HealthInsurancesController < ApplicationController
   # PATCH/PUT /health_insurances/1.json
   def update
     if @health_insurance.update(health_insurance_params)
-      render :show, status: :ok, location: @health_insurance
+      render json: @health_insurance
     else
       render json: @health_insurance.errors, status: :unprocessable_entity
     end

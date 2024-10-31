@@ -4,7 +4,7 @@ class LateralitiesController < ApplicationController
   # GET /lateralities
   # GET /lateralities.json
   def index
-    @lateralities = Laterality.all
+    @lateralities = Laterality.search(params)
       render json: @lateralities
   end
 
@@ -20,7 +20,7 @@ class LateralitiesController < ApplicationController
     @laterality = Laterality.new(laterality_params)
 
     if @laterality.save
-      render :show, status: :created, location: @laterality
+      render json: @laterality
     else
       render json: @laterality.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class LateralitiesController < ApplicationController
   # PATCH/PUT /lateralities/1.json
   def update
     if @laterality.update(laterality_params)
-      render :show, status: :ok, location: @laterality
+      render json: @laterality
     else
       render json: @laterality.errors, status: :unprocessable_entity
     end

@@ -4,7 +4,7 @@ class GradsController < ApplicationController
   # GET /grads
   # GET /grads.json
   def index
-    @grads = Grad.all
+    @grads = Grad.search(params)
     render json: @grads
   end
 
@@ -20,7 +20,7 @@ class GradsController < ApplicationController
     @grad = Grad.new(grad_params)
 
     if @grad.save
-      render :show, status: :created, location: @grad
+      render json: @grad
     else
       render json: @grad.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class GradsController < ApplicationController
   # PATCH/PUT /grads/1.json
   def update
     if @grad.update(grad_params)
-      render :show, status: :ok, location: @grad
+      render json: @grad
     else
       render json: @grad.errors, status: :unprocessable_entity
     end

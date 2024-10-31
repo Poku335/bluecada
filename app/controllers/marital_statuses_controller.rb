@@ -4,7 +4,7 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses
   # GET /marital_statuses.json
   def index
-    @marital_statuses = MaritalStatus.all
+    @marital_statuses = MaritalStatus.search(params)
     render json: @marital_statuses
   end
 
@@ -20,7 +20,7 @@ class MaritalStatusesController < ApplicationController
     @marital_status = MaritalStatus.new(marital_status_params)
 
     if @marital_status.save
-      render :show, status: :created, location: @marital_status
+      render json: @marital_status
     else
       render json: @marital_status.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class MaritalStatusesController < ApplicationController
   # PATCH/PUT /marital_statuses/1.json
   def update
     if @marital_status.update(marital_status_params)
-      render :show, status: :ok, location: @marital_status
+      render json: @marital_status
     else
       render json: @marital_status.errors, status: :unprocessable_entity
     end

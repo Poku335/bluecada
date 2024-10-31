@@ -4,7 +4,7 @@ class PresentsController < ApplicationController
   # GET /presents
   # GET /presents.json
   def index
-    @presents = Present.all
+    @presents = Present.search(params)
     render json: @presents
   end
 
@@ -20,7 +20,7 @@ class PresentsController < ApplicationController
     @present = Present.new(present_params)
 
     if @present.save
-      render :show, status: :created, location: @present
+      render json: @present
     else
       render json: @present.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class PresentsController < ApplicationController
   # PATCH/PUT /presents/1.json
   def update
     if @present.update(present_params)
-      render :show, status: :ok, location: @present
+      render json: @present
     else
       render json: @present.errors, status: :unprocessable_entity
     end

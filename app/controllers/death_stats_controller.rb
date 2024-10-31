@@ -4,7 +4,7 @@ class DeathStatsController < ApplicationController
   # GET /death_stats
   # GET /death_stats.json
   def index
-    @death_stats = DeathStat.all
+    @death_stats = DeathStat.search(params)
     render json: @death_stats
   end
 
@@ -20,7 +20,7 @@ class DeathStatsController < ApplicationController
     @death_stat = DeathStat.new(death_stat_params)
 
     if @death_stat.save
-      render :show, status: :created, location: @death_stat
+      render json: @death_stat
     else
       render json: @death_stat.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class DeathStatsController < ApplicationController
   # PATCH/PUT /death_stats/1.json
   def update
     if @death_stat.update(death_stat_params)
-      render :show, status: :ok, location: @death_stat
+      render json: @death_stat
     else
       render json: @death_stat.errors, status: :unprocessable_entity
     end

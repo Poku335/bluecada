@@ -4,7 +4,8 @@ class SexesController < ApplicationController
   # GET /sexes
   # GET /sexes.json
   def index
-    @sexes = Sex.all
+    @sexes = Sex.search(params)
+    render json: @sexes
   end
 
   # GET /sexes/1
@@ -19,7 +20,7 @@ class SexesController < ApplicationController
     @sex = Sex.new(sex_params)
 
     if @sex.save
-      render :show, status: :created, location: @sex
+      render json: @sex
     else
       render json: @sex.errors, status: :unprocessable_entity
     end
@@ -29,7 +30,7 @@ class SexesController < ApplicationController
   # PATCH/PUT /sexes/1.json
   def update
     if @sex.update(sex_params)
-      render :show, status: :ok, location: @sex
+      render json: @sex
     else
       render json: @sex.errors, status: :unprocessable_entity
     end

@@ -57,4 +57,15 @@ class User < ApplicationRecord
 
     results
   end
+
+  def self.set_zero
+    Patient.destroy_all if Patient.all.present?
+    CancerForm.destroy_all if CancerForm.all.present?
+    CancerInformation.destroy_all if CancerInformation.all.present?
+    InformationDiagnosis.destroy_all if InformationDiagnosis.all.present?
+    TreatmentInformation.destroy_all if TreatmentInformation.all.present?
+    TreatmentFollowUp.destroy_all if TreatmentFollowUp.all.present?
+    DiagnoseParagraph.destroy_all if DiagnoseParagraph.all.present?
+    SearchIcdo.destroy_all if SearchIcdo.all.present?
+  end
 end

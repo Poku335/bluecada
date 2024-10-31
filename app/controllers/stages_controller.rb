@@ -4,7 +4,7 @@ class StagesController < ApplicationController
   # GET /stages
   # GET /stages.json
   def index
-    @stages = Stage.all
+    @stages = Stage.search(params)
     render json: @stages
   end
 
@@ -20,7 +20,7 @@ class StagesController < ApplicationController
     @stage = Stage.new(stage_params)
 
     if @stage.save
-      render :show, status: :created, location: @stage
+      render json: @stage
     else
       render json: @stage.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class StagesController < ApplicationController
   # PATCH/PUT /stages/1.json
   def update
     if @stage.update(stage_params)
-      render :show, status: :ok, location: @stage
+      render json: @stage
     else
       render json: @stage.errors, status: :unprocessable_entity
     end

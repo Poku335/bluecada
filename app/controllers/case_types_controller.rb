@@ -4,7 +4,7 @@ class CaseTypesController < ApplicationController
   # GET /case_types
   # GET /case_types.json
   def index
-    @case_types = CaseType.all
+    @case_types = CaseType.search(params)
       render json: @case_types
   end
 

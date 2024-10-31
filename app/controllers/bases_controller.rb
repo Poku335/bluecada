@@ -4,7 +4,7 @@ class BasesController < ApplicationController
   # GET /bases?p=1
   # GET /bases.json
   def index
-    @bases = Basis.cached_basis
+    @bases = Basis.search(params)
     render json: @bases
   end
 
@@ -20,7 +20,7 @@ class BasesController < ApplicationController
     @basis = Basis.new(basis_params)
 
     if @basis.save
-      render :show, status: :created, location: @basis
+      render json: @basis
     else
       render json: @basis.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class BasesController < ApplicationController
   # PATCH/PUT /bases/1.json
   def update
     if @basis.update(basis_params)
-      render :show, status: :ok, location: @basis
+      render json: @basis
     else
       render json: @basis.errors, status: :unprocessable_entity
     end
