@@ -4,7 +4,7 @@ class LabsController < ApplicationController
   # GET /labs
   # GET /labs.json
   def index
-    @labs = Lab.all
+    @labs = Lab.search(params)
     render json: @labs
   end
 
@@ -20,7 +20,7 @@ class LabsController < ApplicationController
     @lab = Lab.new(lab_params)
 
     if @lab.save
-      render :show, status: :created, location: @lab
+      render json: @lab
     else
       render json: @lab.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class LabsController < ApplicationController
   # PATCH/PUT /labs/1.json
   def update
     if @lab.update(lab_params)
-      render :show, status: :ok, location: @lab
+      render json: @lab
     else
       render json: @lab.errors, status: :unprocessable_entity
     end

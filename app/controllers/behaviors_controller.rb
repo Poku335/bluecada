@@ -4,7 +4,7 @@ class BehaviorsController < ApplicationController
   # GET /behaviors
   # GET /behaviors.json
   def index
-    @behaviors = Behavior.all
+    @behaviors = Behavior.search(params)
       render json: @behaviors
   end
 
@@ -20,7 +20,7 @@ class BehaviorsController < ApplicationController
     @behavior = Behavior.new(behavior_params)
 
     if @behavior.save
-      render :show, status: :created, location: @behavior
+      render json: @behavior
     else
       render json: @behavior.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class BehaviorsController < ApplicationController
   # PATCH/PUT /behaviors/1.json
   def update
     if @behavior.update(behavior_params)
-      render :show, status: :ok, location: @behavior
+      render json: @behavior
     else
       render json: @behavior.errors, status: :unprocessable_entity
     end

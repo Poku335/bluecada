@@ -14,7 +14,7 @@ class CancerInformation < ApplicationRecord
   has_many :cancer_forms
 
   before_create :set_case_type
-  before_update :check_tumor_id
+  before_update :check_tumor_id, :set_diagnosis_age
 
   def check_tumor_id
     case_type_id = self.case_type_id
@@ -37,8 +37,19 @@ class CancerInformation < ApplicationRecord
     self.case_type_id = 1
   end
 
+  def set_diagnosis_age
+    get_patient_birth_date = CancerForm.find_by(cancer_information_id: self.id)&.patient&.birth_date
+    get_diagnosis_date = self.diagnosis_date
+  
+    if get_patient_birth_date.present? && get_diagnosis_date.present?
+      self.diagnosis_age = ((get_diagnosis_date - get_patient_birth_date)/ 365.25).to_i
+    else
+      self.diagnosis_age = nil
+    end
+  end  
+
   def as_json(options = {})
-  # icd10 = topography_code&.icd_10&.split('.')&.join('')
+    # icd10 = topography_code&.icd_10&.split('.')&.join('')
     hsh = super(options.merge(except: [:case_type_id, :basis_id, :topography_code_id, :laterality_id, :behavior_id, :lab_id, :stage_id, :stage_other_id, :extent_id, :metastasis_site_id, :grad_id])).merge(
       basis: basis,
       tumor_id: cancer_forms&.first&.tumor_id,

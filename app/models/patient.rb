@@ -18,18 +18,9 @@ class Patient < ApplicationRecord
   validates :citizen_id, uniqueness: true
 
   def as_json(options = {})
-    diagnosis_age = 
-    if cancer_forms.first&.cancer_information&.diagnosis_date.present? && self.birth_date.present?
-      diagnosis_date = cancer_forms.first.cancer_information.diagnosis_date
-      ((diagnosis_date - birth_date) / 365.25).to_i
-    else
-      nil
-    end
-
     super(options.merge(except: [:hospital_id, :sex_id, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :province_id, :district_id, :sub_district_id])).merge(
       hospital: hospital,
       sex: sex,
-      diagnosis_age: diagnosis_age,
       post_code: post_code,
       address_code: address_code,
       marital_status: marital_status,
@@ -232,6 +223,24 @@ class Patient < ApplicationRecord
           add_code = AddressCode.find_by(code: row['AddCode'])
           add_code_id = add_code&.id
 
+          original_date = Date.strptime(row['icd-10-date'], '%d/%m/%Y') rescue nil
+
+          if original_date
+            day = original_date.day
+            month = original_date.month
+            thai_year = original_date.year
+
+            year_now = Time.now.year
+
+            if thai_year > year_now
+              icd_10_date = Date.strptime("#{day}/#{month}/#{thai_year - 543}", '%d/%m/%Y').strftime('%Y-%m-%d')
+            else
+              icd_10_date = original_date.strftime('%Y-%m-%d')
+            end
+          else
+            icd_10_date = nil
+          end
+
           if add_code_id.nil?
             errors << "#{row['name']}: Address Code '#{row['AddCode']}' ไม่ถูกต้อง"
             error_patient_count += 1
@@ -337,7 +346,8 @@ class Patient < ApplicationRecord
             address_code_id: add_code_id,
             district_id: district_id,
             sub_district_id: sub_district_id,
-            post_code_id: post_code_id
+            post_code_id: post_code_id,
+            icdo_10_date: icd_10_date
           )
   
           if patient.save

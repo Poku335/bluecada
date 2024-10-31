@@ -6,14 +6,10 @@ class ImportDiagParagraphJob < ApplicationJob
 
     errors = []
     CSV.foreach(output_file, headers: true, encoding: 'bom|utf-8') do |row|
-      begin
-        reqdate = Date.strptime(row['REQDATE'], '%m/%d/%y').strftime('%Y-%m-%d')
-      rescue ArgumentError
-        reqdate = nil
-      end
 
-      vali_date = Date.strptime(row['VALIDATE'], '%m/%d/%y').strftime('%Y-%m-%d') rescue nil
-      received_date = Date.strptime(row['RECEIVED DATE'], '%m/%d/%y').strftime('%Y-%m-%d') rescue nil
+      reqdate = check_year(row['REQDATE'])
+      vali_date = check_year(row['VALIDATE'])
+      received_date = check_year(row['RECEIVED DATE'])
 
       hn = row['HN_N']
       patient = Patient.find_by(hos_no: hn) || nil
@@ -108,4 +104,29 @@ class ImportDiagParagraphJob < ApplicationJob
     end
     puts "Finished processing CSV"
   end
+
+  def check_year(get_date)
+    begin
+      original_date = Date.strptime(get_date, '%m/%d/%y')
+    rescue ArgumentError
+      return nil
+    end
+  
+    if original_date
+      day = original_date.day
+      month = original_date.month
+      thai_year = original_date.year
+      year_now = Time.now.year
+  
+      if thai_year > year_now
+        use_date = Date.strptime("#{day}/#{month}/#{thai_year - 543}", '%d/%m/%Y').strftime('%Y-%m-%d')
+      else
+        use_date = original_date.strftime('%Y-%m-%d')
+      end
+    else
+      use_date = nil
+    end
+    use_date
+  end  
+
 end

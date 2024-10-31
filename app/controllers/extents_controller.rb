@@ -4,7 +4,7 @@ class ExtentsController < ApplicationController
   # GET /extents
   # GET /extents.json
   def index
-    @extents = Extent.all
+    @extents = Extent.search(params)
     render json: @extents
   end
 
@@ -20,7 +20,7 @@ class ExtentsController < ApplicationController
     @extent = Extent.new(extent_params)
 
     if @extent.save
-      render :show, status: :created, location: @extent
+      render json: @extent
     else
       render json: @extent.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class ExtentsController < ApplicationController
   # PATCH/PUT /extents/1.json
   def update
     if @extent.update(extent_params)
-      render :show, status: :ok, location: @extent
+      render json: @extent
     else
       render json: @extent.errors, status: :unprocessable_entity
     end

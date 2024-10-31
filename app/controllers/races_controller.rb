@@ -4,7 +4,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.all
+    @races = Race.search(params)
     render json: @races
   end
 
@@ -20,7 +20,7 @@ class RacesController < ApplicationController
     @race = Race.new(race_params)
 
     if @race.save
-      render :show, status: :created, location: @race
+      render json: @race
     else
       render json: @race.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class RacesController < ApplicationController
   # PATCH/PUT /races/1.json
   def update
     if @race.update(race_params)
-      render :show, status: :ok, location: @race
+      render json: @race
     else
       render json: @race.errors, status: :unprocessable_entity
     end
