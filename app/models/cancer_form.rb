@@ -82,7 +82,7 @@ class CancerForm < ApplicationRecord
 
   def self.generate_tumor_id(diagnosis_date, cancer_information_id)
     hospital_code = "01"
-    current_year = diagnosis_date.year + 543
+    current_year = diagnosis_date.year
     year_code = current_year.to_s[-2..-1]
     last_tumor_id = CancerForm.order(:created_at).last&.tumor_id
     if last_tumor_id.present?

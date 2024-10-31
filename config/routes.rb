@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       match '/change/editing/status', to: 'cancer_forms#change_editing_status', via: %i[options post]
 
       match '/search_icdos/drop_down', to: 'search_icdos#drop_down', via: %i[options get]
+      match '/icdos/drop_down', to: 'icdos#drop_down', via: %i[options get]
       
       %i[
         case_types

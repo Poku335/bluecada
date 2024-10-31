@@ -17,11 +17,11 @@ namespace :db do
 
     create_or_update_data class: CaseType, keys: [:code], reset_pkey: false,
       data: [
-        {id: 1, name: "Case finding", code: 1},
-        {id: 2, name: "Register CA", code: 2},
+        {id: 1, name: "Finding", code: 1},
+        {id: 2, name: "Register", code: 2},
         {id: 3, name: "No CA", code: 3},
-        {id: 4, name: "Pending CA", code: 4},
-        {id: 5, name: "register CA and low basis", code: 5}
+        {id: 4, name: "Pending", code: 4},
+        {id: 5, name: "Low basis", code: 5}
       ]
 
     create_or_update_data class: Religion, keys: [:code], reset_pkey: false,

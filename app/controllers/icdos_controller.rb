@@ -1,6 +1,11 @@
 class IcdosController < ApplicationController
   before_action :set_icdo, only: %i[ show update destroy ]
 
+  def drop_down
+    icdo_results = Icdo.drop_down(params)
+    render json: icdo_results
+  end
+
   # GET /icdos
   # GET /icdos.json
   # def index

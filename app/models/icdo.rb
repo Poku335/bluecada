@@ -67,4 +67,22 @@ class Icdo < ApplicationRecord
     icdo_results
   end
 
+  def self.drop_down(params = {})
+    results = []
+
+    conn = ActiveRecord::Base.connection
+
+    results = conn.execute(%{
+      SELECT DISTINCT
+        icdos.id,
+        icdos.icdo_32 || ' ' || icdos.term_used AS term
+      FROM icdos
+      WHERE TRUE
+      #{"AND icdos.id IN (#{params[:icdo_ids].join(',')})" if params[:icdo_ids].present?}
+      ORDER BY icdos.id
+    }).to_a
+
+    results
+  end
+
 end
