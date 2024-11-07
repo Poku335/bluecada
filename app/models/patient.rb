@@ -426,68 +426,128 @@ class Patient < ApplicationRecord
   end
 
   def self.export_patients(params = {})
-    csv_file_path = Rails.root.join('lib', 'csv_files', 'Exported_Patient.csv')
+    csv_file_path = Rails.root.join('lib', 'csv_files', 'Exported_Patient_All_Information.csv')
     headers = [
-      "Hospital", "HN", "Name", "Sex", "Post", "AddCode", "MarCode", "Race", "Rel", "HealthIn", "Basis", 
-      "TopCode", "Latera", "Beh", "Lab", "Stag", "Ext", "Met", "Grad", "CaseType", "Present", "DeathStat", 
-      "ReferFr", "ReferTo", "Surg", "Radia", "Chemo", "Target", "Hormone", "Immu", "InterThe", "Nuclear", 
-      "StemCell", "BoneScan", "Supp", "NonTreat"
+      "TumorID", "Hosp1", "HosNo1", "Name", "Id", "Sex", "Age", "BirthD", "AddDet", "Post", "AddCode", "MarS", "Race", "Rel", "HealthIn", "RegisD", "icd10", "Id_finding",
+      "DiagD", "Basis", "Top_des", "Top", "Letera", "Mor_des", "Mor", "Beh", "Lab", "LabNum", "LabDate", "Type_stage", "Tstage", "Nstage", "Mstage", "Stag", "DateStage", "FIGO", "BCLC", "StagOther", "PostNeo", "PostNeo_TNM", "PostNeo_date", "PostNeo_Staging", "Ext", "Met", "Recurr", "RecurrDate", "Grad", "ECOG",
+      "CA-19.9", "CEA", "HER2", "AFP", "HCG", "PSA", "BRCA1", "BRCA2",
+      "Surg", "DateSurg", "Radia", "DateRadia", "Chemo", "DateChemo", "Traget", "DateTra", "Hormone", "DateHor", "Immu", "DateImm", "InterThe", "DateInt", "Nuclear", "DateNuclear", "StemCell", "DateStemCell", "BoneScan", "DateBoneScan", "Supp", "NonTreat",
+      "Present ", "DLS", "DeathStat", "ReferFr", "DateReferFr", "ReferTo", "DateReferTo", 
+      "remark1", "remark2", "remark3", "remark4",
+      "remark1", "remark2", "remark3", "remark4",
     ]
+
     case_type_id = params[:case_type_id] if params[:case_type_id].present?
-    start_date = params[:start_date]
-    end_date = params[:end_date]
+    start_date = params[:start_date] || "0001-01-01"
+    end_date = params[:end_date] || Date.today
     
-    patients =  if start_date.present? && end_date.present?
-                  Patient.joins(cancer_forms: :cancer_information)
-                          .includes(cancer_forms: [:treatment_follow_up, :treatment_information])
-                          .where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)
-                          .where('cancer_informations.case_type_id = ?', case_type_id) if case_type_id.present?
-                else
-                  Patient.joins(cancer_forms: :cancer_information)
-                          .includes(cancer_forms: [:treatment_follow_up, :treatment_information])
-                          .where('cancer_informations.case_type_id = ?', case_type_id) if case_type_id.present?
-                end
+    patients = Patient.joins(cancer_forms: :cancer_information).includes(cancer_forms: [:treatment_follow_up, :treatment_information])
+    patients = patients.where('cancer_informations.diagnosis_date BETWEEN ? AND ?', start_date, end_date)  if start_date.present? || end_date.present?
+    patients = patients.where('cancer_informations.case_type_id = ?', params[:case_type_id]) if case_type_id.present?
 
     CSV.open(csv_file_path, 'w', write_headers: true, headers: headers) do |csv|
       patients.find_each do |patient|
         patient.cancer_forms.each do |cancer_form|
           csv << [
-            patient.hospital&.code || '',
-            patient.hos_no || '',
-            patient.name || '',
-            patient.sex&.code || '',
-            patient.post_code&.code || '',
-            patient.address_code&.code || '',
-            patient.marital_status&.code || '',
-            patient.race&.code || '',
-            patient.religion&.code || '',
-            patient.health_insurance&.code || '',
-            cancer_form.cancer_information&.basis&.code || '',
-            "\"#{cancer_form.cancer_information&.topography_code&.code || ''}\"",
-            cancer_form.cancer_information&.laterality&.code || '',
-            cancer_form.cancer_information&.behavior&.code || '',
-            cancer_form.cancer_information&.lab&.code || '',
-            cancer_form.cancer_information&.stage&.code || '',
-            cancer_form.cancer_information&.extent&.code || '',
-            cancer_form.cancer_information&.metastasis_site&.code || '',
-            cancer_form.cancer_information&.grad&.code || '',
-            cancer_form.cancer_information&.case_type&.code || '',
-            cancer_form.treatment_follow_up&.present&.code || '',
-            cancer_form.treatment_follow_up&.death_stat&.code || '',
-            cancer_form.treatment_follow_up&.refer_from&.code || '',
-            cancer_form.treatment_follow_up&.refer_to&.code || '',
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_surg),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_radia),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_chemo),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_target),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_hormone),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_immu),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_inter_the),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_nuclear),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_stem_cell),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_bone_scan),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_supportive),
-            patient.boolean_to_integer(cancer_form.treatment_information&.is_treatment)
+            cancer_form.tumor_id || '', # TumorID
+            patient.hospital&.code || '', # Hosp1
+            patient.hos_no || '', # HosNo1
+            patient.name || '', # Name
+            patient.citizen_id || '', # Id
+            patient.sex&.code || '', # Sex
+            patient.age || '', # Age
+            patient.birth_date || '', # BirthD
+            patient.address_detail || '', # AddDet
+            patient.post_code&.code || '', # Post
+            patient.address_code&.code || '', # AddCode
+            patient.marital_status&.code || '', # MarS
+            patient.race&.code || '', # Race
+            patient.religion&.code || '', # Rel
+            patient.health_insurance&.code || '', # HealthIn
+            patient.regis_date || '', # RegisD
+            cancer_form.cancer_information&.icd_10 || '', # icd10
+            patient.id_finding || '', # Id_finding
+
+            cancer_form.cancer_information&.diagnosis_date || '', # DiagD
+            cancer_form.cancer_information&.basis&.code || '', # Basis
+            cancer_form.cancer_information&.topography_description || '', # Top_des
+            cancer_form.cancer_information&.topography_code&.code || '', # Top
+            cancer_form.cancer_information&.laterality&.code || '', # Letera
+            cancer_form.cancer_information&.morphology_description || '', # Mor_des
+            cancer_form.cancer_information&.icdo&.icdo_32 || '', # Mor
+            cancer_form.cancer_information&.behavior&.code || '', # Beh
+            cancer_form.cancer_information&.lab&.code || '', # Lab
+            cancer_form.cancer_information&.lab_num || '', # LabNum
+            cancer_form.cancer_information&.lab_date || '', # LabDate
+            cancer_form.cancer_information&.type_stage&.code || '', # Type_stage
+            cancer_form.cancer_information&.t_stage || '', # Tstage
+            cancer_form.cancer_information&.n_stage || '', # Nstage
+            cancer_form.cancer_information&.m_stage || '', # Mstage
+            cancer_form.cancer_information&.stage&.code || '', # Stag
+            cancer_form.cancer_information&.date_stage || '', # DateStage
+            cancer_form.cancer_information&.figo&.code || '', # FIGO
+            cancer_form.cancer_information&.bclc&.code || '', # BCLC
+            cancer_form.cancer_information&.stage_other || '', # StagOther
+            cancer_form.cancer_information&.postneo&.code || '', # PostNeo
+            cancer_form.cancer_information&.postneo_tnm || '', # PostNeo_TNM
+            cancer_form.cancer_information&.postneo_date || '', # PostNeo_date
+            cancer_form.cancer_information&.postneo_staging&.code || '', # PostNeo_Staging
+            cancer_form.cancer_information&.extent&.code || '', # Ext
+            cancer_form.cancer_information&.metastasis_site&.code || '', # Met
+            cancer_form.cancer_information&.is_recrr || '', # Recurr
+            cancer_form.cancer_information&.recurr_date || '', # RecurrDate
+            cancer_form.cancer_information&.grad&.code || '', # Grad
+            cancer_form.cancer_information&.ecog&.code || '', # ECOG
+
+            cancer_form.information_diagnosis&.tumor_marker_ca_19 || '', # CA-19.9
+            cancer_form.information_diagnosis&.tumor_marker_cea || '', # CEA
+            cancer_form.information_diagnosis&.tumor_marker_her_2 || '', # HER2
+            cancer_form.information_diagnosis&.tumor_marker_afp || '', # AFP
+            cancer_form.information_diagnosis&.tumor_marker_hcg || '', # HCG
+            cancer_form.information_diagnosis&.tumor_marker_psa || '', # PSA
+            cancer_form.information_diagnosis&.tumor_suppressor_gene_brca_1 || '', # BRCA1
+            cancer_form.information_diagnosis&.tumor_suppressor_gene_brca_2 || '', # BRCA2
+
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_surg), # Surg
+            cancer_form.treatment_information&.date_surg || '', # DateSurg
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_radia), # Radia
+            cancer_form.treatment_information&.date_radia || '', # DateRadia
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_chemo), # Chemo
+            cancer_form.treatment_information&.date_chemo || '', # DateChemo
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_target), # Traget
+            cancer_form.treatment_information&.date_target || '', # DateTra
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_hormone), # Hormone
+            cancer_form.treatment_information&.date_hormone || '', # DateHor
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_immu), # Immu
+            cancer_form.treatment_information&.date_immu || '', # DateImm
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_inter_the), # InterThe
+            cancer_form.treatment_information&.date_inter_the || '', # DateInt
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_nuclear), # Nuclear
+            cancer_form.treatment_information&.date_nuclear || '', # DateNuclear
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_stem_cell), # StemCell
+            cancer_form.treatment_information&.date_stem_cell || '', # DateStemCell
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_bone_scan), # BoneScan
+            cancer_form.treatment_information&.date_bone_scan || '', # DateBoneScan
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_supportive), # Supp
+            patient.boolean_to_integer(cancer_form.treatment_information&.is_treatment), # NonTreat
+
+            cancer_form.treatment_follow_up&.present&.code || '', # Present
+            cancer_form.treatment_follow_up&.death_stat&.code || '', # DLS
+            cancer_form.treatment_follow_up&.death_stat&.code || '', # DeathStat
+            cancer_form.treatment_follow_up&.refer_from&.code || '', # ReferFr
+            cancer_form.treatment_follow_up&.date_refer_from || '', # DateReferFr
+            cancer_form.treatment_follow_up&.refer_to&.code || '', # ReferTo
+            cancer_form.treatment_follow_up&.date_refer_to || '', # DateReferTo
+
+            cancer_form.cancer_information&.remark1 || '', # remark1
+            cancer_form.cancer_information&.remark2 || '', # remark2
+            cancer_form.cancer_information&.remark3 || '', # remark3
+            cancer_form.cancer_information&.remark4 || '', # remark4
+
+            cancer_form.information_diagnosis&.remark1 || '', # remark1
+            cancer_form.information_diagnosis&.remark2 || '', # remark2
+            cancer_form.information_diagnosis&.remark3 || '', # remark3
+            cancer_form.information_diagnosis&.remark4 || '', # remark4
           ]
         end
       end

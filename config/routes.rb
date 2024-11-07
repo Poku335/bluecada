@@ -109,6 +109,12 @@ Rails.application.routes.draw do
         users
         hospitals
         roles
+        postneo_stagings
+        postneos
+        ecogs
+        bclcs
+        figos
+        type_stages
       ].each do |res|
         match res.to_s, to: "#{res}#index", via: [:options]
         match "#{res}/new", to: "#{res}#new", via: %i[options get]

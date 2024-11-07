@@ -4,7 +4,7 @@ class Race < ApplicationRecord
     data = all
     data = data.select %(
       #{table_name}.id,
-      #{table_name}.code || ' ' || #{table_name}.name as name,
+      #{table_name}.name as name,
       #{table_name}.code
     )
 

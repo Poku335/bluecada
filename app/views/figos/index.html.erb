@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Figos</h1>
+
+<div id="figos">
+  <% @figos.each do |figo| %>
+    <%= render figo %>
+    <p>
+      <%= link_to "Show this figo", figo %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New figo", new_figo_path %>

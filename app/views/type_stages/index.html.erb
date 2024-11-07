@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Type stages</h1>
+
+<div id="type_stages">
+  <% @type_stages.each do |type_stage| %>
+    <%= render type_stage %>
+    <p>
+      <%= link_to "Show this type stage", type_stage %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New type stage", new_type_stage_path %>

@@ -11,6 +11,12 @@ class CancerInformation < ApplicationRecord
   belongs_to :grad, optional: true
   belongs_to :icdo, optional: true
   belongs_to :case_type, optional: true
+  belongs_to :type_stage
+  belongs_to :figo
+  belongs_to :bclc
+  belongs_to :postneo
+  belongs_to :postneo_staging
+  belongs_to :ecog
   has_many :cancer_forms
 
   before_create :set_case_type
@@ -62,7 +68,13 @@ class CancerInformation < ApplicationRecord
       stage_other: stage_other,
       extent: extent,
       metastasis_site: metastasis_site,
-      grad: grad
+      grad: grad,
+      type_stage: type_stage,
+      figo: figo,
+      bclc: bclc,
+      postneo: postneo,
+      postneo_staging: postneo_staging,
+      ecog: ecog
     )
     hsh
   end

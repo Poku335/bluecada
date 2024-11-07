@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @type_stage %>
+
+<div>
+  <%= link_to "Edit this type stage", edit_type_stage_path(@type_stage) %> |
+  <%= link_to "Back to type stages", type_stages_path %>
+
+  <%= button_to "Destroy this type stage", @type_stage, method: :delete %>
+</div>
