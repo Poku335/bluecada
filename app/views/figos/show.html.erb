@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @figo %>
+
+<div>
+  <%= link_to "Edit this figo", edit_figo_path(@figo) %> |
+  <%= link_to "Back to figos", figos_path %>
+
+  <%= button_to "Destroy this figo", @figo, method: :delete %>
+</div>

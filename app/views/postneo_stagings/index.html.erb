@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Postneo stagings</h1>
+
+<div id="postneo_stagings">
+  <% @postneo_stagings.each do |postneo_staging| %>
+    <%= render postneo_staging %>
+    <p>
+      <%= link_to "Show this postneo staging", postneo_staging %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New postneo staging", new_postneo_staging_path %>

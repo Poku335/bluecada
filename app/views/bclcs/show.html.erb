@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bclc %>
+
+<div>
+  <%= link_to "Edit this bclc", edit_bclc_path(@bclc) %> |
+  <%= link_to "Back to bclcs", bclcs_path %>
+
+  <%= button_to "Destroy this bclc", @bclc, method: :delete %>
+</div>

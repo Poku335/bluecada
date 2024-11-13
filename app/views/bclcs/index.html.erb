@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bclcs</h1>
+
+<div id="bclcs">
+  <% @bclcs.each do |bclc| %>
+    <%= render bclc %>
+    <p>
+      <%= link_to "Show this bclc", bclc %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New bclc", new_bclc_path %>

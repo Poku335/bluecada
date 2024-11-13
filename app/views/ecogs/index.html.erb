@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ecogs</h1>
+
+<div id="ecogs">
+  <% @ecogs.each do |ecog| %>
+    <%= render ecog %>
+    <p>
+      <%= link_to "Show this ecog", ecog %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New ecog", new_ecog_path %>

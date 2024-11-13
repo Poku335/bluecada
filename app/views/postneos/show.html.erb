@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @postneo %>
+
+<div>
+  <%= link_to "Edit this postneo", edit_postneo_path(@postneo) %> |
+  <%= link_to "Back to postneos", postneos_path %>
+
+  <%= button_to "Destroy this postneo", @postneo, method: :delete %>
+</div>

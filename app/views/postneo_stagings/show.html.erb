@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @postneo_staging %>
+
+<div>
+  <%= link_to "Edit this postneo staging", edit_postneo_staging_path(@postneo_staging) %> |
+  <%= link_to "Back to postneo stagings", postneo_stagings_path %>
+
+  <%= button_to "Destroy this postneo staging", @postneo_staging, method: :delete %>
+</div>
