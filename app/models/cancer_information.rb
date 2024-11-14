@@ -11,12 +11,12 @@ class CancerInformation < ApplicationRecord
   belongs_to :grad, optional: true
   belongs_to :icdo, optional: true
   belongs_to :case_type, optional: true
-  belongs_to :type_stage
-  belongs_to :figo
-  belongs_to :bclc
-  belongs_to :postneo
-  belongs_to :postneo_staging
-  belongs_to :ecog
+  belongs_to :type_stage, optional: true
+  belongs_to :figo, optional: true
+  belongs_to :bclc, optional: true
+  belongs_to :postneo, optional: true
+  belongs_to :postneo_staging, optional: true
+  belongs_to :ecog, optional: true
   has_many :cancer_forms
 
   before_create :set_case_type
