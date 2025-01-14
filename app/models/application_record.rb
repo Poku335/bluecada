@@ -147,7 +147,7 @@ class ApplicationRecord < ActiveRecord::Base
     page = params[:page].to_i
     offset = (page - 1) * limit if page > 0
 
-    data = data.order(order)
+    data = data.where("case_types.id = #{params[:case_type_id]}") if params[:case_type_id].present?
     data = data.offset(offset) if offset
     data = data.limit(limit) if limit > 0
 

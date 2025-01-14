@@ -618,7 +618,52 @@ class Patient < ApplicationRecord
         end
       end
       preview_data
-  end
 
+    end
+    
+    def self.cancer_statistics
+      query = <<-SQL
+        SELECT case_types.name, COUNT(patients.id) AS patient_count
+        FROM patients
+        LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id
+        LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id
+        LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id
+        
+        GROUP BY case_types.name
+      SQL
+    
+      ActiveRecord::Base.connection.execute(query)
+    end
+    
+    def self.cancer_statistics_year(year)
+      query = <<-SQL
+        SELECT case_types.name, COUNT(patients.id) AS patient_count
+        FROM patients
+        LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id
+        LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id
+        LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id
+        WHERE EXTRACT(YEAR FROM patients.icdo_10_date) = ?
+        GROUP BY case_types.name
+      SQL
+    
+      ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array, [query, year]))
+    end
+    
+    
+    
+    
+
+
+# คิวรี่ข้อ4
+  # SELECT case_types.name, COUNT(patients.id) AS patient_count
+  # FROM cancer_forms
+  # LEFT JOIN patients ON cancer_forms.patient_id = patients.id
+  # LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id
+  # LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id
+  # GROUP BY case_types.name;
+  
+  
+
+  
 end
 

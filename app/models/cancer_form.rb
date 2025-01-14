@@ -17,7 +17,7 @@ class CancerForm < ApplicationRecord
   end
 
   def create_form_data
-    ActiveRecord::Base.transaction do
+    ActiveRecord::Base.transaction do   
       begin
         cancer_information = CancerInformation.create!
         treatment_follow_up = TreatmentFollowUp.create!

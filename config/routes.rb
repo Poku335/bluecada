@@ -49,7 +49,6 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-
     scope '' do
       match "user_info/read_sql_data", to: "users#read_sql_data", via: [:options, :get]
       match "user_info", to: "users#index", via: [:options, :get]
@@ -70,6 +69,8 @@ Rails.application.routes.draw do
       match '/search_icdos/drop_down', to: 'search_icdos#drop_down', via: %i[options get]
       match '/icdos/drop_down', to: 'icdos#drop_down', via: %i[options get]
       
+      match '/patients/cancer_statistics/', to: 'patients#cancer_statistics', via: %i[options get]
+      match '/patients/cancer_statistics_year/:year', to: 'patients#cancer_statistics_year', via: %i[options get]
       %i[
         case_types
         diagnose_paragraphs

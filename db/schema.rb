@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_07_100242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
   create_table "bases", force: :cascade do |t|
     t.integer "code"
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bclcs", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.string "n_stage"
     t.string "m_stage"
     t.bigint "stage_id"
-    t.bigint "stage_other_id"
+    t.string "stage_other"
     t.bigint "extent_id"
     t.bigint "metastasis_site_id"
     t.boolean "is_recrr"
@@ -93,18 +100,38 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.datetime "updated_at", null: false
     t.bigint "case_type_id"
     t.date "diagnosis_date"
+    t.string "remark1"
+    t.string "remark2"
+    t.string "remark3"
+    t.string "remark4"
+    t.integer "diagnosis_age"
+    t.datetime "date_stage"
+    t.string "postneo_tnm"
+    t.datetime "postneo_date"
+    t.bigint "type_stage_id"
+    t.bigint "figo_id"
+    t.bigint "bclc_id"
+    t.bigint "postneo_id"
+    t.bigint "postneo_staging_id"
+    t.bigint "ecog_id"
     t.index ["basis_id"], name: "index_cancer_informations_on_basis_id"
+    t.index ["bclc_id"], name: "index_cancer_informations_on_bclc_id"
     t.index ["behavior_id"], name: "index_cancer_informations_on_behavior_id"
     t.index ["case_type_id"], name: "index_cancer_informations_on_case_type_id"
+    t.index ["ecog_id"], name: "index_cancer_informations_on_ecog_id"
     t.index ["extent_id"], name: "index_cancer_informations_on_extent_id"
+    t.index ["figo_id"], name: "index_cancer_informations_on_figo_id"
     t.index ["grad_id"], name: "index_cancer_informations_on_grad_id"
     t.index ["icdo_id"], name: "index_cancer_informations_on_icdo_id"
     t.index ["lab_id"], name: "index_cancer_informations_on_lab_id"
     t.index ["laterality_id"], name: "index_cancer_informations_on_laterality_id"
     t.index ["metastasis_site_id"], name: "index_cancer_informations_on_metastasis_site_id"
+    t.index ["postneo_id"], name: "index_cancer_informations_on_postneo_id"
+    t.index ["postneo_staging_id"], name: "index_cancer_informations_on_postneo_staging_id"
     t.index ["stage_id"], name: "index_cancer_informations_on_stage_id"
-    t.index ["stage_other_id"], name: "index_cancer_informations_on_stage_other_id"
+    t.index ["stage_other"], name: "index_cancer_informations_on_stage_other"
     t.index ["topography_code_id"], name: "index_cancer_informations_on_topography_code_id"
+    t.index ["type_stage_id"], name: "index_cancer_informations_on_type_stage_id"
   end
 
   create_table "case_types", force: :cascade do |t|
@@ -138,10 +165,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
 
   create_table "diagnose_paragraphs", force: :cascade do |t|
     t.string "diagnose_paragraph"
-    t.bigint "cancer_information_id", null: false
+    t.bigint "cancer_information_id"
     t.date "diag_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "vali_date"
+    t.date "received_date"
+    t.string "hos_no"
     t.index ["cancer_information_id"], name: "index_diagnose_paragraphs_on_cancer_information_id"
   end
 
@@ -156,9 +186,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.index ["province_id"], name: "index_districts_on_province_id"
   end
 
+  create_table "ecogs", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "extents", force: :cascade do |t|
     t.integer "code"
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "figos", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -218,6 +262,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.string "tumor_marker_psa"
     t.string "tumor_suppressor_gene_brca_1"
     t.string "tumor_suppressor_gene_brca_2"
+    t.string "remark1"
+    t.string "remark2"
+    t.string "remark3"
+    t.string "remark4"
   end
 
   create_table "labs", force: :cascade do |t|
@@ -270,6 +318,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.bigint "sub_district_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "icdo_10_date"
     t.index ["address_code_id"], name: "index_patients_on_address_code_id"
     t.index ["district_id"], name: "index_patients_on_district_id"
     t.index ["health_insurance_id"], name: "index_patients_on_health_insurance_id"
@@ -288,6 +337,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.string "province"
     t.string "district"
     t.string "sub_district"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "postneo_stagings", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "postneos", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -425,6 +488,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "type_stages", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "user_name"
     t.string "password_digest"
@@ -445,17 +515,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_120250) do
   add_foreign_key "cancer_forms", "treatment_informations"
   add_foreign_key "cancer_forms", "users", column: "current_user_id"
   add_foreign_key "cancer_informations", "bases"
+  add_foreign_key "cancer_informations", "bclcs"
   add_foreign_key "cancer_informations", "behaviors"
   add_foreign_key "cancer_informations", "case_types"
+  add_foreign_key "cancer_informations", "ecogs"
   add_foreign_key "cancer_informations", "extents"
+  add_foreign_key "cancer_informations", "figos"
   add_foreign_key "cancer_informations", "grads"
   add_foreign_key "cancer_informations", "icdos"
   add_foreign_key "cancer_informations", "labs"
   add_foreign_key "cancer_informations", "lateralities"
   add_foreign_key "cancer_informations", "metastasis_sites"
-  add_foreign_key "cancer_informations", "stage_others"
+  add_foreign_key "cancer_informations", "postneo_stagings"
+  add_foreign_key "cancer_informations", "postneos"
   add_foreign_key "cancer_informations", "stages"
   add_foreign_key "cancer_informations", "topography_codes"
+  add_foreign_key "cancer_informations", "type_stages"
   add_foreign_key "diagnose_paragraphs", "cancer_informations", on_delete: :cascade
   add_foreign_key "districts", "provinces"
   add_foreign_key "patients", "address_codes"
