@@ -30,7 +30,7 @@ class Patient < ApplicationRecord
       province: province, 
       district: district, 
       sub_district: sub_district,
-      presents_name: presents&.name,
+     # presents_name: presents&.name,
       cancer_forms: cancer_forms&.order(:primary)&.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
     )
   end
