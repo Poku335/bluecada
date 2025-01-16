@@ -70,7 +70,9 @@ Rails.application.routes.draw do
       match '/icdos/drop_down', to: 'icdos#drop_down', via: %i[options get]
       
       match '/patients/cancer_statistics/', to: 'patients#cancer_statistics', via: %i[options get]
-      match '/patients/cancer_statistics_year/:year', to: 'patients#cancer_statistics_year', via: %i[options get]
+      match '/patients/cancer_statistics_all_years', to: 'patients#cancer_statistics_all_years', via: %i[options get]
+      # match '/patients/cancer_statistics_year/:year', to: 'patients#cancer_statistics_year', via: %i[options get]
+      match '/tumur_markers', to: 'tumur_markers#index', via: %i[options get]
       %i[
         case_types
         diagnose_paragraphs

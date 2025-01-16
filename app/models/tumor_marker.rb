@@ -1,0 +1,2 @@
+class TumorMarker < ApplicationRecord
+end

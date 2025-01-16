@@ -30,6 +30,7 @@ class Patient < ApplicationRecord
       province: province, 
       district: district, 
       sub_district: sub_district,
+      presents_name: presents&.name,
       cancer_forms: cancer_forms&.order(:primary)&.as_json(only: [:id, :primary, :is_editing, :treatment_follow_up_id, :information_diagnosis_id, :treatment_information_id, :cancer_information_id, :cancer_form_status_id])
     )
   end
@@ -95,6 +96,7 @@ class Patient < ApplicationRecord
         grads.code AS grad_code,
         case_types.code AS case_type_code,
         presents.code AS present_code,
+         presents.name AS present_name,
         death_stats.code AS death_stat_code,
         refer_from_hospitals.code AS refer_from_code,
         refer_to_hospitals.code AS refer_to_code,
@@ -207,6 +209,7 @@ class Patient < ApplicationRecord
       data = super(params.merge!(data: data))
     end
   end
+
 
   def self.import_patient(params)
     if params[:file].present?
@@ -634,23 +637,33 @@ class Patient < ApplicationRecord
     
       ActiveRecord::Base.connection.execute(query)
     end
-    
-    def self.cancer_statistics_year(year)
+     
+    def self.cancer_statistics_all_years
       query = <<-SQL
-        SELECT case_types.name, COUNT(patients.id) AS patient_count
+        SELECT 
+          EXTRACT(YEAR FROM patients.icdo_10_date) AS year,
+          case_types.name AS cancer_type,
+          COUNT(patients.id) AS patient_count
         FROM patients
         LEFT JOIN cancer_forms ON cancer_forms.patient_id = patients.id
         LEFT JOIN cancer_informations ON cancer_forms.cancer_information_id = cancer_informations.id
         LEFT JOIN case_types ON cancer_informations.case_type_id = case_types.id
-        WHERE EXTRACT(YEAR FROM patients.icdo_10_date) = ?
-        GROUP BY case_types.name
+        GROUP BY year, case_types.name
+        ORDER BY year, cancer_type
       SQL
     
-      ActiveRecord::Base.connection.execute(ActiveRecord::Base.send(:sanitize_sql_array, [query, year]))
+      results = ActiveRecord::Base.connection.execute(query)
+      results.each_with_object({}) do |row, hash|
+        year = row['year'].to_i
+        hash[year] ||= []
+        hash[year] << { name: row['cancer_type'], patient_count: row['patient_count'] }
+      end
     end
     
     
     
+    
+   
     
 
 

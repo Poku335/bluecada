@@ -14,12 +14,18 @@ class PatientsController < ApplicationController
     render json: @cancer_statistics
   end
 
-  # GET /patients/cancer_statistics_year/year
-  def cancer_statistics_year
-    year = params[:year]  
-    @cancer_statistics_year = Patient.cancer_statistics_year(year)
-    render json: @cancer_statistics_year
+  def cancer_statistics_all_years
+    statistics = Patient.cancer_statistics_all_years
+    render json: statistics
   end
+  
+
+  # GET /patients/cancer_statistics_year/year
+  # def cancer_statistics_year
+  #   year = params[:year]  
+  #   @cancer_statistics_year = Patient.cancer_statistics_year(year)
+  #   render json: @cancer_statistics_year
+  # end
 
   def import_patient
     @patients = Patient.import_patient(params)
@@ -79,6 +85,6 @@ class PatientsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def patient_params
-    params.require(:patient).permit(:hos_no, :hospital_id, :name, :citizen_id, :sex_id, :age, :birth_date, :address_detail, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :regis_date, :id_finding, :province_id, :district_id, :sub_district_id, :icdo_10_date)
+    params.require(:patient).permit(:hos_no, :hospital_id, :name, :citizen_id, :sex_id, :age, :birth_date, :address_detail, :post_code_id, :address_code_id, :marital_status_id, :race_id, :religion_id, :health_insurance_id, :regis_date, :id_finding, :province_id, :district_id, :sub_district_id, :icdo_10_date , :present_id)
   end
 end

@@ -2,7 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   connects_to shards: {
-    int: { writing: :internal },
+    'everywhere-cgi-artists-preparing' => { writing: :internal },
     ext: { writing: :external }
   }
 
